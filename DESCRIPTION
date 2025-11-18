@@ -1,0 +1,52 @@
+Package: randomforge
+Type: Package
+Version: 1.0.0.9045
+Date: 2022-03-17
+Title: Production Grade Randomization 
+Author: Friedrich Pahlke
+Maintainer: Friedrich Pahlke <friedrich.pahlke@rpact.com>
+Description: Production grade randomization of clinical trials 
+License: MIT + file LICENSE
+Copyright: The pgr source files are Copyright (C) 2025 by Friedrich Pahlke. All rights reserved.
+Encoding: UTF-8
+URL: https://www.evidat.com
+BugReports: https://bugreport.evidat.com
+Language: en-US
+Depends: 
+	R (>= 4.1.0)
+Imports:
+	methods,
+	stats,
+	utils,
+	graphics,
+	tools
+Suggests: 
+    testthat (>= 3.0.0),
+    uuid (>= 1.0-3),
+    openxlsx (>= 4.2.5)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.3
+Collate: 
+    'f_assertions.R'
+    'class_general_unique_id_builder.R'
+    'f_constants.R'
+    'class_random_method_range_set.R'
+    'class_random_system_state.R'
+    'class_random_result.R'
+    'class_random_project.R'
+    'f_utilities.R'
+    'class_random_configuration.R'
+    'class_random_allocation_value.R'
+    'class_random_allocation_value_service.R'
+    'class_random_block.R'
+    'class_random_block_arm.R'
+    'class_random_block_size_randomizer.R'
+    'class_random_data_base.R'
+    'class_random_method_pbr.R'
+    'class_random_method_range.R'
+    'class_random_method_range_set_pbr.R'
+    'class_random_subject.R'
+    'class_string_builder.R'
+    'f_random_service.R'
+    'f_random_stratum_builder.R'
+    'pkgname.R'
