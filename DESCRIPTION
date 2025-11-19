@@ -1,19 +1,38 @@
 Package: randomforge
 Type: Package
-Version: 1.0.0.9045
-Date: 2022-03-17
-Title: Production Grade Randomization 
-Author: Friedrich Pahlke
-Maintainer: Friedrich Pahlke <friedrich.pahlke@rpact.com>
-Description: Production grade randomization of clinical trials 
+Title: Framework for Clinical Trial Randomization Methods
+Version: 0.1.0.9046
+Date: 2025-11-19
+Authors@R: c(
+    person(
+    	given = "Friedrich", 
+    	family = "Pahlke", 
+    	email = "friedrich.pahlke@rpact.com",
+    	comment = c(ORCID = "0000-0003-2105-2582"), 
+    	role = c("aut", "cre")
+    ))
+Description: 
+    Randomforge provides an extensible and transparent framework for 
+    implementing, evaluating, and applying randomization methods for 
+    clinical trials. The package aims to support a broad range of 
+    classical, covariate-adaptive, and response-adaptive techniques while 
+    enabling reproducibility, auditability, and methodological clarity.
+    Built as part of the open RandomForge initiative ("Innovating the 
+    Future of Randomization"), the package encourages community 
+    collaboration, modular extensions, and contributions from academia, 
+    industry, and clinical researchers. 
+    The architecture is designed for integration into larger ecosystems, 
+    including Shiny applications, APIs, and cloud-based workflows.
 License: MIT + file LICENSE
-Copyright: The pgr source files are Copyright (C) 2025 by Friedrich Pahlke. All rights reserved.
+Copyright: Copyright (C) 2025 by Friedrich Pahlke. All rights reserved.
+URL: 
+    https://randomforge.org,
+    https://github.com/rpact-com/randomforge
+BugReports: https://github.com/rpact-com/randomforge/issues
 Encoding: UTF-8
-URL: https://www.evidat.com
-BugReports: https://bugreport.evidat.com
 Language: en-US
-Depends: 
-	R (>= 4.1.0)
+Depends:
+    R (>= 4.1.0)
 Imports:
 	methods,
 	stats,
@@ -25,6 +44,9 @@ Suggests:
     uuid (>= 1.0-3),
     openxlsx (>= 4.2.5)
 Config/testthat/edition: 3
+Config/testthat/parallel: true
+VignetteBuilder: knitr, rmarkdown
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Collate: 
     'f_assertions.R'
