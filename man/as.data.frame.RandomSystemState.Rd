@@ -7,7 +7,7 @@
 \method{as.data.frame}{RandomSystemState}(x, ...)
 }
 \arguments{
-\item{x}{A `RandomSystemState` object.}
+\item{x}{A \code{RandomSystemState} object.}
 
 \item{...}{Additional arguments (currently unused).}
 }
@@ -15,6 +15,6 @@
 A data frame with columns for overall and block-wise treatment arm filling levels.
 }
 \description{
-Converts a `RandomSystemState` object into a data frame containing overall and block-wise treatment arm filling levels.
+Converts a \code{RandomSystemState} object into a data frame containing overall and block-wise treatment arm filling levels.
 }
 \keyword{internal}

@@ -15,6 +15,8 @@
 #' @param ravBufferMaximumSize Integer specifying the maximum buffer size for allocation values. Defaults to `10000L`.
 #'
 #' @return A `RandomConfiguration` reference class object.
+#' 
+#' @seealso \code{\link[=RandomConfiguration]{RandomConfiguration}}
 #'
 #' @export
 #' 
@@ -58,6 +60,8 @@ getRandomConfiguration <- function(...,
 #'   \item{getDoubleValue()}{Returns the double value (if defined).}
 #'   \item{getSeed()}{Returns the seed value, validating its integrity.}
 #' }
+#' 
+#' @seealso \code{\link[=getRandomConfiguration]{getRandomConfiguration()}}
 #'
 #' @keywords internal
 #' 

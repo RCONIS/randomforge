@@ -26,6 +26,8 @@
 #' @include class_general_unique_id_builder.R
 #' @include class_random_project.R
 #' @include class_random_result.R
+#' 
+#' @seealso \code{\link[=as.data.frame.RandomSubject]{as.data.frame()}}
 #'
 #' @keywords internal
 #' 
@@ -80,6 +82,8 @@ RandomSubject <- setRefClass("RandomSubject",
 #' @return A data frame with columns for subject and randomization details.
 #'
 #' @keywords internal
+#' 
+#' @seealso \code{\link[=RandomSubject]{RandomSubject}}
 #' 
 #' @export
 #'  

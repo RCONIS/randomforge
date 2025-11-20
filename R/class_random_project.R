@@ -9,13 +9,14 @@
 #' @param name Character string specifying the project name.
 #'
 #' @return A `RandomProject` reference class object.
+#' 
+#' @seealso \code{\link[=RandomProject]{RandomProject}}
 #'
 #' @export
 #' 
 getRandomProject <- function(name) {
     return(RandomProject(name = name))
 }
-
 
 #'
 #' RandomProject Reference Class
@@ -35,6 +36,8 @@ getRandomProject <- function(name) {
 #' }
 #'
 #' @keywords internal
+#' 
+#' @seealso \code{\link[=getRandomProject]{getRandomProject()}}
 #' 
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R

@@ -1,5 +1,4 @@
 
-
 #'
 #' RandomMethodRangeSetPBR Reference Class
 #'

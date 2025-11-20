@@ -14,6 +14,8 @@
 #' @param blockSizeRandomizer `RandomBlockSizeRandomizer` object for selecting block sizes randomly.
 #'
 #' @return A `RandomMethodPBR` reference class object.
+#' 
+#' @seealso \code{\link[=RandomMethodPBR]{RandomMethodPBR}}
 #'
 #' @export
 #' 
@@ -56,6 +58,8 @@ getRandomMethodPBR <- function(...,
 #' }
 #'
 #' @keywords internal
+#' 
+#' @seealso \code{\link[=getRandomMethodPBR]{getRandomMethodPBR()}}
 #'
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R

@@ -6,8 +6,8 @@
 \alias{RandomSubject}
 \title{RandomSubject Reference Class}
 \description{
-Represents a subject in the randomization system, including unique 
-identifier, project association, random number, factor levels, 
+Represents a subject in the randomization system, including unique
+identifier, project association, random number, factor levels,
 randomization result, and status.
 }
 \section{Fields}{
@@ -15,13 +15,13 @@ randomization result, and status.
 \describe{
 \item{\code{uniqueId}}{Character string uniquely identifying the subject.}
 
-\item{\code{randomProject}}{`RandomProject` object associated with the subject.}
+\item{\code{randomProject}}{\code{RandomProject} object associated with the subject.}
 
 \item{\code{randomNumber}}{Integer representing the subject's random number.}
 
 \item{\code{factorLevels}}{List of factor levels for the subject.}
 
-\item{\code{randomResult}}{`RandomResult` object containing the randomization outcome.}
+\item{\code{randomResult}}{\code{RandomResult} object containing the randomization outcome.}
 
 \item{\code{status}}{Character string indicating the subject's status.}
 }}
@@ -30,10 +30,10 @@ randomization result, and status.
 \section{Methods}{
 
 \describe{
-  \item{initialize(...)}{Initializes a new `RandomSubject` instance and assigns a unique ID.}
-  \item{show(prefix = "")}{Prints a summary of the subject.}
-  \item{toString(prefix = "")}{Returns a string representation of the subject.}
-  \item{setStatus(status)}{Sets the subject's status.}
+\item{initialize(...)}{Initializes a new \code{RandomSubject} instance and assigns a unique ID.}
+\item{show(prefix = "")}{Prints a summary of the subject.}
+\item{toString(prefix = "")}{Returns a string representation of the subject.}
+\item{setStatus(status)}{Sets the subject's status.}
 }
 }
 

@@ -15,7 +15,7 @@ getTreatmentArmValueList(..., treatmentArmIds)
 A named list of treatment arm values.
 }
 \description{
-Creates a named list of treatment arm values from variable arguments, 
-ensuring the correct number of values per treatment arm. Handles block 
+Creates a named list of treatment arm values from variable arguments,
+ensuring the correct number of values per treatment arm. Handles block
 size logic for balanced randomization.
 }

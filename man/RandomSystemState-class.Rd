@@ -6,8 +6,90 @@
 \alias{RandomSystemState}
 \title{RandomSystemState Reference Class}
 \description{
-Represents the state of a randomization system, tracking filling 
+Represents the state of a randomization system, tracking filling
 levels for treatment arms across overall, block, stratum, and factor levels.
+}
+\details{
+\code{fillingLevelsBlock}:
+Contains the filling levels of each treatment arm respectively inside each block,
+where a block exists for each stratum. \if{html}{\out{<br/>}}\if{html}{\out{<br/>}}
+
+Example: B = 6\if{html}{\out{
+<ul>
+  <li>RandomBlock 1 (gender: male)
+    <ul>
+      <li>Treatment 1 = 2</li>
+      <li>Treatment 2 = 2</li>
+      <li>Treatment 3 = 2</li>
+    </ul>
+  </li>
+  <li>RandomBlock 2 (gender: female)
+    <ul>
+      <li>Treatment 1 = 2</li>
+      <li>Treatment 2 = 1</li>
+      <li>Treatment 3 = 2</li>
+    </ul>
+  </li>
+</ul>
+<br/><br/>
+}}
+
+
+Data format: \if{html}{\out{<code>}}Map(key = 'block id' = 'strata id', value = 'treatment filling level')\if{html}{\out{</code>}}.
+
+\code{fillingLevelsStratum}:
+
+Contains the filling levels of each treatment arm respectively inside each stratum. \if{html}{\out{<br/>}}\if{html}{\out{<br/>}}
+
+Example:\if{html}{\out{
+<ul>
+  <li>Gender: male
+    <ul>
+      <li>Treatment 1 = 5</li>
+      <li>Treatment 2 = 5</li>
+      <li>Treatment 3 = 3</li>
+    </ul>
+  </li>
+  <li>Gender: female
+    <ul>
+      <li>Treatment 1 = 4</li>
+      <li>Treatment 2 = 4</li>
+      <li>Treatment 3 = 5</li>
+    </ul>
+  </li>
+</ul>
+<br/><br/>
+}}
+
+
+Data format: \if{html}{\out{<code>}}Map(key = 'strata id', value = 'treatment filling level')\if{html}{\out{</code>}}.
+
+\code{fillingLevelsFactor}:
+
+Contains the filling levels of each treatment arm respectively inside each factor level. \if{html}{\out{<br/>}}\if{html}{\out{<br/>}}
+
+Example:\if{html}{\out{
+<ul>
+  <li>Gender: male
+    <ul>
+      <li>Treatment 1 = 5</li>
+      <li>Treatment 2 = 5</li>
+      <li>Treatment 3 = 3</li>
+    </ul>
+  </li>
+  <li>Gender: female
+    <ul>
+      <li>Treatment 1 = 4</li>
+      <li>Treatment 2 = 4</li>
+      <li>Treatment 3 = 5</li>
+    </ul>
+  </li>
+</ul>
+<br/><br/>
+}}
+
+
+Data format: \if{html}{\out{<code>}}Map(key = 'factor level id', value = 'treatment filling level')\if{html}{\out{</code>}}.
 }
 \section{Fields}{
 
@@ -31,14 +113,14 @@ levels for treatment arms across overall, block, stratum, and factor levels.
 \section{Methods}{
 
 \describe{
-  \item{initialize(...)}{Initializes a new `RandomSystemState` instance.}
-  \item{show(prefix = "")}{Prints a summary of the system state.}
-  \item{toString(prefix = "")}{Returns a string representation of the system state.}
-  \item{init(treatmentArmIds, ..., factorIds = NULL, strataIds = NULL)}{Initializes filling levels for treatment arms, factors, and strata.}
-  \item{clone()}{Creates a deep copy of the system state.}
-  \item{getBlock(factorLevels, randomBlockSizeGenerator)}{Retrieves or creates a block for the given factor levels.}
-  \item{incrementFillingLevel(treatmentArmId)}{Increments the overall filling level for a treatment arm.}
-  \item{setFillingLevelsBlock(randomBlock)}{Sets the filling levels for a block.}
+\item{initialize(...)}{Initializes a new \code{RandomSystemState} instance.}
+\item{show(prefix = "")}{Prints a summary of the system state.}
+\item{toString(prefix = "")}{Returns a string representation of the system state.}
+\item{init(treatmentArmIds, ..., factorIds = NULL, strataIds = NULL)}{Initializes filling levels for treatment arms, factors, and strata.}
+\item{clone()}{Creates a deep copy of the system state.}
+\item{getBlock(factorLevels, randomBlockSizeGenerator)}{Retrieves or creates a block for the given factor levels.}
+\item{incrementFillingLevel(treatmentArmId)}{Increments the overall filling level for a treatment arm.}
+\item{setFillingLevelsBlock(randomBlock)}{Sets the filling levels for a block.}
 }
 }
 

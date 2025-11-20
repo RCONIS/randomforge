@@ -4,25 +4,43 @@
 \name{RandomBlock-class}
 \alias{RandomBlock-class}
 \alias{RandomBlock}
-\title{Random Block}
+\title{RandomBlock Reference Class}
 \arguments{
 \item{treatmentArmIds}{the treatment arm id's.}
 
-\item{maximumBlockSize}{the maximum block length <code>B</code> for each treatment arm.}
+\item{maximumBlockSize}{the maximum block length \if{html}{\out{<code>}}B\if{html}{\out{</code>}} for each treatment arm.}
 
 \item{factorLevels}{the optional factors and factor levels.}
 }
 \description{
-Random Block
+Represents a block of treatment arms for randomization, with associated factor levels (strata). Provides methods for initialization, cloning, display, validation, probability calculation, and block arm management.
 }
 \section{Fields}{
 
 \describe{
-\item{\code{blockArms}}{The map containing the block arms, 
-format: [treatment arm id, RandomBlockArm]}
+\item{\code{blockArms}}{List mapping treatment arm IDs to \code{RandomBlockArm} objects.}
 
-\item{\code{factorLevels}}{The strata and strata levels formatted as character list
-where the key is the factor name or id and the value is the specific level (name or id).}
+\item{\code{factorLevels}}{List of strata and their levels, where keys are factor names or IDs and values are specific levels (name or ID).}
 }}
 
 
+\section{Methods}{
+
+\describe{
+\item{initialize(..., maximumBlockSize, currentBlockSize, blockArms, factorLevels)}{Initializes a new \code{RandomBlock} instance, optionally setting up block arms and factor levels.}
+\item{clone()}{Creates a deep copy of the block and its arms.}
+\item{show()}{Displays a summary of the block.}
+\item{toString()}{Returns a string representation of the block and its arms.}
+\item{assertBlockArmsAreValid()}{Validates that block arms are present and non-empty.}
+\item{isCompleted()}{Checks if all block arms are completed.}
+\item{getProbabilities()}{Returns a list of allocation probabilities for each treatment arm.}
+\item{incrementSize(treatmentArmId)}{Increments the size of the specified block arm.}
+\item{getBlockArm(treatmentArmId)}{Retrieves the block arm for a given treatment arm ID.}
+\item{keySet()}{Returns the set of treatment arm IDs.}
+\item{get(key)}{Retrieves the block arm by key.}
+\item{getTreatmentCount()}{Returns the number of treatment arms.}
+\item{init(maximumBlockSize, currentBlockSize, factorLevels)}{Initializes block arms and factor levels.}
+}
+}
+
+\keyword{internal}

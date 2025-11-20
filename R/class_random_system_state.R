@@ -9,6 +9,8 @@
 #'
 #' @return A data frame with columns for overall and block-wise treatment arm filling levels.
 #'
+#' @seealso \code{\link[=RandomSystemState]{RandomSystemState}}
+#' 
 #' @keywords internal
 #' 
 #' @export 
@@ -126,6 +128,8 @@ as.data.frame.RandomSystemState <- function(x, ...) {
 #' }
 #' 
 #' @include f_constants.R
+#' 
+#' @seealso \code{\link[=as.data.frame.RandomSystemState]{as.data.frame()}}
 #'
 #' @keywords internal
 #' 

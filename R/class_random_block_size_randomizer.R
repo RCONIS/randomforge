@@ -8,6 +8,8 @@
 #' randomization procedures.
 #'
 #' @return A `RandomBlockSizeRandomizer` reference class object.
+#' 
+#' @seealso \code{\link[=RandomBlockSizeRandomizer]{RandomBlockSizeRandomizer}}
 #'
 #' @export
 #' 
@@ -35,6 +37,8 @@ getRandomBlockSizeRandomizer <- function() {
 #'   \item{initRandomValues(numberOfBlockSizes, numberOfValuesToCreate)}{Generates a sequence of random block sizes.}
 #'   \item{nextInt(numberOfBlockSizes)}{Retrieves the next random block size from the sequence.}
 #' }
+#' 
+#' @seealso \code{\link[=getRandomBlockSizeRandomizer]{getRandomBlockSizeRandomizer()}}
 #'
 #' @keywords internal
 #' 

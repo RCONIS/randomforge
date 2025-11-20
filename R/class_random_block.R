@@ -10,6 +10,8 @@
 #' @param ... Additional arguments passed to the conversion function.
 #'
 #' @return A data frame containing all block arms from the block.
+#' 
+#' @seealso \code{\link[=RandomBlock]{RandomBlock}}
 #'
 #' @export
 #' 
@@ -23,8 +25,7 @@ as.data.frame.RandomBlock <- function(x, ...) {
 #' @description
 #' Represents a block of treatment arms for randomization, with associated factor levels (strata). Provides methods for initialization, cloning, display, validation, probability calculation, and block arm management.
 #'
-#' @field blockArms List mapping treatment arm IDs to `RandomBlockArm` objects, 
-#'        format: [treatment arm id, RandomBlockArm].
+#' @field blockArms List mapping treatment arm IDs to `RandomBlockArm` objects.
 #' @field factorLevels List of strata and their levels, where keys are factor names or IDs and values are specific levels (name or ID).
 #'
 #' @section Methods:
@@ -43,6 +44,8 @@ as.data.frame.RandomBlock <- function(x, ...) {
 #'   \item{getTreatmentCount()}{Returns the number of treatment arms.}
 #'   \item{init(maximumBlockSize, currentBlockSize, factorLevels)}{Initializes block arms and factor levels.}
 #' }
+#' 
+#' @seealso \code{\link[=as.data.frame.RandomBlock]{as.data.frame()}}
 #'
 #' @keywords internal
 #' 

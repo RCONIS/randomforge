@@ -33,6 +33,9 @@
 #' initializing all fields and assigning a unique ID.
 #'
 #' @return A `RandomDataBase` reference class object.
+#' 
+#' @seealso \code{\link[=RandomDataBase]{RandomDataBase}}
+#' @seealso \code{\link[=as.data.frame.RandomDataBase]{as.data.frame()}}
 #'
 #' @export
 #' 
@@ -68,6 +71,9 @@ getRandomDataBase <- function() {
 #'   \item{getLastRandomConfiguration(randomProject)}{Retrieves the last configuration for a given project.}
 #'   \item{createNewSubjectRandomNumber(randomProject)}{Generates the next subject random number for a given project.}
 #' }
+#' 
+#' @seealso \code{\link[=getRandomDataBase]{getRandomDataBase()}}
+#' @seealso \code{\link[=as.data.frame.RandomDataBase]{as.data.frame()}}
 #'
 #' @keywords internal
 #'
@@ -212,6 +218,8 @@ RandomDataBase <- setRefClass("RandomDataBase",
 #' @param ... Additional arguments passed to `as.data.frame`.
 #'
 #' @return A data frame containing all subjects from the database.
+#' 
+#' @seealso \code{\link[=RandomDataBase]{RandomDataBase}}
 #'
 #' @export
 #' 

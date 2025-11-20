@@ -3,7 +3,10 @@
 #' RandomAllocationValue Reference Class
 #'
 #' @description
-#' Represents a single random allocation value, including its unique identifier, configuration, creation date, numeric value, associated result, and hash. Provides methods for initialization, display, string conversion, and value retrieval.
+#' Represents a single random allocation value, including its unique 
+#' identifier, configuration, creation date, numeric value, associated 
+#' result, and hash. Provides methods for initialization, display, 
+#' string conversion, and value retrieval.
 #'
 #' @field uniqueId Character unique identifier for the allocation value.
 #' @field randomConfiguration `RandomConfiguration` object describing the randomization setup.
@@ -14,7 +17,8 @@
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{initialize(..., creationDate = Sys.time())}{Initializes a new `RandomAllocationValue` instance, setting the creation date and generating a unique ID.}
+#'   \item{initialize(..., creationDate = Sys.time())}{Initializes a 
+#'     new `RandomAllocationValue` instance, setting the creation date and generating a unique ID.}
 #'   \item{show(prefix = "")}{Displays a summary of the allocation value.}
 #'   \item{toString(prefix = "")}{Returns a string representation of the allocation value.}
 #'   \item{getDoubleValue()}{Returns the numeric allocation value.}

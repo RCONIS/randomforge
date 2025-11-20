@@ -14,27 +14,27 @@ writeExcelFile(
 )
 }
 \arguments{
-\item{sheetList}{A named list of data frames; 
+\item{sheetList}{A named list of data frames;
 each name represents the sheet name.}
 
 \item{file}{Character value specifying the output Excel file path.}
 
 \item{...}{Additional arguments (currently not used).}
 
-\item{user}{Character; name of the user creating the file. 
+\item{user}{Character; name of the user creating the file.
 Default is \code{"Unknown"}.}
 
-\item{addMetaInformationSheet}{Logical; if \code{TRUE}, adds a meta 
+\item{addMetaInformationSheet}{Logical; if \code{TRUE}, adds a meta
 information sheet. Default is \code{TRUE}.}
 
-\item{metaRows}{Named list of additional metadata rows to include in the meta 
+\item{metaRows}{Named list of additional metadata rows to include in the meta
 information sheet. Default is \code{NULL}.}
 }
 \value{
 Invisibly returns the file path.
 }
 \description{
-Writes a named list of data frames to an Excel file, with each list element 
-as a separate sheet. Optionally adds a meta information sheet with creation 
+Writes a named list of data frames to an Excel file, with each list element
+as a separate sheet. Optionally adds a meta information sheet with creation
 details and custom metadata.
 }

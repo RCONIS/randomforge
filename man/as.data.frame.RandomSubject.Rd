@@ -7,7 +7,7 @@
 \method{as.data.frame}{RandomSubject}(x, ...)
 }
 \arguments{
-\item{x}{A `RandomSubject` object.}
+\item{x}{A \code{RandomSubject} object.}
 
 \item{...}{Additional arguments (currently unused).}
 }
@@ -15,6 +15,8 @@
 A data frame with columns for subject and randomization details.
 }
 \description{
-Converts a `RandomSubject` object into a data frame containing project, random number, treatment arm, status, system state, randomization decision, and unique subject ID.
+Converts a \code{RandomSubject} object into a data frame containing project,
+random number, treatment arm, status, system state,
+randomization decision, and unique subject ID.
 }
 \keyword{internal}

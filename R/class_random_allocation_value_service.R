@@ -8,6 +8,8 @@
 #' allocation values for randomization procedures.
 #'
 #' @return A `RandomAllocationValueService` reference class object.
+#' 
+#' @seealso \code{\link[=RandomAllocationValueService]{RandomAllocationValueService}}
 #'
 #' @export
 #' 
@@ -39,6 +41,8 @@ getRandomAllocationValueService <- function() {
 #'   \item{getNextRandomAllocationValue(randomConfiguration)}{Retrieves 
 #'     the next random allocation value if available.}
 #' }
+#' 
+#' @seealso \code{\link[=plot.RandomAllocationValueService]{plot()}}
 #'
 #' @export
 #' 
