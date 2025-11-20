@@ -1,16 +1,17 @@
 
-
 #'
 #' GeneralUniqueIdBuilder Reference Class
 #'
 #' @description
-#' Provides a builder for generating and tracking unique IDs using the `uuid` package, ensuring no duplicates within the session.
+#' Provides a builder for generating and tracking unique IDs using 
+#' the `uuid` package, ensuring no duplicates within the session.
 #'
 #' @field uniqueIds Character vector storing all generated unique IDs.
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{initialize(uniqueIds = character(0), ...)}{Initializes a new `GeneralUniqueIdBuilder` instance and checks for the `uuid` package.}
+#'   \item{initialize(uniqueIds = character(0), ...)}{Initializes a 
+#'     new `GeneralUniqueIdBuilder` instance and checks for the `uuid` package.}
 #'   \item{show()}{Prints a summary of the builder.}
 #'   \item{toString()}{Returns a string representation of the builder.}
 #'   \item{getUniqueId()}{Generates a new unique ID and adds it to the tracked list.}

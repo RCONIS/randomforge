@@ -1,9 +1,43 @@
 
-#' @export 
+#'
+#' Create a New RandomBlockSizeRandomizer Instance
+#'
+#' @description
+#' Constructs and returns a new `RandomBlockSizeRandomizer` reference 
+#' class object, which manages random selection of block sizes for 
+#' randomization procedures.
+#'
+#' @return A `RandomBlockSizeRandomizer` reference class object.
+#'
+#' @export
+#' 
 getRandomBlockSizeRandomizer <- function() {
     return(RandomBlockSizeRandomizer())
 }
 
+#'
+#' RandomBlockSizeRandomizer Reference Class
+#'
+#' @description
+#' Manages random selection of block sizes for randomization procedures. 
+#' Maintains a reproducible sequence of block sizes using a seed, and 
+#' provides methods for initialization, value generation, and retrieval.
+#'
+#' @field seed Integer random seed used for reproducibility.
+#' @field values Integer vector of randomly generated block sizes.
+#' @field index Integer index tracking the current position in the values vector.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(seed, ...)}{Initializes the randomizer with a seed and sets the index to 1.}
+#'   \item{show()}{Displays a summary of the randomizer.}
+#'   \item{toString()}{Returns a string representation of the randomizer.}
+#'   \item{initRandomValues(numberOfBlockSizes, numberOfValuesToCreate)}{Generates a sequence of random block sizes.}
+#'   \item{nextInt(numberOfBlockSizes)}{Retrieves the next random block size from the sequence.}
+#' }
+#'
+#' @keywords internal
+#' 
 RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
     fields = list(
         seed = "integer",

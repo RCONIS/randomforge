@@ -1,11 +1,46 @@
 
-#' @export 
+#'
+#' Create a New RandomAllocationValueService Instance
+#'
+#' @description
+#' Constructs and returns a new `RandomAllocationValueService` reference 
+#' class object, which manages the generation and retrieval of random 
+#' allocation values for randomization procedures.
+#'
+#' @return A `RandomAllocationValueService` reference class object.
+#'
+#' @export
+#' 
 getRandomAllocationValueService <- function() {
     return(RandomAllocationValueService())
 }
 
 #'
-#' 
+#' RandomAllocationValueService Reference Class
+#'
+#' @description
+#' Manages the generation and retrieval of random allocation values for 
+#' randomization procedures. Maintains a reproducible sequence of random 
+#' values using a seed, and provides methods for initialization, 
+#' value creation, retrieval, and display.
+#'
+#' @field seed Integer random seed used for reproducibility.
+#' @field index Integer index tracking the current position in the values vector.
+#' @field values Numeric vector of generated random allocation values.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(...)}{Initializes the service, setting the seed, index, and values.}
+#'   \item{show()}{Displays a summary of the service.}
+#'   \item{toString()}{Returns a string representation of the service.}
+#'   \item{createNewRandomAllocationValues(randomConfiguration, 
+#'     numberOfValuesToCreate)}{Generates new random allocation values 
+#'     based on the configuration.}
+#'   \item{getNextRandomAllocationValue(randomConfiguration)}{Retrieves 
+#'     the next random allocation value if available.}
+#' }
+#'
+#' @export
 #' 
 RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
     fields = list(
@@ -64,7 +99,22 @@ RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
     )
 )
 
-#' @export 
+#'
+#' Plot Distribution of Random Allocation Values
+#'
+#' @description
+#' Visualizes the distribution of random allocation values managed by 
+#' a `RandomAllocationValueService` object. Optionally restricts the plot 
+#' to only used values and performs a chi-squared test for uniformity.
+#'
+#' @param x A `RandomAllocationValueService` object.
+#' @param ... Additional arguments passed to the `hist` function.
+#' @param usedValuesOnly Logical; if `TRUE`, only values up to the current index are plotted.
+#'
+#' @return A histogram plot of the random allocation values.
+#'
+#' @export
+#' 
 plot.RandomAllocationValueService <- function(x, ..., usedValuesOnly = TRUE) {
     values <- x$values
     if (usedValuesOnly) {
