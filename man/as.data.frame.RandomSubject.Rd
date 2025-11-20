@@ -19,4 +19,7 @@ Converts a \code{RandomSubject} object into a data frame containing project,
 random number, treatment arm, status, system state,
 randomization decision, and unique subject ID.
 }
+\seealso{
+\code{\link[=RandomSubject]{RandomSubject}}
+}
 \keyword{internal}

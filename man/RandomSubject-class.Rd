@@ -37,4 +37,7 @@ randomization result, and status.
 }
 }
 
+\seealso{
+\code{\link[=as.data.frame.RandomSubject]{as.data.frame()}}
+}
 \keyword{internal}

@@ -124,4 +124,7 @@ Data format: \if{html}{\out{<code>}}Map(key = 'factor level id', value = 'treatm
 }
 }
 
+\seealso{
+\code{\link[=as.data.frame.RandomSystemState]{as.data.frame()}}
+}
 \keyword{internal}

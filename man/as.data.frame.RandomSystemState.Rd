@@ -17,4 +17,7 @@ A data frame with columns for overall and block-wise treatment arm filling level
 \description{
 Converts a \code{RandomSystemState} object into a data frame containing overall and block-wise treatment arm filling levels.
 }
+\seealso{
+\code{\link[=RandomSystemState]{RandomSystemState}}
+}
 \keyword{internal}

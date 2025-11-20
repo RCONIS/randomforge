@@ -43,4 +43,7 @@ Represents a block of treatment arms for randomization, with associated factor l
 }
 }
 
+\seealso{
+\code{\link[=as.data.frame.RandomBlock]{as.data.frame()}}
+}
 \keyword{internal}
