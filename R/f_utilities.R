@@ -369,87 +369,86 @@ getTreatmentArmValueList <- function(..., treatmentArmIds) {
 }
 
 #'
-#' Write Excel File from Named List of Data Frames
+#' Write Data Frames to Excel File
 #'
 #' @description
-#' Writes a named list of data frames to an Excel file, with each list element 
-#' as a separate sheet. Optionally adds a meta information sheet with creation 
-#' details and custom metadata.
+#' Writes a named list of data frames to an Excel file, with optional 
+#' meta information. Each list element becomes a separate sheet in the output file.
 #'
-#' @param sheetList A named list of data frames; 
-#'        each name represents the sheet name.
-#' @param file Character value specifying the output Excel file path.
+#' @param sheetList A named list of data frames; each name represents the sheet name.
+#' @param file Character string specifying the output Excel file path.
 #' @param ... Additional arguments (currently not used).
-#' @param user Character; name of the user creating the file. 
-#'        Default is \code{"Unknown"}.
-#' @param addMetaInformationSheet Logical; if \code{TRUE}, adds a meta 
-#'        information sheet. Default is \code{TRUE}.
-#' @param metaRows Named list of additional metadata rows to include in the meta 
-#'        information sheet. Default is \code{NULL}.
+#' @param addMetaInformationSheet Logical; if \code{TRUE}, adds a meta information sheet. Default is \code{TRUE}.
+#' @param userName Character string for the user name in meta information. Default is \code{"Anonymous"}.
 #'
-#' @return Invisibly returns the file path.
+#' @return The file path of the written Excel file.
 #'
-#' @export
+#' @export 
 #' 
-writeExcelFile <- function(sheetList, file, ..., user = "Unknown", addMetaInformationSheet = TRUE, metaRows = NULL) {
-    .assertPackageIsInstalled("openxlsx")
+writeExcelFile <- function(sheetList, file, ..., addMetaInformationSheet = TRUE, userName = "Anonymous") {
     tryCatch(
         {
+            .assertPackageIsInstalled("writexl")
+            
             if (length(sheetList) == 0 || !is.list(sheetList)) {
                 stop("'sheetList' must be a valid list of data frames")
             }
-
+            
             sheetNames <- names(sheetList)
             sheetNames <- sheetNames[sheetNames != ""]
             if (length(sheetList) > length(sheetNames)) {
                 stop("'sheetList' must be a named list of data frames")
             }
-
+            
             for (sheet in sheetList) {
                 if (!is.data.frame(sheet)) {
                     stop("'sheetList' must be a named list of data frames")
                 }
             }
-
-            options("openxlsx.dateFormat" = "yyyy-mm-dd")
-            wb <- openxlsx::createWorkbook()
-            for (sheetName in sheetNames) {
-                data <- sheetList[[sheetName]]
-                openxlsx::addWorksheet(wb, sheetName)
-                openxlsx::setColWidths(wb, sheet = sheetName, cols = 1:ncol(data), widths = "auto")
-                openxlsx::writeData(wb, sheet = sheetName, x = data, withFilter = FALSE)
-            }
-
+            
+            message("Write Excel file ", sQuote(file), " with ", length(sheetList), " sheets...")
             if (addMetaInformationSheet) {
-                sheetName <- "Meta information"
-                captions <- c("Creation date", "Creation time", "Created by")
-                values <- c(format(Sys.time(), "%Y-%m-%d"), format(Sys.time(), "%X"), user)
-                if (!is.null(metaRows) && !is.null(names(metaRows))) {
-                    for (caption in names(metaRows)) {
-                        value <- metaRows[[caption]]
-                        if (!is.null(value)) {
-                            captions <- c(captions, caption)
-                            values <- c(values, value)
-                        }
-                    }
+                meta <- .getMetaInformation(userName)
+                if (!is.null(meta)) {
+                    sheetList[["Meta information"]] <- meta
                 }
-
-                meta <- data.frame(
-                    "randomforge" = captions,
-                    " " = values,
-                    stringsAsFactors = FALSE, check.names = FALSE
-                )
-
-                openxlsx::addWorksheet(wb, sheetName)
-                openxlsx::setColWidths(wb, sheet = sheetName, cols = 1:ncol(meta), widths = "auto")
-                openxlsx::writeData(wb, sheet = sheetName, x = meta, withFilter = FALSE)
             }
-
-            openxlsx::saveWorkbook(wb, file, overwrite = TRUE)
+            
+            writexl::write_xlsx(sheetList, path = file, col_names = TRUE, format_headers = TRUE)
+            
+            message("Completed: write Excel file ", sQuote(file), " with ", length(sheetList), " sheets.")
         },
         error = function(e) {
-            logError("Failed to write Excel file ", sQuote(file), ": ", e$message)
+            stop("Failed to write Excel file ", sQuote(file), ": ", e$message)
         }
     )
-    return(invisible(file))
+    return(file)
+}
+
+.getMetaInformation <- function(userName) {
+    currentLocale <- Sys.getlocale("LC_TIME")
+    tryCatch(
+        {
+            Sys.setlocale("LC_TIME", "en_US.UTF-8")
+            meta <- data.frame(
+                "Created by" = "randomforge",
+                "Creation date" = format(Sys.time(), "%B %d, %Y"),
+                "Creation time" = format(Sys.time(), "%X"),
+                "User" = userName,
+                "randomforge package version" = paste0("randomforge ", packageVersion("randomforge")),
+                "The documentation is hosted at" = "https://www.randomforge.org",
+                "randomforge is developed by" = "Friedrich Pahlke, www.linkedin.com/in/pahlke",
+                stringsAsFactors = FALSE, 
+                check.names = FALSE
+            )
+            meta <- data.frame(Parameter = names(meta), Value = unlist(meta, use.names = FALSE))
+            return(meta)
+        },
+        error = function(e) {
+            logError("Failed to get meta information ", sQuote(file), ": ", e$message)
+        }, finally = {
+            Sys.setlocale("LC_TIME", currentLocale)
+        }
+    )
+    return(NULL)
 }

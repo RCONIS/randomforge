@@ -23,7 +23,7 @@ getRandomMethodPBR <- function(...,
         blockSizes = list(),
         fixedBlockDesignEnabled = TRUE,
         fixedBlockIndex = 1L,
-        blockSizeRandomizer = RandomBlockSizeRandomizer()) {
+        blockSizeRandomizer = getRandomBlockSizeRandomizer()) {
     return(RandomMethodPBR(
         blockSizes = blockSizes,
         fixedBlockDesignEnabled = fixedBlockDesignEnabled,
@@ -79,7 +79,7 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
                 blockSizes = list(),
                 fixedBlockDesignEnabled = TRUE,
                 fixedBlockIndex = 1L,
-                blockSizeRandomizer = RandomBlockSizeRandomizer()) {
+                blockSizeRandomizer = getRandomBlockSizeRandomizer()) {
             callSuper(name = name,
                 blockSizes = blockSizes, fixedBlockDesignEnabled = fixedBlockDesignEnabled,
                 fixedBlockIndex = fixedBlockIndex, blockSizeRandomizer = blockSizeRandomizer, ...

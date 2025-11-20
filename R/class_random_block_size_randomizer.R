@@ -6,6 +6,8 @@
 #' Constructs and returns a new `RandomBlockSizeRandomizer` reference 
 #' class object, which manages random selection of block sizes for 
 #' randomization procedures.
+#' 
+#' @param seed Integer random seed used for reproducibility.
 #'
 #' @return A `RandomBlockSizeRandomizer` reference class object.
 #' 
@@ -13,8 +15,8 @@
 #'
 #' @export
 #' 
-getRandomBlockSizeRandomizer <- function() {
-    return(RandomBlockSizeRandomizer())
+getRandomBlockSizeRandomizer <- function(seed = NA_integer_) {
+    return(RandomBlockSizeRandomizer(seed = seed))
 }
 
 #'
@@ -51,19 +53,21 @@ RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
     methods = list(
         initialize = function(seed = NA_integer_, ...) {
             callSuper(seed = seed, ...)
-            index <<- 1L
+            if (is.na(seed)) {
+                .self$seed <- .getRandomSeed()
+            }
+            .setSeed(.self$seed)
+            .self$index <- 1L
         },
         show = function() {
             cat(toString(), "\n")
         },
         toString = function() {
-            return("RandomBlockSizeRandomizer")
+            return("RandomBlockSizeRandomizer(seed = ", .self$seed, 
+                   ", numberOfValues = ", length(.self$values), 
+                   ", currentIndex = ", .self$index, ")")
         },
-        initRandomValues = function(numberOfBlockSizes, numberOfValuesToCreate = 1000L) {
-            if (is.na(seed)) {
-                seed <<- .getRandomSeed()
-                .setSeed(seed)
-            }
+        initRandomValues = function(numberOfBlockSizes, ..., numberOfValuesToCreate = 1000L) {
             values <<- sample.int(n = numberOfBlockSizes, size = numberOfValuesToCreate, replace = TRUE)
         },
         nextInt = function(numberOfBlockSizes) { # TODO numberOfBlockSizes

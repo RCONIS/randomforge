@@ -16,11 +16,13 @@ test_that("Test that seed is working as expected", {
     blockSizes[[1]] <- list("A" = 2, "B" = 2)
     blockSizes[[2]] <- list("A" = 3, "B" = 3)
     
-    blockSizeRandomizer <- getRandomBlockSizeRandomizer()
+    blockSizeRandomizer <- getRandomBlockSizeRandomizer(seed = 371022898L)
     blockSizeRandomizer$initRandomValues(numberOfBlockSizes = length(blockSizes))
     
-    randomMethod <- getRandomMethodPBR(blockSizes = blockSizes, 
-        fixedBlockDesignEnabled = FALSE, blockSizeRandomizer = blockSizeRandomizer)
+    randomMethod <- getRandomMethodPBR(
+        blockSizes = blockSizes, 
+        fixedBlockDesignEnabled = FALSE, 
+        blockSizeRandomizer = blockSizeRandomizer)
     
     for (i in 1:30) {
         suppressMessages(temp <- getNextRandomResult(randomDataBase, randomProject, randomMethod, randomAllocationValueService))

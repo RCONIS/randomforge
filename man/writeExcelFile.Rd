@@ -2,39 +2,31 @@
 % Please edit documentation in R/f_utilities.R
 \name{writeExcelFile}
 \alias{writeExcelFile}
-\title{Write Excel File from Named List of Data Frames}
+\title{Write Data Frames to Excel File}
 \usage{
 writeExcelFile(
   sheetList,
   file,
   ...,
-  user = "Unknown",
   addMetaInformationSheet = TRUE,
-  metaRows = NULL
+  userName = "Anonymous"
 )
 }
 \arguments{
-\item{sheetList}{A named list of data frames;
-each name represents the sheet name.}
+\item{sheetList}{A named list of data frames; each name represents the sheet name.}
 
-\item{file}{Character value specifying the output Excel file path.}
+\item{file}{Character string specifying the output Excel file path.}
 
 \item{...}{Additional arguments (currently not used).}
 
-\item{user}{Character; name of the user creating the file.
-Default is \code{"Unknown"}.}
+\item{addMetaInformationSheet}{Logical; if \code{TRUE}, adds a meta information sheet. Default is \code{TRUE}.}
 
-\item{addMetaInformationSheet}{Logical; if \code{TRUE}, adds a meta
-information sheet. Default is \code{TRUE}.}
-
-\item{metaRows}{Named list of additional metadata rows to include in the meta
-information sheet. Default is \code{NULL}.}
+\item{userName}{Character string for the user name in meta information. Default is \code{"Anonymous"}.}
 }
 \value{
-Invisibly returns the file path.
+The file path of the written Excel file.
 }
 \description{
-Writes a named list of data frames to an Excel file, with each list element
-as a separate sheet. Optionally adds a meta information sheet with creation
-details and custom metadata.
+Writes a named list of data frames to an Excel file, with optional
+meta information. Each list element becomes a separate sheet in the output file.
 }
