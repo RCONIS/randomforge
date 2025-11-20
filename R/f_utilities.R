@@ -445,7 +445,7 @@ writeExcelFile <- function(sheetList, file, ..., addMetaInformationSheet = TRUE,
             return(meta)
         },
         error = function(e) {
-            logError("Failed to get meta information ", sQuote(file), ": ", e$message)
+            message("Failed to get meta information ", sQuote(file), ": ", e$message)
         }, finally = {
             Sys.setlocale("LC_TIME", currentLocale)
         }

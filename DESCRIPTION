@@ -37,7 +37,6 @@ Imports:
 	methods,
 	stats,
 	utils,
-	graphics,
 	tools,
     rlang,
     knitr (>= 1.19)
