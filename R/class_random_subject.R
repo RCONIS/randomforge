@@ -66,12 +66,13 @@ RandomSubject <- setRefClass("RandomSubject",
     )
 )
 
-
 #'
 #' Convert RandomSubject to Data Frame
 #'
 #' @description
-#' Converts a `RandomSubject` object into a data frame containing project, random number, treatment arm, status, system state, randomization decision, and unique subject ID.
+#' Converts a `RandomSubject` object into a data frame containing project, 
+#' random number, treatment arm, status, system state, 
+#' randomization decision, and unique subject ID.
 #'
 #' @param x A `RandomSubject` object.
 #' @param ... Additional arguments (currently unused).

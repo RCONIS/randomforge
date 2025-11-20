@@ -1,13 +1,39 @@
+#'
+#' Convert RandomSystemState to Data Frame
+#'
+#' @description
+#' Converts a `RandomSystemState` object into a data frame containing overall and block-wise treatment arm filling levels.
+#'
+#' @param x A `RandomSystemState` object.
+#' @param ... Additional arguments (currently unused).
+#'
+#' @return A data frame with columns for overall and block-wise treatment arm filling levels.
+#'
+#' @keywords internal
+#' 
+#' @export 
+#' 
+as.data.frame.RandomSystemState <- function(x, ...) {
+    df <- .treatmentListToDataFrame(x$fillingLevelsOverall, "overall-levels-")
+    df <- cbind(df, .treatmentListToDataFrame(as.list(as.data.frame(x$blocks[[1]])), "block-wise-levels-"))
+    return(df)
+}
 
 #'
-#' @title Random System State
-#' 
-#' @field fillingLevelsOverall
-#' @field fillingLevelsBlock
-#' @field fillingLevelsBlockMaximum
-#' @field fillingLevelsStratum
-#' @field fillingLevelsFactor
-#' 
+#' RandomSystemState Reference Class
+#'
+#' @description
+#' Represents the state of a randomization system, tracking filling 
+#' levels for treatment arms across overall, block, stratum, and factor levels.
+#'
+#' @field uniqueId Character string uniquely identifying the system state.
+#' @field fillingLevelsOverall List of overall filling levels for each treatment arm.
+#' @field blocks List of block objects for each stratum.
+#' @field fillingLevelsBlock List of filling levels for each treatment arm within each block.
+#' @field fillingLevelsBlockMaximum List of maximum filling levels for each treatment arm within each block.
+#' @field fillingLevelsStratum List of filling levels for each treatment arm within each stratum.
+#' @field fillingLevelsFactor List of filling levels for each treatment arm within each factor level.
+#'
 #' @details 
 #' 
 #' \code{fillingLevelsBlock}: 
@@ -87,44 +113,6 @@
 #' 
 #' @include class_general_unique_id_builder.R
 #' 
-NULL
-
-#'
-#' Convert RandomSystemState to Data Frame
-#'
-#' @description
-#' Converts a `RandomSystemState` object into a data frame containing overall and block-wise treatment arm filling levels.
-#'
-#' @param x A `RandomSystemState` object.
-#' @param ... Additional arguments (currently unused).
-#'
-#' @return A data frame with columns for overall and block-wise treatment arm filling levels.
-#'
-#' @keywords internal
-#' 
-#' @export 
-#' 
-as.data.frame.RandomSystemState <- function(x, ...) {
-    df <- .treatmentListToDataFrame(x$fillingLevelsOverall, "overall-levels-")
-    df <- cbind(df, .treatmentListToDataFrame(as.list(as.data.frame(x$blocks[[1]])), "block-wise-levels-"))
-    return(df)
-}
-
-#'
-#' RandomSystemState Reference Class
-#'
-#' @description
-#' Represents the state of a randomization system, tracking filling 
-#' levels for treatment arms across overall, block, stratum, and factor levels.
-#'
-#' @field uniqueId Character string uniquely identifying the system state.
-#' @field fillingLevelsOverall List of overall filling levels for each treatment arm.
-#' @field blocks List of block objects for each stratum.
-#' @field fillingLevelsBlock List of filling levels for each treatment arm within each block.
-#' @field fillingLevelsBlockMaximum List of maximum filling levels for each treatment arm within each block.
-#' @field fillingLevelsStratum List of filling levels for each treatment arm within each stratum.
-#' @field fillingLevelsFactor List of filling levels for each treatment arm within each factor level.
-#'
 #' @section Methods:
 #' \describe{
 #'   \item{initialize(...)}{Initializes a new `RandomSystemState` instance.}

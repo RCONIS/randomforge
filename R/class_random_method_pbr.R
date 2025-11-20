@@ -1,5 +1,22 @@
 
+#'
+#' Create a Permuted Block Randomization Method Instance
+#'
+#' @description
+#' Constructs and returns a new `RandomMethodPBR` reference class object, 
+#' configured for permuted block randomization with specified block 
+#' sizes and design options.
+#'
+#' @param ... Additional arguments passed to the `RandomMethodPBR` initializer.
+#' @param blockSizes List of block size configurations, each mapping treatment arm IDs to sizes.
+#' @param fixedBlockDesignEnabled Logical indicating if a fixed block design is used (default: TRUE).
+#' @param fixedBlockIndex Integer specifying the index of the fixed block size to use (default: 1).
+#' @param blockSizeRandomizer `RandomBlockSizeRandomizer` object for selecting block sizes randomly.
+#'
+#' @return A `RandomMethodPBR` reference class object.
+#'
 #' @export
+#' 
 getRandomMethodPBR <- function(...,
         blockSizes = list(),
         fixedBlockDesignEnabled = TRUE,
@@ -13,6 +30,32 @@ getRandomMethodPBR <- function(...,
     ))
 }
 
+#'
+#' RandomMethodPBR Reference Class
+#'
+#' @description
+#' Implements the Permuted Block Randomization (PBR) method, supporting 
+#' both fixed and randomized block designs for treatment allocation.
+#'
+#' @field name Character string specifying the method name.
+#' @field uniqueId Character string uniquely identifying the method instance.
+#' @field blockSizeRandomizer `RandomBlockSizeRandomizer` object for selecting block sizes randomly.
+#' @field blockSizes List of block size configurations, each mapping treatment arm IDs to sizes.
+#' @field fixedBlockDesignEnabled Logical indicating if a fixed block design is used.
+#' @field fixedBlockIndex Integer specifying the index of the fixed block size to use.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(...)}{Initializes a new `RandomMethodPBR` instance, 
+#'     validates block size settings, and assigns a unique ID.}
+#'   \item{show()}{Prints a string representation of the method.}
+#'   \item{toString()}{Returns a string representation of the method and its configuration.}
+#'   \item{randomize(factorLevels, randomSystemState, randomAllocationValue)}{Performs 
+#'     randomization using PBR, updates system state, and returns a `RandomResult`.}
+#'   \item{getNextRandomBlockSize()}{Retrieves the next block size configuration, either fixed or randomized.}
+#' }
+#'
+#' @keywords internal
 #'
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R
@@ -116,9 +159,10 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
 
             blockSize <- blockSizes[[randomIndex]]
 
-            #            Map<String, Object> rndLoggerValues = new HashMap<String, Object>()
-            #            rndLoggerValues.put("blockSize", "new random block size: " + blockSize + " (random index: " + randomIndex + ")")
-            #            logger.info("Random configuration set: " + rndLoggerValues)
+            # TODO logging
+            # Map<String, Object> rndLoggerValues = new HashMap<String, Object>()
+            # rndLoggerValues.put("blockSize", "new random block size: " + blockSize + " (random index: " + randomIndex + ")")
+            # logger.info("Random configuration set: " + rndLoggerValues)
 
             return(blockSize)
         }

@@ -1,5 +1,28 @@
 
+
 #'
+#' RandomMethodRangeSet Reference Class
+#'
+#' @description
+#' Represents a set of randomization method ranges, each associated with a treatment arm and probability, and provides methods for initialization, validation, and lookup.
+#'
+#' @field uniqueId Character string uniquely identifying the range set.
+#' @field ranges List of `RandomMethodRange` objects, keyed by treatment arm ID.
+#' @field randomAllocationDoubleValue Numeric value representing the last allocation value used.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(ranges = list(), ...)}{Initializes a new `RandomMethodRangeSet` instance and assigns a unique ID.}
+#'   \item{show()}{Prints a string representation of the range set.}
+#'   \item{toString()}{Returns a string representation of the range set.}
+#'   \item{getRange(treatmentArmId)}{Retrieves the range for a specified treatment arm.}
+#'   \item{indexOf(randomAllocationValue)}{Finds the treatment arm for a given allocation value.}
+#'   \item{initRanges(probabilities)}{Initializes ranges based on a named list of probabilities.}
+#'   \item{validate()}{Validates that the ranges are contiguous and sum to 1.0.}
+#' }
+#'
+#' @keywords internal
+#' 
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R
 #' 

@@ -1,5 +1,26 @@
 
-#' @export 
+
+#'
+#' Generate and Persist the Next Randomization Result
+#'
+#' @description
+#' Retrieves the next random allocation value, generates a new randomization 
+#' result using the specified method, updates the system state, and persists 
+#' all relevant objects in the database.
+#'
+#' @param randomDataBase Object providing access to randomization data and persistence methods.
+#' @param randomProject `RandomProject` reference class object representing the current project.
+#' @param randomMethod Object implementing the randomization method with a `randomize` function.
+#' @param randomAllocationValueService Service object for managing random allocation values.
+#'
+#' @return A `RandomResult` reference class object representing the outcome of the randomization.
+#'
+#' @details
+#' Validates the project, retrieves configuration and allocation values, 
+#' manages system state, and persists the result and subject information.
+#'
+#' @export
+#' 
 getNextRandomResult <- function(
         randomDataBase, 
         randomProject, 

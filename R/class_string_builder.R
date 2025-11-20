@@ -1,5 +1,4 @@
 
-
 #'
 #' StringBuilder Reference Class
 #'
@@ -21,7 +20,7 @@
 #'
 #' @keywords internal
 #' 
-#' @noRd
+#' @noRd 
 #' 
 StringBuilder <- setRefClass("StringBuilder",
     fields = list(

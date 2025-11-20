@@ -1,6 +1,23 @@
 
-
-#' @export 
+#'
+#' Create a New RandomConfiguration Instance
+#'
+#' @description
+#' Constructs and returns a new `RandomConfiguration` reference class object, 
+#' initializing all fields and assigning a unique ID. Allows specification of 
+#' treatment arms, seed, buffer sizes, and associated project.
+#'
+#' @param ... Additional arguments passed to the constructor.
+#' @param randomProject `RandomProject` object associated with this configuration.
+#' @param treatmentArmIds Character vector of treatment arm IDs.
+#' @param seed Integer random seed used for reproducibility. Defaults to `NA_integer_`.
+#' @param ravBufferMinimumSize Integer specifying the minimum buffer size for allocation values. Defaults to `1000L`.
+#' @param ravBufferMaximumSize Integer specifying the maximum buffer size for allocation values. Defaults to `10000L`.
+#'
+#' @return A `RandomConfiguration` reference class object.
+#'
+#' @export
+#' 
 getRandomConfiguration <- function(..., 
         randomProject, treatmentArmIds, 
         seed = NA_integer_,
@@ -14,6 +31,35 @@ getRandomConfiguration <- function(...,
     ))
 }
 
+#'
+#' RandomConfiguration Reference Class
+#'
+#' @description
+#' Represents a randomization configuration for a project, including 
+#' treatment arms, seed, buffer sizes, and optional factor IDs. 
+#' Provides methods for initialization, display, and validation of configuration parameters.
+#'
+#' @field uniqueId Character string uniquely identifying the configuration instance.
+#' @field creationDate POSIXct timestamp of configuration creation.
+#' @field randomProject `RandomProject` object associated with this configuration.
+#' @field seed Integer random seed used for reproducibility.
+#' @field ravBufferMinimumSize Integer specifying the minimum buffer size for allocation values.
+#' @field ravBufferMaximumSize Integer specifying the maximum buffer size for allocation values.
+#' @field treatmentArmIds Character vector of treatment arm IDs.
+#' @field factorIds Character vector of factor IDs (optional).
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(..., creationDate, seed, ravBufferMinimumSize, 
+#'     ravBufferMaximumSize)}{Initializes a new `RandomConfiguration` instance, 
+#'     validates buffer sizes, assigns a unique ID, and sets the seed.}
+#'   \item{show(prefix)}{Displays a summary of the configuration.}
+#'   \item{toString(prefix)}{Returns a string representation of the configuration and its fields.}
+#'   \item{getDoubleValue()}{Returns the double value (if defined).}
+#'   \item{getSeed()}{Returns the seed value, validating its integrity.}
+#' }
+#'
+#' @keywords internal
 #' 
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R

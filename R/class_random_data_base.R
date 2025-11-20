@@ -1,4 +1,18 @@
 
+#'
+#' Display a List of Objects with a Title
+#'
+#' @description
+#' Formats and returns a string representation of a list of objects, each displayed using their `toString` method, prefixed by a title.
+#'
+#' @param x List of objects to display.
+#' @param title Character string used as the title for the list.
+#'
+#' @return A character string representing the formatted list, or an empty character vector if the list is empty or `NULL`.
+#'
+#' @keywords internal
+#' @noRd
+#' 
 .showList <- function(x, title) {
     if (is.null(x) || length(x) == 0) {
         return(character(0))
@@ -11,11 +25,51 @@
     return(sb$toString())
 }
 
-#' @export 
+#'
+#' Create a New RandomDataBase Instance
+#'
+#' @description
+#' Constructs and returns a new `RandomDataBase` reference class object, 
+#' initializing all fields and assigning a unique ID.
+#'
+#' @return A `RandomDataBase` reference class object.
+#'
+#' @export
+#' 
 getRandomDataBase <- function() {
     return(RandomDataBase())
 }
 
+#'
+#' RandomDataBase Reference Class
+#'
+#' @description
+#' Manages randomization data, including projects, configurations, 
+#' allocation values, subjects, and results. Provides methods for 
+#' validation, persistence, retrieval, and display of randomization objects.
+#'
+#' @field uniqueId Character string uniquely identifying the database instance.
+#' @field creationDate POSIXct timestamp of database creation.
+#' @field randomProjects List of `RandomProject` objects.
+#' @field randomConfigurations List of `RandomConfiguration` objects.
+#' @field randomAllocationValues List of `RandomAllocationValue` objects.
+#' @field randomSubjects List of `RandomSubject` objects.
+#' @field randomResults List of `RandomResult` objects.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(..., creationDate)}{Initializes a new `RandomDataBase` instance, assigns a unique ID, and sets up empty lists for all fields.}
+#'   \item{validateRandomProject(randomProject)}{Checks if a project exists in the database; stops with an error if not.}
+#'   \item{show()}{Displays a summary of the database and its contents.}
+#'   \item{toString()}{Returns a string representation of the database and its statistics.}
+#'   \item{persist(obj)}{Persists an object to the appropriate list based on its class.}
+#'   \item{getRandomProjectUniqueIds(objects)}{Returns a character vector of unique IDs for the given objects' projects.}
+#'   \item{getLastSubject(randomProject)}{Retrieves the last subject for a given project.}
+#'   \item{getLastRandomConfiguration(randomProject)}{Retrieves the last configuration for a given project.}
+#'   \item{createNewSubjectRandomNumber(randomProject)}{Generates the next subject random number for a given project.}
+#' }
+#'
+#' @keywords internal
 #'
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R
@@ -148,7 +202,19 @@ RandomDataBase <- setRefClass("RandomDataBase",
     )
 )
 
-#' @export 
+#'
+#' Convert RandomDataBase Subjects to Data Frame
+#'
+#' @description
+#' Converts the list of `RandomSubject` objects stored in a `RandomDataBase` instance into a data frame by applying `as.data.frame` to each subject and binding the results by row.
+#'
+#' @param x A `RandomDataBase` reference class object.
+#' @param ... Additional arguments passed to `as.data.frame`.
+#'
+#' @return A data frame containing all subjects from the database.
+#'
+#' @export
+#' 
 as.data.frame.RandomDataBase <- function(x, ...) {
     do.call(rbind.data.frame, lapply(x$randomSubjects, as.data.frame))
 }

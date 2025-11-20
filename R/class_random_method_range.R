@@ -1,4 +1,25 @@
+
 #'
+#' RandomMethodRange Reference Class
+#'
+#' @description
+#' Represents a range for randomization methods, associated with a treatment arm and defined by lower and upper bounds.
+#'
+#' @field uniqueId Character string uniquely identifying the method range.
+#' @field treatmentArmId Character string specifying the treatment arm.
+#' @field lowerBound Numeric value for the lower bound of the range.
+#' @field upperBound Numeric value for the upper bound of the range.
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(..., treatmentArmId, lowerBound, upperBound)}{Initializes a new `RandomMethodRange` instance and assigns a unique ID.}
+#'   \item{show()}{Prints a string representation of the method range.}
+#'   \item{toString(randomAllocationValue = NULL)}{Returns a string representation of the range, optionally including a specific allocation value.}
+#'   \item{contains(value)}{Checks if a value falls within the defined range.}
+#' }
+#'
+#' @keywords internal
+#' 
 #' @include f_constants.R
 #' @include class_general_unique_id_builder.R
 #' 

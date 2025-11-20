@@ -1,5 +1,4 @@
 
-
 #'
 #' Create Stratum Identifier from Factor Levels
 #'

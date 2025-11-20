@@ -1,16 +1,50 @@
 
-#' @export 
+#'
+#' Convert RandomBlock Arms to Data Frame
+#'
+#' @description
+#' Converts the list of `RandomBlockArm` objects stored in a `RandomBlock` 
+#' instance into a data frame by applying `.treatmentListToDataFrame` to the block arms.
+#'
+#' @param x A `RandomBlock` reference class object.
+#' @param ... Additional arguments passed to the conversion function.
+#'
+#' @return A data frame containing all block arms from the block.
+#'
+#' @export
+#' 
 as.data.frame.RandomBlock <- function(x, ...) {
     return(.treatmentListToDataFrame(x$blockArms))
 }
 
 #'
-#' @title Random Block 
-#' 
-#' @field blockArms The map containing the block arms, 
-#' format: [treatment arm id, RandomBlockArm]
-#' @field factorLevels The strata and strata levels formatted as character list
-#' where the key is the factor name or id and the value is the specific level (name or id).
+#' RandomBlock Reference Class
+#'
+#' @description
+#' Represents a block of treatment arms for randomization, with associated factor levels (strata). Provides methods for initialization, cloning, display, validation, probability calculation, and block arm management.
+#'
+#' @field blockArms List mapping treatment arm IDs to `RandomBlockArm` objects, 
+#'        format: [treatment arm id, RandomBlockArm].
+#' @field factorLevels List of strata and their levels, where keys are factor names or IDs and values are specific levels (name or ID).
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{initialize(..., maximumBlockSize, currentBlockSize, blockArms, factorLevels)}{Initializes a new `RandomBlock` instance, optionally setting up block arms and factor levels.}
+#'   \item{clone()}{Creates a deep copy of the block and its arms.}
+#'   \item{show()}{Displays a summary of the block.}
+#'   \item{toString()}{Returns a string representation of the block and its arms.}
+#'   \item{assertBlockArmsAreValid()}{Validates that block arms are present and non-empty.}
+#'   \item{isCompleted()}{Checks if all block arms are completed.}
+#'   \item{getProbabilities()}{Returns a list of allocation probabilities for each treatment arm.}
+#'   \item{incrementSize(treatmentArmId)}{Increments the size of the specified block arm.}
+#'   \item{getBlockArm(treatmentArmId)}{Retrieves the block arm for a given treatment arm ID.}
+#'   \item{keySet()}{Returns the set of treatment arm IDs.}
+#'   \item{get(key)}{Retrieves the block arm by key.}
+#'   \item{getTreatmentCount()}{Returns the number of treatment arms.}
+#'   \item{init(maximumBlockSize, currentBlockSize, factorLevels)}{Initializes block arms and factor levels.}
+#' }
+#'
+#' @keywords internal
 #' 
 RandomBlock <- setRefClass("RandomBlock",
     fields = list(

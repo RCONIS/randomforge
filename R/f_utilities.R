@@ -44,7 +44,6 @@ NULL
     return(df)
 }
 
-
 #'
 #' Concatenate Values with Custom Separator and Mode
 #'
@@ -88,7 +87,6 @@ NULL
     part2 <- x[length(x)]
     return(paste0(paste(part1, collapse = separator), separator, space, mode, " ", part2))
 }
-
 
 #'
 #' Convert Array to String Representation
