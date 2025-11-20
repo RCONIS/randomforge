@@ -16,7 +16,8 @@
 #' @export
 #' 
 getRandomBlockSizeRandomizer <- function(seed = NA_integer_) {
-    return(RandomBlockSizeRandomizer(seed = seed))
+    .assertIsSingleInteger(seed, "seed", naAllowed = TRUE, validateType = FALSE)
+    return(RandomBlockSizeRandomizer(seed = as.integer(seed)))
 }
 
 #'

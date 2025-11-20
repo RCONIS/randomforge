@@ -4,7 +4,10 @@
 \alias{getRandomBlockSizeRandomizer}
 \title{Create a New RandomBlockSizeRandomizer Instance}
 \usage{
-getRandomBlockSizeRandomizer()
+getRandomBlockSizeRandomizer(seed = NA_integer_)
+}
+\arguments{
+\item{seed}{Integer random seed used for reproducibility.}
 }
 \value{
 A \code{RandomBlockSizeRandomizer} reference class object.
