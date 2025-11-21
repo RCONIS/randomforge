@@ -1,0 +1,220 @@
+---
+title: "Contributing to randomforge"
+author: "Friedrich Pahlke"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Contributing to randomforge}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+**RandomForge — An Open Project for Clinical Trial Randomization in R**
+
+`randomforge` is a newly started, open-source project on GitHub that aims to
+provide a clean and transparent implementation of clinical trial randomization
+methods in R. The initial version focuses on a flexible and modular
+implementation of **permuted block randomization**, with the goal of gradually
+expanding the framework to additional techniques.
+
+The project is still in an early phase, but it is designed to be openly
+accessible and easy to extend. Contributions, discussions, and feedback from
+statisticians, programmers, and clinical trial practitioners are explicitly
+welcome as the project evolves.
+
+This vignette explains how to:
+
+1. Install and try the package with a small reproducible example  
+2. Contribute to the project  
+3. Use GitHub effectively even if you are new to it  
+
+
+# 1. Installing randomforge and running a simple randomization
+
+At this stage, the package is not yet on CRAN.  
+You can install the development version directly from GitHub:
+
+```r
+# install.packages("remotes")
+remotes::install_github("RCONIS/randomforge")
+
+library(randomforge)
+```
+
+Below is a minimal example that demonstrates a simple permuted block
+randomization workflow.
+
+```r
+# Create an in-memory randomization database
+randomDataBase <- getRandomDataBase()
+
+# Define a project and configuration
+randomProject <- getRandomProject("Example Trial")
+randomDataBase$persist(randomProject)
+
+config <- getRandomConfiguration(
+    randomProject        = randomProject,
+    treatmentArmIds      = c("A", "B"),
+    seed                 = 123L,
+    ravBufferMinimumSize = 1000L,
+    ravBufferMaximumSize = 10000L
+)
+
+randomDataBase$persist(config)
+
+# Define variable block sizes
+blockSizes <- getBlockSizes(config$treatmentArmIds, c(4, 6))
+
+# Define a block randomization method
+blockSizeRandomizer <- getRandomBlockSizeRandomizer(blockSizes)
+
+randomMethodPBR <- getRandomMethodPBR(
+    blockSizes              = blockSizes,
+    fixedBlockDesignEnabled = FALSE,
+    blockSizeRandomizer     = blockSizeRandomizer
+)
+
+# Create a random allocation value service
+ravService <- getRandomAllocationValueService()
+
+# Draw a few randomization results
+results <- lapply(1:5, function(i) {
+    getNextRandomResult(
+        randomDataBase               = randomDataBase,
+        randomProject                = randomProject,
+        randomMethod                 = randomMethodPBR,
+        randomAllocationValueService = ravService
+    )
+})
+
+# Convert results to a data frame
+as.data.frame(randomDataBase)
+```
+
+
+# 2. How to contribute to randomforge
+
+Contributions of all kinds are welcome:
+
+- new randomization methods  
+- improvements to the existing code  
+- better documentation  
+- tests and reproducible examples  
+- fixing typos or cleaning up style  
+- suggesting new functionality  
+
+You do **not** need to be an expert in R, Git, or clinical trial methodology to
+get involved.  
+We are happy to support new contributors.
+
+
+# 3. Option A: Get invited as a direct contributor
+
+If you prefer not to deal with forks or pull requests, you can simply request
+to be added as a contributor to the GitHub repository.
+
+Please send an email to:
+
+**friedrich.pahlke@rpact.com**
+
+with a brief note explaining:
+
+- who you are  
+- your GitHub username  
+- why you would like to contribute  
+
+Once added, you will be able to push branches and open pull requests directly
+in the main repository.
+
+
+# 4. Option B: Contribute via Fork (recommended for most users)
+
+If you are not familiar with GitHub contribution workflows, here is a simple
+step-by-step guide.
+
+## Step 1 — Create a GitHub account  
+If you do not already have one, register at  
+https://github.com
+
+## Step 2 — Open the randomforge repository  
+Navigate to:  
+https://github.com/RCONIS/randomforge
+
+## Step 3 — Click “Fork”  
+The button is in the upper-right corner.  
+This creates *your own copy* of the repository under your GitHub account.
+
+## Step 4 — Clone your fork to your local machine
+
+```bash
+git clone https://github.com/YOUR_USERNAME/randomforge.git
+```
+
+Then:
+
+```bash
+cd randomforge
+```
+
+## Step 5 — Create a new branch for your change
+
+```bash
+git checkout -b my-feature-branch
+```
+
+## Step 6 — Make your changes locally  
+Edit R files, documentation, tests, examples, or vignettes.
+
+## Step 7 — Commit your changes
+
+```bash
+git add .
+git commit -m "Add new feature / fix / improvement"
+```
+
+## Step 8 — Push your branch to your fork
+
+```bash
+git push origin my-feature-branch
+```
+
+## Step 9 — Open a Pull Request  
+Go back to your fork on GitHub and click:
+
+**“Compare & pull request”**
+
+In the Pull Request description, please provide:
+
+- a brief explanation of your change  
+- any related issue numbers  
+- optional: screenshots or examples  
+
+We will review all contributions as soon as possible.
+
+
+# 5. Getting help
+
+If you get stuck at any point — GitHub workflow, code questions, architecture
+discussion — feel free to:
+
+- open an issue in the GitHub repository, or  
+- send an email to: **friedrich.pahlke@rpact.com**
+
+All questions are welcome, especially from newcomers.  
+We want to make contributing as easy and friendly as possible.
+
+
+# 6. Thank you
+
+We appreciate your interest in contributing to the RandomForge project.  
+Your ideas and contributions help shape a more open, transparent, and
+community-driven future for clinical trial randomization in R.

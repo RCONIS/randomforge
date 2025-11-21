@@ -7,6 +7,7 @@
 #' class object, which manages random selection of block sizes for 
 #' randomization procedures.
 #' 
+#' @param blockSizes List of block size configurations, each mapping treatment arm IDs to sizes.
 #' @param seed Integer random seed used for reproducibility.
 #'
 #' @return A `RandomBlockSizeRandomizer` reference class object.
@@ -15,9 +16,11 @@
 #'
 #' @export
 #' 
-getRandomBlockSizeRandomizer <- function(seed = NA_integer_) {
+getRandomBlockSizeRandomizer <- function(blockSizes, ..., seed = NA_integer_) {
     .assertIsSingleInteger(seed, "seed", naAllowed = TRUE, validateType = FALSE)
-    return(RandomBlockSizeRandomizer(seed = as.integer(seed)))
+    blockSizeRandomizer <- RandomBlockSizeRandomizer(seed = as.integer(seed))
+    blockSizeRandomizer$initRandomValues(numberOfBlockSizes = length(blockSizes))
+    return(blockSizeRandomizer)
 }
 
 #'
