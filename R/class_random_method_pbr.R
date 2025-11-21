@@ -88,7 +88,8 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
                 warning("Only 1 of ", length(blockSizes), " defined block sizes will be used")
             }
             if (fixedBlockDesignEnabled && (fixedBlockIndex < 1 || fixedBlockIndex > length(blockSizes))) {
-                stop("Illegal argument: 'fixedBlockIndex' (", fixedBlockIndex, ") out of bounds [1; ", length(blockSizes), "]")
+                stop(C_EXCEPTION_TYPE_ILLEGAL_ARGUMENT,
+                    "'fixedBlockIndex' (", fixedBlockIndex, ") out of bounds [1; ", length(blockSizes), "]")
             }
             uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },

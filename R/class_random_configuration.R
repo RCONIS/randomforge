@@ -95,10 +95,12 @@ RandomConfiguration <- setRefClass("RandomConfiguration",
                 ravBufferMaximumSize = ravBufferMaximumSize, 
                 ...)
             if (ravBufferMinimumSize < 1) {
-                stop("Illegal argument: ravBufferMinimumSize (", ravBufferMinimumSize, ") must be > 0")
+                stop(C_EXCEPTION_TYPE_ILLEGAL_ARGUMENT, 
+                    "ravBufferMinimumSize (", ravBufferMinimumSize, ") must be > 0")
             }
             if (ravBufferMaximumSize <= ravBufferMinimumSize) {
-                stop("Illegal argument: ravBufferMaximumSize (", ravBufferMaximumSize, 
+                stop(C_EXCEPTION_TYPE_ILLEGAL_ARGUMENT,
+                    "ravBufferMaximumSize (", ravBufferMaximumSize, 
                     ") must be greater than ravBufferMinimumSize (", ravBufferMinimumSize, ")")
             }
             uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
@@ -129,7 +131,7 @@ RandomConfiguration <- setRefClass("RandomConfiguration",
         },
         getSeed = function() {
             if (is.null(seed) || length(seed) != 1 || is.na(seed)) {
-                stop("Runtime exception: seed is invalid")
+                stop(C_EXCEPTION_TYPE_RUNTIME_ISSUE, "seed is invalid")
             }
             return(seed)
         }

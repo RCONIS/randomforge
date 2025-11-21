@@ -147,5 +147,5 @@ You can install the development version from GitHub:
 
 ```r
 # install.packages("remotes")
-remotes::install_github("rpact-com/randomforge")
+remotes::install_github("RCONIS/randomforge")
 ```

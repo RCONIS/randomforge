@@ -71,9 +71,12 @@ RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
         initRandomValues = function(numberOfBlockSizes, ..., numberOfValuesToCreate = 1000L) {
             values <<- sample.int(n = numberOfBlockSizes, size = numberOfValuesToCreate, replace = TRUE)
         },
-        nextInt = function(numberOfBlockSizes) { # TODO numberOfBlockSizes
+        nextInt = function(numberOfBlockSizes) { # TODO implement numberOfBlockSizes
+            if (length(values) == 0) {
+                stop("Block size randomizer not initialized. Call initRandomValues() first")
+            }
             if (index > length(values)) {
-                stop("Index out of bounds exception: index (", index, ") is out of bounds [1; ", length(values), "]")
+                stop("No more random block sizes available")
             }
             
             value <- values[index]

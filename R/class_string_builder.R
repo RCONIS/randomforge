@@ -50,7 +50,8 @@ StringBuilder <- setRefClass("StringBuilder",
                 return(invisible())
             }
             if (index < 1 || index > base::length(values)) {
-                stop("Index ", index, " out of bounds [1; ", base::length(values), "]")
+                stop(C_EXCEPTION_TYPE_INDEX_OUT_OF_BOUNDS, 
+                    "index ", index, " out of bounds [1; ", base::length(values), "]")
             }
             if (index == 1) {
                 values <<- c(x, values)
