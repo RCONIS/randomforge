@@ -35,8 +35,8 @@ getRandomAllocationValueService <- function() {
 #'   \item{initialize(...)}{Initializes the service, setting the seed, index, and values.}
 #'   \item{show()}{Displays a summary of the service.}
 #'   \item{toString()}{Returns a string representation of the service.}
-#'   \item{createNewRandomAllocationValues(randomConfiguration, 
-#'     numberOfValuesToCreate)}{Generates new random allocation values 
+#'   \item{createNewRandomAllocationValues(randomConfiguration)}{
+#'     Generates new random allocation values 
 #'     based on the configuration.}
 #'   \item{getNextRandomAllocationValue(randomConfiguration)}{Retrieves 
 #'     the next random allocation value if available.}
@@ -65,12 +65,9 @@ RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
         toString = function() {
             return("RandomAllocationValueService")
         },
-        createNewRandomAllocationValues = function(
-                randomConfiguration, 
-                numberOfValuesToCreate) {
-            
-            n <- randomConfiguration$ravBufferMaximumSize - randomConfiguration$ravBufferMinimumSize
-            if (is.na(n) || n < 1) {
+        createNewRandomAllocationValues = function(randomConfiguration) {
+            numberOfValuesToCreate <- randomConfiguration$ravBufferMaximumSize - randomConfiguration$ravBufferMinimumSize
+            if (is.na(numberOfValuesToCreate) || numberOfValuesToCreate < 1) {
                 stop("Runtime issue: rav buffer range [", randomConfiguration$ravBufferMinimumSize, 
                     " - ", randomConfiguration$ravBufferMaximumSize, "] is invalid")
             }
@@ -85,9 +82,9 @@ RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
                 seedInfo <- seed2
             }
             
-            message("Create ", n, " new random allocation values (seed = ", seedInfo, ")")
+            message("Create ", numberOfValuesToCreate, " new random allocation values (seed = ", seedInfo, ")")
             
-            .self$values <- c(.self$values, stats::runif(n))
+            .self$values <- c(.self$values, stats::runif(numberOfValuesToCreate))
         },
         getNextRandomAllocationValue = function(randomConfiguration) {
             numberOfFreeValues <- length(values) - .self$index
@@ -121,12 +118,22 @@ RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
 #' 
 plot.RandomAllocationValueService <- function(x, ..., usedValuesOnly = TRUE) {
     values <- x$values
-    if (usedValuesOnly) {
-        values <- values[1:x$index]
+    if (is.null(values) || length(values) == 0) {
+        stop("'RandomAllocationValueService' is not initialized. Run createNewRandomAllocationValues() first")
     }
-    suppressWarnings(chisq <- chisq.test(values))
+    
+    if (usedValuesOnly) {
+        if (x$index <= 1) {
+            stop(C_EXCEPTION_TYPE_ILLEGAL_ARGUMENT, 
+                "plot argument usedValuesOnly = FALSE is required because no random allocation values have beed used")
+        }
+        
+        values <- values[seq_len(x$index)]
+    }
+    
+    suppressWarnings(chisq <- stats::chisq.test(values))
     main <- paste0("Distribution of ", ifelse(usedValuesOnly, "used ", ""), "random allocation values")
-    hist(values, main = main, 
+    graphics::hist(values, main = main, 
         xlab = paste0("Random value (N = ", length(values), 
         "; mean = ", round(mean(values), 4), 
         "; p = ", round(chisq$p.value, 4), ")"))

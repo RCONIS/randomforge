@@ -38,6 +38,7 @@ Imports:
 	stats,
 	utils,
 	tools,
+    graphics,
     rlang,
     knitr (>= 1.19)
 Suggests: 

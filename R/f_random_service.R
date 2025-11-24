@@ -34,13 +34,9 @@ getNextRandomResult <- function(
         stop("No random configuration found for project ", sQuote(randomProject$toString()))
     }
     
-    randomAllocationValueBufferMinimumSize <- randomConfiguration$ravBufferMinimumSize
-    randomAllocationValueBufferMaximumSize <- randomConfiguration$ravBufferMaximumSize
-    
     randomAllocationValue <- randomAllocationValueService$getNextRandomAllocationValue(randomConfiguration)
     if (is.null(randomAllocationValue)) {
-        randomAllocationValueService$createNewRandomAllocationValues(
-            randomConfiguration, randomAllocationValueBufferMaximumSize)
+        randomAllocationValueService$createNewRandomAllocationValues(randomConfiguration)
         randomAllocationValue <- randomAllocationValueService$getNextRandomAllocationValue(randomConfiguration)
     }
     

@@ -1,0 +1,199 @@
+---
+title: "Getting Started with randomforge"
+author: "Friedrich Pahlke"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with randomforge}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+`randomforge` is an open-source R package providing a transparent and modular 
+framework for clinical trial randomization.  
+This vignette gives a quick introduction on how to install the package, create a
+simple project, configure a permuted block randomization method, and generate 
+subject allocations.
+
+If you are new to randomization frameworks or want a minimal working example, 
+this is a good place to start.
+
+
+# Installation
+
+At this stage, `randomforge` is available only on GitHub:
+
+```r
+# install.packages("remotes")
+remotes::install_github("rpact-com/randomforge")
+```
+
+# Creating a Randomization Project
+
+Every workflow begins with a `RandomProject` stored inside an in-memory 
+`RandomDataBase`:
+
+```{r}
+library(randomforge)
+
+# Create an in-memory randomization database
+randomDataBase <- getRandomDataBase()
+
+# Define a project
+randomProject <- getRandomProject("Example Trial")
+
+# Store the project in the database
+randomDataBase$persist(randomProject)
+```
+
+A project groups all configurations, subjects, and resulting allocations.
+
+
+# Defining a Randomization Configuration
+
+A configuration defines:
+
+- treatment arms  
+- allocation parameters  
+- random number buffer settings  
+- seeds  
+- optional stratification  
+
+Example:
+
+```{r}
+config <- getRandomConfiguration(
+    randomProject        = randomProject,
+    treatmentArmIds      = c("A", "B"),
+    seed                 = createSeed(),
+    ravBufferMinimumSize = 1000L,
+    ravBufferMaximumSize = 10000L
+)
+config
+
+# Store the configuration
+randomDataBase$persist(config)
+```
+
+
+# Creating a Block Randomization Method
+
+`randomforge` currently supports **permuted block randomization** (PBR) as a 
+fully working implementation.
+
+You can define variable block sizes:
+
+```{r}
+# Define variable block sizes
+blockSizes <- getBlockSizes(config$treatmentArmIds, c(4, 6))
+
+# Define a block randomization method
+blockSizeRandomizer <- getRandomBlockSizeRandomizer(blockSizes)
+blockSizeRandomizer
+
+randomMethodPBR <- getRandomMethodPBR(
+    blockSizes              = blockSizes,
+    fixedBlockDesignEnabled = FALSE,
+    blockSizeRandomizer     = blockSizeRandomizer
+)
+```
+
+# Create a Random Allocation Value Service
+
+```{r}
+# Create a random allocation value service
+ravService <- getRandomAllocationValueService()
+ravService$createNewRandomAllocationValues(config)
+```
+
+Quality control of the random numbers used for randomization can be visualized by
+
+```{r}
+ravService |>
+    plot(usedValuesOnly = FALSE)
+```
+
+Other key performance indicators are planned for future releases.
+
+# Running Randomization
+
+To generate assignments, create a random allocation value service, then call 
+`getNextRandomResult()`.
+
+```{r}
+# Draw a few randomization results
+resultList <- lapply(1:12, function(i) {
+    getNextRandomResult(
+        randomDataBase               = randomDataBase,
+        randomProject                = randomProject,
+        randomMethod                 = randomMethodPBR,
+        randomAllocationValueService = ravService
+    ) |> suppressMessages()
+})
+```
+
+```{r}
+ravService |>
+    plot()
+```
+
+# Inspecting the Results
+
+All subjects and allocations stored in the database can be displayed as a data
+frame:
+
+```{r}
+#| eval: false
+# Convert results to a data frame
+resultData <- randomDataBase |>
+    as.data.frame()
+resultData
+```
+
+```{r}
+#| echo: false
+resultData <- randomDataBase |>
+    as.data.frame()
+resultData |>
+    knitr::kable()
+```
+
+# Exporting to Excel (Optional)
+
+`randomforge` supports exporting subject lists or randomization results via 
+`writeExcelFile()`:
+
+```{r}
+#| eval: false
+writeExcelFile(resultData, "randomization_list.xlsx")
+```
+
+
+# What’s Next?
+
+The project is in an early phase, and many extensions are planned:
+
+- covariate-adaptive methods (e.g., minimization)
+- response-adaptive techniques  
+- stratified and center-based workflows  
+- audit trail and reporting components  
+- Shiny and API integration  
+
+To learn how to contribute, see the vignette:
+
+**`vignette("randomforge_contribution")`**
+
+
+# Thank You
+
+We hope this vignette helps you get started with `randomforge`.  
+Feedback and suggestions are very welcome via GitHub issues.
