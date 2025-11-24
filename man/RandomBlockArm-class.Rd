@@ -17,7 +17,7 @@ cloning, display, size management, and completion checks.
 
 \item{\code{maximumSize}}{Integer specifying the maximum allowed allocations for this arm.}
 
-\item{\code{currentSize}}{Integer tracking the current number of allocations.}
+\item{\code{.self$currentSize}}{Integer tracking the current number of allocations.}
 
 \item{\code{enabled}}{Logical indicating if the arm is active for allocation.}
 }}
@@ -27,7 +27,7 @@ cloning, display, size management, and completion checks.
 
 \describe{
 \item{initialize(treatmentArmId, maximumSize, ...,
-currentSize = 0L, enabled = TRUE)}{Initializes a new \code{RandomBlockArm} instance.}
+.self$currentSize = 0L, enabled = TRUE)}{Initializes a new \code{RandomBlockArm} instance.}
 \item{clone()}{Creates a deep copy of the block arm.}
 \item{show()}{Displays a summary of the block arm.}
 \item{toString()}{Returns a string representation of the block arm.}

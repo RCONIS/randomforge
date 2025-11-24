@@ -1,0 +1,19 @@
+url: https://RCONIS.github.io/randomforge/
+
+template:
+  bootstrap: 5
+  includes:
+    in_header: |
+      <meta name="keywords" content="randomforge, randomization, clinical trials, rstats, r-project, R package, RCONIS, RPACT"/>
+      <link href="reference/figures/favicon.ico" rel="icon"/>
+      <link href="reference/figures/favicon.ico" rel="apple-touch-icon"/>
+      <link href="reference/figures/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+
+home:
+  links:
+  - text: RCONIS
+    href: https://rconis.com
+  - text: RPACT
+    href: https://www.rpact.com
+  - text: RPACT Connect
+    href: https://connect.rpact.com
