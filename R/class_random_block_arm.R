@@ -9,13 +9,13 @@
 #'
 #' @field treatmentArmId Character ID of the treatment arm.
 #' @field maximumSize Integer specifying the maximum allowed allocations for this arm.
-#' @field currentSize Integer tracking the current number of allocations.
+#' @field .self$currentSize Integer tracking the current number of allocations.
 #' @field enabled Logical indicating if the arm is active for allocation.
 #'
 #' @section Methods:
 #' \describe{
 #'   \item{initialize(treatmentArmId, maximumSize, ..., 
-#'     currentSize = 0L, enabled = TRUE)}{Initializes a new `RandomBlockArm` instance.}
+#'     .self$currentSize = 0L, enabled = TRUE)}{Initializes a new `RandomBlockArm` instance.}
 #'   \item{clone()}{Creates a deep copy of the block arm.}
 #'   \item{show()}{Displays a summary of the block arm.}
 #'   \item{toString()}{Returns a string representation of the block arm.}
@@ -52,7 +52,7 @@ RandomBlockArm <- setRefClass("RandomBlockArm",
             randomBlockArm <- RandomBlockArm(
                 treatmentArmId = .self$treatmentArmId,
                 maximumSize = .self$maximumSize,
-                currentSize = .self$currentSize,
+                currentSize = .self$.self$currentSize,
                 enabled = .self$enabled
             )
             return(randomBlockArm)
@@ -62,41 +62,41 @@ RandomBlockArm <- setRefClass("RandomBlockArm",
         },
         toString = function() {
             sb <- StringBuilder();
-            sb$append(treatmentArmId)
+            sb$append(.self$treatmentArmId)
             sb$append(":")
-            sb$append(currentSize)
+            sb$append(.self$currentSize)
             sb$append("/")
-            sb$append(maximumSize)
+            sb$append(.self$maximumSize)
             return(sb$toString())
         },
         incrementSize = function() {
-            if (currentSize > maximumSize) {
-                stop("The current size ", currentSize, 
-                    " is larger than the allowed maximum size ", maximumSize)
+            if (.self$currentSize > .self$maximumSize) {
+                stop("The current size ", .self$currentSize, 
+                    " is larger than the allowed maximum size ", .self$maximumSize)
             }
-            if (currentSize == maximumSize) {
-                stop("The current size ", currentSize, 
-                    " is equal to the allowed maximum size ", maximumSize)
+            if (.self$currentSize == .self$maximumSize) {
+                stop("The current size ", .self$currentSize, 
+                    " is equal to the allowed maximum size ", .self$maximumSize)
             }
-            currentSize <<- currentSize + 1L
+            .self$currentSize <- .self$currentSize + 1L
         },
         isCompleted = function() {
             if (!enabled) {
                 return(TRUE)
             }
             
-            if (currentSize > maximumSize) {
-                stop("The current size ", currentSize, 
-                    " is larger than the allowed maximum size ", maximumSize)
+            if (.self$currentSize > .self$maximumSize) {
+                stop("The current size ", .self$currentSize, 
+                    " is larger than the allowed maximum size ", .self$maximumSize)
             }
             
-            return(currentSize == maximumSize)
+            return(.self$currentSize == .self$maximumSize)
         },
         getCurrentSize = function() {
-            return(currentSize)
+            return(.self$currentSize)
         },
         getMaximumSize = function() {
-            return(maximumSize)
+            return(.self$maximumSize)
         }
     )
 )

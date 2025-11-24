@@ -43,16 +43,16 @@ RandomAllocationValue <- setRefClass("RandomAllocationValue",
     methods = list(
         initialize = function(..., creationDate = Sys.time()) {
             callSuper(creationDate = creationDate, ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },
         show = function(prefix = "") {
             cat(toString(prefix = prefix), "\n")
         },
         toString = function(prefix = "") {
-            return(paste0(prefix, "rav:", doubleValue))
+            return(paste0(prefix, "rav:", .self$doubleValue))
         },
         getDoubleValue = function() {
-            return(doubleValue)
+            return(.self$doubleValue)
         }
     )
 )

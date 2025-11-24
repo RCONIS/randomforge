@@ -303,38 +303,6 @@ NULL
 }
 
 #'
-#' Generate or Retrieve a Random Seed
-#'
-#' @description
-#' Retrieves the current random seed from the global environment if available, 
-#' or generates a new random seed using a uniform distribution. Ensures the 
-#' seed is a valid single integer.
-#'
-#' @return An integer representing the random seed.
-#'
-#' @keywords internal
-#'  
-#' @noRd
-#' 
-.getRandomSeed <- function() {
-    if (exists(".Random.seed") && length(.Random.seed) > 0) {
-        seed <- as.integer(.Random.seed[length(.Random.seed)])
-    } else {
-        seed <- as.integer(trunc(stats::runif(1) * 1e09))
-    }
-
-    if (is.null(seed) || length(seed) != 1 || is.na(seed)) {
-        seed <- as.integer(trunc(stats::runif(1) * 1e08))
-    }
-
-    if (is.null(seed) || length(seed) != 1 || is.na(seed)) {
-        stop("Failed to generate random seed")
-    }
-
-    return(seed)
-}
-
-#'
 #' Generate Named List of Treatment Arm Values
 #'
 #' @description

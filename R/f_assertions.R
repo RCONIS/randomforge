@@ -634,3 +634,60 @@
         )
     }
 }
+
+#'
+#' Assert Values Are in a Closed Interval
+#'
+#' @description
+#' Checks if every element of \code{x} is within the closed interval defined by \code{lower} and \code{upper}.
+#' If any element is outside the interval, an error is thrown.
+#'
+#' @param x Numeric vector. The values to be checked.
+#' @param xName Character. Used to label \code{x} in error messages.
+#' @param ... Additional arguments (unused).
+#' @param lower Numeric. The inclusive lower bound of the interval.
+#' @param upper Numeric. The inclusive upper bound of the interval. If \code{NULL} or \code{NA}, only the lower bound is enforced.
+#' @param naAllowed Logical. Indicates if \code{NA} values are permitted. Default is \code{FALSE}.
+#' @param call. Logical. If \code{TRUE} the error message will include the call. Default is \code{FALSE}.
+#'
+#' @return Invisibly returns \code{x} if all elements are within the specified interval.
+#'
+#' @examples
+#' \dontrun{
+#' .assertIsInClosedInterval(1:10, "x", lower = 1, upper = 10)
+#' .assertIsInClosedInterval(c(1, NA, 5), "x", lower = 1, upper = 10, naAllowed = TRUE)
+#' }
+#'
+#' @noRd
+#'
+.assertIsInClosedInterval <- function(x, xName, ..., lower, upper, naAllowed = FALSE, call. = FALSE) {
+    .warnInCaseOfUnknownArguments(functionName = ".assertIsInClosedInterval", ...)
+    if (naAllowed && all(is.na(x))) {
+        return(invisible())
+    }
+    
+    if (!naAllowed && length(x) > 1 && any(is.na(x))) {
+        stop(
+            C_EXCEPTION_TYPE_ILLEGAL_ARGUMENT,
+            "'", xName, "' (", .arrayToString(x), ") must be a valid numeric vector or a single NA",
+            call. = call.
+        )
+    }
+    
+    if (is.null(upper) || is.na(upper)) {
+        if (any(x < lower, na.rm = TRUE)) {
+            prefix <- ifelse(length(x) > 1, "each value of ", "")
+            stop(
+                C_EXCEPTION_TYPE_ARGUMENT_OUT_OF_BOUNDS, prefix,
+                "'", xName, "' (", .arrayToString(x), ") must be >= ", lower,
+                call. = call.
+            )
+        }
+    } else if (any(x < lower, na.rm = TRUE) || any(x > upper, na.rm = TRUE)) {
+        stop(
+            C_EXCEPTION_TYPE_ARGUMENT_OUT_OF_BOUNDS,
+            "'", xName, "' (", .arrayToString(x), ") is out of bounds [", lower, "; ", upper, "]",
+            call. = call.
+        )
+    }
+}

@@ -162,7 +162,7 @@ RandomSystemState <- setRefClass("RandomSystemState",
                 fillingLevelsStratum = fillingLevelsStratum, 
                 fillingLevelsFactor = fillingLevelsFactor, 
                 ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },
         show = function(prefix = "") {
             cat(toString(prefix = prefix), "\n")
@@ -228,17 +228,17 @@ RandomSystemState <- setRefClass("RandomSystemState",
         init = function(treatmentArmIds, ..., factorIds = NULL, strataIds = NULL) {
             if (!is.null(treatmentArmIds) && length(treatmentArmIds) > 0) {
                 for (treatmentArmId in treatmentArmIds) {
-                    fillingLevelsOverall[[treatmentArmId]] <<- 0L
+                    .self$fillingLevelsOverall[[treatmentArmId]] <- 0L
                 }
             }
             if (!is.null(factorIds) && length(factorIds) > 0) {
                 for (factorId in factorIds) {
-                    fillingLevelsFactor[[factorId]] <<- createFillingLevelsMap(treatmentArmIds)
+                    .self$fillingLevelsFactor[[factorId]] <- createFillingLevelsMap(treatmentArmIds)
                 }
             }
             if (!is.null(strataIds) && length(strataIds) > 0) {
                 for (strataId in strataIds) {
-                    fillingLevelsStratum[[strataId]] <<- createFillingLevelsMap(treatmentArmIds)
+                    .self$fillingLevelsStratum[[strataId]] <- createFillingLevelsMap(treatmentArmIds)
                 }
             }
         },
@@ -264,30 +264,30 @@ RandomSystemState <- setRefClass("RandomSystemState",
                 block <- RandomBlock(
                     maximumBlockSize = randomBlockSizeGenerator$getNextRandomBlockSize(), 
                     factorLevels = factorLevels)
-                blocks[[stratumId]] <<- block
+                .self$blocks[[stratumId]] <- block
             } else {
                 message("Use existing block...")
             }
             return(block)
         },
         incrementFillingLevel = function(treatmentArmId) {
-            fillingLevel <- fillingLevelsOverall[[treatmentArmId]]
+            fillingLevel <- .self$fillingLevelsOverall[[treatmentArmId]]
             if (is.null(fillingLevel)) {
                 fillingLevel <- 0L
             }
             fillingLevel <- fillingLevel + 1L
-            fillingLevelsOverall[[treatmentArmId]] <<- fillingLevel
+            .self$fillingLevelsOverall[[treatmentArmId]] <- fillingLevel
             
             # TODO increment also factor and strata levels
         },
         setFillingLevelsBlock = function(randomBlock) {
             factorLevels <- randomBlock$factorLevels
             stratumId <- createStratumId(factorLevels)
-            blockFillingLevels <- fillingLevelsBlock[[stratumId]]
+            blockFillingLevels <- .self$fillingLevelsBlock[[stratumId]]
             if (is.null(blockFillingLevels)) {
                 blockFillingLevels <- list()
             }
-            blockMaximumFillingLevels <- fillingLevelsBlockMaximum[[stratumId]]
+            blockMaximumFillingLevels <- .self$fillingLevelsBlockMaximum[[stratumId]]
             if (is.null(blockMaximumFillingLevels)) {
                 blockMaximumFillingLevels <- list()
             }
@@ -295,8 +295,8 @@ RandomSystemState <- setRefClass("RandomSystemState",
                 blockFillingLevels[[blockArmId]] <- randomBlock$blockArms[[blockArmId]]$getCurrentSize()
                 blockMaximumFillingLevels[[blockArmId]] <- randomBlock$blockArms[[blockArmId]]$getMaximumSize()
             }
-            fillingLevelsBlock[[stratumId]] <<- blockFillingLevels
-            fillingLevelsBlockMaximum[[stratumId]] <<- blockMaximumFillingLevels
+            .self$fillingLevelsBlock[[stratumId]] <- blockFillingLevels
+            .self$fillingLevelsBlockMaximum[[stratumId]] <- blockMaximumFillingLevels
         }
     )
 )

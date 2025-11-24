@@ -78,13 +78,13 @@ RandomBlock <- setRefClass("RandomBlock",
         },
         toString = function() {
             sb <- StringBuilder();
-            for (blockArm in blockArms) {
+            for (blockArm in .self$blockArms) {
                 if (!sb$isEmpty()) {
                     sb$append(", ")								
                 }
                 sb$append(blockArm$toString())
             }
-            stratumId <- createStratumId(factorLevels)
+            stratumId <- createStratumId(.self$factorLevels)
             stratumInfo <- ""
             if (!identical(stratumId, NO_FACTOR_ID)) {
                 stratumInfo <- paste0(stratumId, ": ")
@@ -94,16 +94,16 @@ RandomBlock <- setRefClass("RandomBlock",
             return(sb$toString())
         },
         assertBlockArmsAreValid = function() {
-            if (is.null(blockArms)) {
+            if (is.null(.self$blockArms)) {
                 stop("The block arms are null")
             }
-            if (length(blockArms) == 0) {
+            if (length(.self$blockArms) == 0) {
                 stop("The block arms are empty")
             }
         },
         isCompleted = function() {
             assertBlockArmsAreValid()
-            for (blockArm in blockArms) {
+            for (blockArm in .self$blockArms) {
                 if (!blockArm$isCompleted()) {
                     return(FALSE)
                 }
@@ -114,15 +114,15 @@ RandomBlock <- setRefClass("RandomBlock",
             assertBlockArmsAreValid()
             
             numberOfIncompleteBlockArms = 0
-            for (blockArm in blockArms) {
+            for (blockArm in .self$blockArms) {
                 if (!blockArm$isCompleted()) {
                     numberOfIncompleteBlockArms <- numberOfIncompleteBlockArms + 1;
                 }
             }
             fraction = 1 / numberOfIncompleteBlockArms;
             probabilities = list();
-            for (treatmentArmId in names(blockArms)) {
-                if (blockArms[[treatmentArmId]]$isCompleted()) {
+            for (treatmentArmId in names(.self$blockArms)) {
+                if (.self$blockArms[[treatmentArmId]]$isCompleted()) {
                     probabilities[[treatmentArmId]] <- 0;
                 } else {
                     probabilities[[treatmentArmId]] <- fraction
@@ -136,7 +136,7 @@ RandomBlock <- setRefClass("RandomBlock",
             randomBlockArm$incrementSize()
         },
         getBlockArm = function(treatmentArmId) {
-            blockArm <- blockArms[[treatmentArmId]] 
+            blockArm <- .self$blockArms[[treatmentArmId]] 
             if (is.null(blockArm)) {
                 stop("The treatment arm id ", 
                     sQuote(treatmentArmId), " does not exist")
@@ -144,18 +144,18 @@ RandomBlock <- setRefClass("RandomBlock",
             return(blockArm)
         },
         keySet = function() {
-            x <- names(blockArms)
+            x <- names(.self$blockArms)
             if (is.null(x)) {
                 stop("Runtime issue: 'blockArms' must be a named list")
             }
             return(x)
         },
         get = function(key) {
-            return(blockArms[[key]])
+            return(.self$blockArms[[key]])
         },
         getTreatmentCount = function() {
             assertBlockArmsAreValid()
-            return(length(blockArms))
+            return(length(.self$blockArms))
         },
         #'
         #' @param treatmentArmIds the treatment arm id's.
@@ -165,9 +165,9 @@ RandomBlock <- setRefClass("RandomBlock",
         init = function(maximumBlockSize, currentBlockSize, factorLevels) {
             
             if (is.null(factorLevels)) {
-                .self$factorLevels <<- list()
+                .self$factorLevels <- list()
             } else {
-                .self$factorLevels <<- factorLevels
+                .self$factorLevels <- factorLevels
             }
             
             for (treatmentArmId in names(maximumBlockSize)) {
@@ -192,7 +192,7 @@ RandomBlock <- setRefClass("RandomBlock",
                     }
                 }
                 
-                blockArms[[treatmentArmId]] <<- randomBlockArm
+                .self$blockArms[[treatmentArmId]] <- randomBlockArm
             }           
         }
     )

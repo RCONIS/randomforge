@@ -41,7 +41,7 @@ RandomMethodRange <- setRefClass("RandomMethodRange",
                 lowerBound = lowerBound, 
                 upperBound = upperBound, 
                 ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },
         show = function() {
             cat(toString(), "\n")

@@ -45,7 +45,7 @@ RandomSubject <- setRefClass("RandomSubject",
     methods = list(
         initialize = function(...) {
             callSuper(...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },
         show = function(prefix = "") {
             cat(toString(prefix = prefix), "\n")
@@ -53,17 +53,17 @@ RandomSubject <- setRefClass("RandomSubject",
         toString = function(prefix = "") {
             sb <- StringBuilder()
             sb$append(prefix, "subject:")
-            sb$append(randomNumber)
-            if (!is.null(randomResult)) {
-                sb$append("[", randomResult$toString(), "]")
+            sb$append(.self$randomNumber)
+            if (!is.null(.self$randomResult)) {
+                sb$append("[", .self$randomResult$toString(), "]")
             }
-            if (!is.null(status) && nchar(status) > 0) {
-                sb$append(" ", status)
+            if (!is.null(.self$status) && nchar(.self$status) > 0) {
+                sb$append(" ", .self$status)
             }
             return(sb$toString())
         },
         setStatus = function(status) {
-            status <<- status
+            .self$status <- status
         }
     )
 )

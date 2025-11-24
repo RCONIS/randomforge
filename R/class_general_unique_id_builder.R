@@ -43,7 +43,7 @@ GeneralUniqueIdBuilder <- setRefClass("GeneralUniqueIdBuilder",
             while (is.na(uniqueId) || uniqueId %in% uniqueIds) {
                 uniqueId <- uuid::UUIDgenerate()
             }
-            uniqueIds <<- c(uniqueIds, uniqueId)
+            .self$uniqueIds <- c(uniqueIds, uniqueId)
             return(uniqueId)
         }
     )

@@ -55,9 +55,9 @@ RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
     methods = list(
         initialize = function(...) {
             callSuper(...)
-            seed <<- NA_integer_ 
-            index <<- 1L 
-            values <<- numeric(0)
+            .self$seed <- NA_integer_ 
+            .self$index <- 1L 
+            .self$values <- numeric(0)
         },
         show = function() {
             cat(toString(), "\n")
@@ -75,29 +75,29 @@ RandomAllocationValueService <- setRefClass("RandomAllocationValueService",
                     " - ", randomConfiguration$ravBufferMaximumSize, "] is invalid")
             }
             
-            if (is.na(seed) || length(values) == 0) {
-                seed <<- randomConfiguration$getSeed()
+            if (is.na(seed) || length(.self$values) == 0) {
+                .self$seed <- randomConfiguration$getSeed()
                 .setSeed(seed)
                 seedInfo <- seed
-            } else if (length(values) > 0) {
-                seed2 <- as.integer(trunc(values[length(values)] * 0.333 * 1e08))
+            } else if (length(.self$values) > 0) {
+                seed2 <- as.integer(trunc(.self$values[length(.self$values)] * 0.333 * 1e08))
                 .setSeed(seed2)
                 seedInfo <- seed2
             }
             
             message("Create ", n, " new random allocation values (seed = ", seedInfo, ")")
             
-            values <<- c(values, stats::runif(n))
+            .self$values <- c(.self$values, stats::runif(n))
         },
         getNextRandomAllocationValue = function(randomConfiguration) {
-            numberOfFreeValues <- length(values) - index
+            numberOfFreeValues <- length(values) - .self$index
             if (numberOfFreeValues < randomConfiguration$ravBufferMinimumSize) {
                 return(NULL)
             }
             
-            doubleValue <- values[index]
+            doubleValue <- values[.self$index]
             rav <- RandomAllocationValue(doubleValue = doubleValue)
-            index <<- index + 1L
+            .self$index <- .self$index + 1L
             return(rav)
         }
     )

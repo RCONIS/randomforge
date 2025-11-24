@@ -14,10 +14,15 @@
 #' 
 #' @seealso \code{\link[=RandomBlockSizeRandomizer]{RandomBlockSizeRandomizer}}
 #'
+#' @include f_seed.R
+#' 
 #' @export
 #' 
 getRandomBlockSizeRandomizer <- function(blockSizes, ..., seed = NA_integer_) {
     .assertIsSingleInteger(seed, "seed", naAllowed = TRUE, validateType = FALSE)
+    if (is.na(seed)) {
+        seed <- createSeed()
+    }
     blockSizeRandomizer <- RandomBlockSizeRandomizer(seed = as.integer(seed))
     blockSizeRandomizer$initRandomValues(numberOfBlockSizes = length(blockSizes))
     return(blockSizeRandomizer)
@@ -46,6 +51,8 @@ getRandomBlockSizeRandomizer <- function(blockSizes, ..., seed = NA_integer_) {
 #' 
 #' @seealso \code{\link[=getRandomBlockSizeRandomizer]{getRandomBlockSizeRandomizer()}}
 #'
+#' @include f_seed.R
+#' 
 #' @keywords internal
 #' 
 RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
@@ -58,21 +65,22 @@ RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
         initialize = function(seed = NA_integer_, ...) {
             callSuper(seed = seed, ...)
             if (is.na(seed)) {
-                .self$seed <- .getRandomSeed()
+                .self$seed <- createSeed()
             }
             .setSeed(.self$seed)
             .self$index <- 1L
+            .self$values <- integer(0)
         },
         show = function() {
             cat(toString(), "\n")
         },
         toString = function() {
-            return("RandomBlockSizeRandomizer(seed = ", .self$seed, 
+            return(paste0("RandomBlockSizeRandomizer(seed = ", .self$seed, 
                    ", numberOfValues = ", length(.self$values), 
-                   ", currentIndex = ", .self$index, ")")
+                   ", currentIndex = ", .self$index, ")"))
         },
         initRandomValues = function(numberOfBlockSizes, ..., numberOfValuesToCreate = 1000L) {
-            values <<- sample.int(n = numberOfBlockSizes, size = numberOfValuesToCreate, replace = TRUE)
+            .self$values <- sample.int(n = numberOfBlockSizes, size = numberOfValuesToCreate, replace = TRUE)
         },
         nextInt = function(numberOfBlockSizes) { # TODO implement numberOfBlockSizes
             if (length(values) == 0) {
@@ -83,7 +91,7 @@ RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
             }
             
             value <- values[index]
-            index <<- index + 1L
+            .self$index <- index + 1L
             return(value)
         }
     )

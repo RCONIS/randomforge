@@ -66,8 +66,9 @@ getRandomConfiguration <- function(...,
 #' @keywords internal
 #' 
 #' @include f_constants.R
-#' @include class_general_unique_id_builder.R
 #' @include f_utilities.R
+#' @include f_seed.R
+#' @include class_general_unique_id_builder.R
 #' @include class_random_project.R
 #' 
 RandomConfiguration <- setRefClass("RandomConfiguration",
@@ -103,9 +104,9 @@ RandomConfiguration <- setRefClass("RandomConfiguration",
                     "ravBufferMaximumSize (", ravBufferMaximumSize, 
                     ") must be greater than ravBufferMinimumSize (", ravBufferMinimumSize, ")")
             }
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
             if (is.na(seed)) {
-                seed <<- .getRandomSeed()
+                .self$seed <- createSeed()
             }
         },
         show = function(prefix = "") {

@@ -96,14 +96,14 @@ RandomDataBase <- setRefClass("RandomDataBase",
             callSuper(
                 creationDate = creationDate,
                 ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
-            randomAllocationValues <<- list()
-            randomConfigurations <<- list()
-            randomSubjects <<- list()
-            randomResults <<- list()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$randomAllocationValues <- list()
+            .self$randomConfigurations <- list()
+            .self$randomSubjects <- list()
+            .self$randomResults <- list()
         },
         validateRandomProject = function(randomProject) {
-            for (p in randomProjects) {
+            for (p in .self$randomProjects) {
                 if (p$uniqueId == randomProject$uniqueId) {
                     return(invisible())
                 }
@@ -113,10 +113,10 @@ RandomDataBase <- setRefClass("RandomDataBase",
         show = function() {
             sb <- StringBuilder()
             sb$append(.self$toString(), "\n")
-            sb$append(.showList(randomProjects, "Random projects"))
-            sb$append(.showList(randomConfigurations, "Random configurations"))
-            sb$append(.showList(randomAllocationValues, "Random allocation values"))
-            sb$append(.showList(randomSubjects, "Random subjects"))
+            sb$append(.showList(.self$randomProjects, "Random projects"))
+            sb$append(.showList(.self$randomConfigurations, "Random configurations"))
+            sb$append(.showList(.self$randomAllocationValues, "Random allocation values"))
+            sb$append(.showList(.self$randomSubjects, "Random subjects"))
             cat(sb$toString())
             
             cat("Random system state:\n")
@@ -137,27 +137,27 @@ RandomDataBase <- setRefClass("RandomDataBase",
             sb$append("Random data base: ")
             sb$append(uniqueId)
             sb$append(" [")
-            sb$append("randomAllocationValues: ", length(randomAllocationValues), ", ")
-            sb$append("randomConfigurations: ", length(randomConfigurations), ", ")
-            sb$append("randomSubjects: ", length(randomSubjects))
+            sb$append("randomAllocationValues: ", length(.self$randomAllocationValues), ", ")
+            sb$append(".self$randomConfigurations: ", length(.self$randomConfigurations), ", ")
+            sb$append(".self$randomSubjects: ", length(.self$randomSubjects))
             sb$append("]")
             return(sb$toString())
         },
         persist = function(obj) {
             if (inherits(obj, "RandomAllocationValue")) {
-                randomAllocationValues[[length(randomAllocationValues) + 1]] <<- obj
+                .self$randomAllocationValues[[length(.self$randomAllocationValues) + 1]] <- obj
             }
             else if (inherits(obj, "RandomConfiguration")) {
-                randomConfigurations[[length(randomConfigurations) + 1]] <<- obj
+                .self$randomConfigurations[[length(.self$randomConfigurations) + 1]] <- obj
             }
             else if (inherits(obj, "RandomSubject")) {
-                randomSubjects[[length(randomSubjects) + 1]] <<- obj
+                .self$randomSubjects[[length(.self$randomSubjects) + 1]] <- obj
             }
             else if (inherits(obj, "RandomResult")) {
-                randomResults[[length(randomResults) + 1]] <<- obj
+                .self$randomResults[[length(.self$randomResults) + 1]] <- obj
             }
             else if (inherits(obj, "RandomProject")) {
-                randomProjects[[length(randomProjects) + 1]] <<- obj
+                .self$randomProjects[[length(.self$randomProjects) + 1]] <- obj
             }
         },
         getRandomProjectUniqueIds = function(objects) {
@@ -168,11 +168,11 @@ RandomDataBase <- setRefClass("RandomDataBase",
             return(uniqueIds)
         },
         getLastSubject = function(randomProject) {
-            if (length(randomSubjects) == 0) {
+            if (length(.self$randomSubjects) == 0) {
                 return(NULL)
             }
             
-            s <- randomSubjects[getRandomProjectUniqueIds(randomSubjects) == randomProject$uniqueId]
+            s <- .self$randomSubjects[getRandomProjectUniqueIds(.self$randomSubjects) == randomProject$uniqueId]
             if (length(s) == 0) {
                 return(NULL)
             }
@@ -180,11 +180,11 @@ RandomDataBase <- setRefClass("RandomDataBase",
             return(s[[length(s)]])
         },
         getLastRandomConfiguration = function(randomProject) {
-            if (length(randomConfigurations) == 0) {
+            if (length(.self$randomConfigurations) == 0) {
                 return(NULL)
             }
             
-            configs <- randomConfigurations[getRandomProjectUniqueIds(randomConfigurations) == randomProject$uniqueId]
+            configs <- .self$randomConfigurations[getRandomProjectUniqueIds(.self$randomConfigurations) == randomProject$uniqueId]
             if (length(configs) == 0) {
                 return(NULL)
             }
@@ -192,12 +192,12 @@ RandomDataBase <- setRefClass("RandomDataBase",
             return(configs[[length(configs)]])
         },
         createNewSubjectRandomNumber = function(randomProject) {
-            if (length(randomSubjects) == 0) {
+            if (length(.self$randomSubjects) == 0) {
                 return(1L)
             }
             
             randomNumber <- 1L
-            for (randomSubject in randomSubjects) {
+            for (randomSubject in .self$randomSubjects) {
                 if (randomSubject$randomProject$uniqueId == randomProject$uniqueId &&
                         randomSubject$randomNumber > randomNumber) {
                     randomNumber <- randomSubject$randomNumber

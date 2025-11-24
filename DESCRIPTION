@@ -43,7 +43,9 @@ Imports:
 Suggests: 
     testthat (>= 3.0.0),
     uuid (>= 1.0-3),
-    writexl (>= 1.5.0)
+    writexl (>= 1.5.0),
+    glue (>= 1.6.0),
+    httr (>= 1.4.0)
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 VignetteBuilder: knitr, rmarkdown
@@ -57,6 +59,7 @@ Collate:
     'class_random_system_state.R'
     'class_random_result.R'
     'class_random_project.R'
+    'f_seed.R'
     'f_utilities.R'
     'class_random_configuration.R'
     'class_random_allocation_value.R'
@@ -70,6 +73,7 @@ Collate:
     'class_random_method_range_set_pbr.R'
     'class_random_subject.R'
     'class_string_builder.R'
+    'f_random_block_size.R'
     'f_random_service.R'
     'f_random_stratum_builder.R'
     'pkgname.R'

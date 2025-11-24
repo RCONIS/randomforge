@@ -36,7 +36,7 @@ RandomResult <- setRefClass("RandomResult",
     methods = list(
         initialize = function(..., randomizationDate = Sys.time()) {
             callSuper(randomizationDate = randomizationDate, ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },
         show = function(prefix = "") {
             cat(.self$toString(prefix = prefix), "\n")

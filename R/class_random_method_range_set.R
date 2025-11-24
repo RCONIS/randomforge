@@ -35,8 +35,8 @@ RandomMethodRangeSet <- setRefClass("RandomMethodRangeSet",
     methods = list(
         initialize = function(ranges = list(), ...) {
             callSuper(ranges = ranges, ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
-            randomAllocationDoubleValue <<- NA_real_
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$randomAllocationDoubleValue <- NA_real_
         },
         show = function() {
             cat(toString(), "\n")
@@ -64,7 +64,7 @@ RandomMethodRangeSet <- setRefClass("RandomMethodRangeSet",
         indexOf = function(randomAllocationValue) {
             for (treatmentArmId in names(ranges)) {
                 if (ranges[[treatmentArmId]]$contains(randomAllocationValue$doubleValue)) {
-                    randomAllocationDoubleValue <<- randomAllocationValue$doubleValue
+                    .self$randomAllocationDoubleValue <- randomAllocationValue$doubleValue
                     return(treatmentArmId)
                 }
             }
@@ -98,11 +98,11 @@ RandomMethodRangeSet <- setRefClass("RandomMethodRangeSet",
                     "but has to be 1.0")
             }
             
-            ranges <<- list()
+            .self$ranges <- list()
             
             if (length(probabilities) == 1) {
                 treatmentArmId = names(probabilities)[1]
-                ranges[[treatmentArmId]] <<- RandomMethodRange(
+                .self$ranges[[treatmentArmId]] <- RandomMethodRange(
                     treatmentArmId = treatmentArmId, 
                     lowerBound = 0.0, 
                     upperBound = 1.0)
@@ -124,7 +124,7 @@ RandomMethodRangeSet <- setRefClass("RandomMethodRangeSet",
                 for (i in 1:length(intersectionIndex)) {
                     treatmentArmId <- treatmentArmIds[i]
                     to <- to + probabilities[[treatmentArmId]]
-                    ranges[[treatmentArmId]] <<- 
+                    .self$ranges[[treatmentArmId]] <- 
                         RandomMethodRange(
                             treatmentArmId = treatmentArmId, 
                             lowerBound = from, 
@@ -143,7 +143,7 @@ RandomMethodRangeSet <- setRefClass("RandomMethodRangeSet",
                         if (i == intersectionIndex) {
                             from <- intersectionFromValue
                         }
-                        ranges[[treatmentArmId]] <<- 
+                        .self$ranges[[treatmentArmId]] <- 
                             RandomMethodRange(
                                 treatmentArmId = treatmentArmId, 
                                 lowerBound = from, 

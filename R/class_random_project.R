@@ -53,7 +53,7 @@ RandomProject <- setRefClass("RandomProject",
             callSuper(
                 creationDate = creationDate,
                 ...)
-            uniqueId <<- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
+            .self$uniqueId <- GENERAL_UNIQUE_ID_BUILDER$getUniqueId()
         },
         show = function(prefix = "") {
             cat(toString(prefix = prefix), "\n")

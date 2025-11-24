@@ -36,32 +36,32 @@ StringBuilder <- setRefClass("StringBuilder",
         append = function(...) {
             args <- list(...)
             x <- paste0(args, collapse = "")
-            values <<- c(values, x)
+            .self$values <- c(.self$values, x)
         },
         length = function() {
-            return(base::length(values))
+            return(base::length(.self$values))
         },
         isEmpty = function() {
-            return(base::length(values) == 0)
+            return(base::length(.self$values) == 0)
         },
         insert = function(index, x) {
-            if (base::length(values) == 0) {
-                values <<- x
+            if (base::length(.self$values) == 0) {
+                .self$values <- x
                 return(invisible())
             }
-            if (index < 1 || index > base::length(values)) {
+            if (index < 1 || index > base::length(.self$values)) {
                 stop(C_EXCEPTION_TYPE_INDEX_OUT_OF_BOUNDS, 
-                    "index ", index, " out of bounds [1; ", base::length(values), "]")
+                    "index ", index, " out of bounds [1; ", base::length(.self$values), "]")
             }
             if (index == 1) {
-                values <<- c(x, values)
+                .self$values <- c(x, .self$values)
             } else {
-                values <<- c(values[1:index], x, 
-                    values[(index + 1):base::length(values)])
+                .self$values <- c(.self$values[1:index], x, 
+                    .self$values[(index + 1):base::length(.self$values)])
             }
         },
         toString = function() {
-            return(paste0(.self$values, collapse = ""))
+            return(paste0(.self$.self$values, collapse = ""))
         }
     )
 )
