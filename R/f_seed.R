@@ -85,8 +85,6 @@
 #' @export
 #'
 createSeed <- function(numberOfValues = 1, minValue = 1000000, maxValue = 9999999, ...) {
-    .assertPackageIsInstalled("httr")
-    .assertPackageIsInstalled("glue")
     .assertIsSingleInteger(numberOfValues, "numberOfValues", validateType = FALSE)
     .assertIsInClosedInterval(numberOfValues, "numberOfValues", lower = 1, upper = 1000)
     .assertIsSingleInteger(minValue, "minValue", validateType = FALSE)
@@ -97,8 +95,12 @@ createSeed <- function(numberOfValues = 1, minValue = 1000000, maxValue = 999999
         stop(C_EXCEPTION_TYPE_CONFLICTING_ARGUMENTS, "'minValue' (", minValue, ") ",
             "must be smaller than argument 'maxValue'(", maxValue, ")")
     }
+    
     tryCatch(
         {
+            .assertPackageIsInstalled("httr")
+            .assertPackageIsInstalled("glue")
+            
             args <- list(...)
             if (length(args) > 0 && !is.null(args[["test_exception"]])) {
                 stop(args[["test_exception"]])
