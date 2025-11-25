@@ -44,7 +44,7 @@ getRandomMethodPBR <- function(...,
         blockSizes = list(),
         fixedBlockDesignEnabled = TRUE,
         fixedBlockIndex = 1L,
-        blockSizeRandomizer = getRandomBlockSizeRandomizer()) {
+        blockSizeRandomizer = NULL) {
     return(RandomMethodPBR(
         blockSizes = blockSizes,
         fixedBlockDesignEnabled = fixedBlockDesignEnabled,
@@ -89,7 +89,7 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
     fields = list(
         name = "character",
         uniqueId = "character",
-        blockSizeRandomizer = "RandomBlockSizeRandomizer",
+        blockSizeRandomizer = "ANY",
         blockSizes = "list",
         fixedBlockDesignEnabled = "logical",
         fixedBlockIndex = "integer"
@@ -100,10 +100,13 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
                 blockSizes = list(),
                 fixedBlockDesignEnabled = TRUE,
                 fixedBlockIndex = 1L,
-                blockSizeRandomizer = getRandomBlockSizeRandomizer()) {
+                blockSizeRandomizer = NULL) {
             callSuper(name = name,
-                blockSizes = blockSizes, fixedBlockDesignEnabled = fixedBlockDesignEnabled,
-                fixedBlockIndex = fixedBlockIndex, blockSizeRandomizer = blockSizeRandomizer, ...
+                blockSizes = blockSizes, 
+                fixedBlockDesignEnabled = fixedBlockDesignEnabled,
+                fixedBlockIndex = fixedBlockIndex, 
+                blockSizeRandomizer = blockSizeRandomizer, 
+                ...
             )
             if (fixedBlockDesignEnabled && length(blockSizes) > 1) {
                 warning("Only 1 of ", length(blockSizes), " defined block sizes will be used")
@@ -179,6 +182,7 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
                 if (is.null(blockSizeRandomizer)) {
                     stop("'blockSizeRandomizer' is not initialized")
                 }
+                
                 randomIndex <- blockSizeRandomizer$nextInt(length(blockSizes))
                 message("Get next random block size (index = ", randomIndex, ")")
             }

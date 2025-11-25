@@ -13,8 +13,6 @@ This package is the core engine of the wider **RandomForge** initiative:
 a community-driven effort to innovate the future of clinical trial
 randomization.
 
----
-
 ## 🌍 Vision
 
 Randomization is a cornerstone of clinical research integrity.  
@@ -28,8 +26,6 @@ Yet many tools currently in use are:
 **RandomForge** aims to change this by providing an open, shared infrastructure
 for randomization methods – where ideas can grow into trusted, well-documented
 and practically usable methods, developed together by the community.
-
----
 
 ## 🔧 Current Capabilities (0.1.x)
 
@@ -63,8 +59,6 @@ The internal architecture uses reference classes to represent key entities like
 randomization methods in the future (e.g., covariate-adaptive or
 response-adaptive procedures).
 
----
-
 ## 🚀 Planned Extensions
 
 While the current release focuses on permuted block randomization, the
@@ -77,8 +71,6 @@ over time, including (but not limited to):
 - enhanced auditing and reporting facilities,
 - integration with Shiny UIs and web APIs,
 - validation and documentation patterns suitable for regulated environments.
-
----
 
 ## 🧪 Example: Simple Block Randomization
 
@@ -94,50 +86,57 @@ It shows how to:
 ```r
 library(randomforge)
 
-# 1) Create a randomization project
-random_db <- getRandomDataBase()
-project   <- getRandomProject("Example Trial")
+# Create an in-memory randomization database
+randomDataBase <- getRandomDataBase()
 
-# 2) Define a randomization configuration
-#    Here: two treatment arms "A" and "B"
+# Define a project and configuration
+randomProject <- getRandomProject("Example Trial")
+randomDataBase$persist(randomProject)
+
+# Create a randomization configuration
 config <- getRandomConfiguration(
-    randomProject        = project,
+    randomProject        = randomProject,
     treatmentArmIds      = c("A", "B"),
-    seed                 = 123L,
+    seed                 = createSeed(),
     ravBufferMinimumSize = 1000L,
     ravBufferMaximumSize = 10000L
 )
+config
 
-# Persist configuration in the in-memory database
-random_db$persist(config)
+randomDataBase$persist(config)
 
-# 3) Define a permuted block randomization (PBR) method
-#    - here with variable block sizes of 4 and 6
-block_size_randomizer <- getRandomBlockSizeRandomizer()
-method_pbr <- getRandomMethodPBR(
-    blockSizes              = list(4L, 6L),
+# Define variable block sizes
+blockSizes <- getBlockSizes(config$treatmentArmIds, c(4, 6))
+
+# Define a block randomization method
+blockSizeRandomizer <- getRandomBlockSizeRandomizer(blockSizes)
+blockSizeRandomizer
+
+randomMethodPBR <- getRandomMethodPBR(
+    blockSizes              = blockSizes,
     fixedBlockDesignEnabled = FALSE,
-    blockSizeRandomizer     = block_size_randomizer
+    blockSizeRandomizer     = blockSizeRandomizer
 )
 
-# 4) Create an allocation value service (random number buffer)
-rav_service <- getRandomAllocationValueService()
+# Create a random allocation value service
+ravService <- getRandomAllocationValueService()
+ravService$createNewRandomAllocationValues(config)
 
-# 5) Draw a couple of randomization results
-results <- vector("list", 10L)
-for (i in seq_along(results)) {
-    # factorLevels can be used for stratification; here left empty (no strata)
-    results[[i]] <- getNextRandomResult(
-        randomDataBase               = random_db,
-        randomProject                = project,
-        randomMethod                 = method_pbr,
-        randomAllocationValueService = rav_service
+# Visualize the distribution of the random allocation values
+plot(ravService, usedValuesOnly = FALSE)
+
+# Create a few randomization results
+lapply(1:5, function(i) {
+    getNextRandomResult(
+        randomDataBase               = randomDataBase,
+        randomProject                = randomProject,
+        randomMethod                 = randomMethodPBR,
+        randomAllocationValueService = ravService
     )
-}
+})
 
-# 6) Inspect the randomized subjects as a data frame
-df_subjects <- as.data.frame(random_db)
-head(df_subjects)
+# Convert results to a data frame
+as.data.frame(randomDataBase)
 ```
 
 ## 📦 Installation

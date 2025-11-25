@@ -43,17 +43,18 @@ This vignette explains how to:
 At this stage, the package is not yet on CRAN.  
 You can install the development version directly from GitHub:
 
-```r
+```{r}
+#| eval: FALSE
 # install.packages("remotes")
 remotes::install_github("RCONIS/randomforge")
-
-library(randomforge)
 ```
 
 Below is a minimal example that demonstrates a simple permuted block
 randomization workflow.
 
-```r
+```{r}
+library(randomforge)
+
 # Create an in-memory randomization database
 randomDataBase <- getRandomDataBase()
 
@@ -61,33 +62,32 @@ randomDataBase <- getRandomDataBase()
 randomProject <- getRandomProject("Example Trial")
 randomDataBase$persist(randomProject)
 
+# Create a randomization configuration
 config <- getRandomConfiguration(
     randomProject        = randomProject,
     treatmentArmIds      = c("A", "B"),
-    seed                 = 123L,
+    seed                 = createSeed(),
     ravBufferMinimumSize = 1000L,
     ravBufferMaximumSize = 10000L
 )
 
 randomDataBase$persist(config)
 
-# Define variable block sizes
-blockSizes <- getBlockSizes(config$treatmentArmIds, c(4, 6))
+# Define fixed block size
+blockSizes <- getBlockSizes(config$treatmentArmIds, 8)
 
-# Define a block randomization method
-blockSizeRandomizer <- getRandomBlockSizeRandomizer(blockSizes)
-
+# Create a permuted block randomization method
 randomMethodPBR <- getRandomMethodPBR(
     blockSizes              = blockSizes,
-    fixedBlockDesignEnabled = FALSE,
-    blockSizeRandomizer     = blockSizeRandomizer
+    fixedBlockDesignEnabled = FALSE
 )
 
 # Create a random allocation value service
 ravService <- getRandomAllocationValueService()
+ravService$createNewRandomAllocationValues(config)
 
-# Draw a few randomization results
-results <- lapply(1:5, function(i) {
+# Create a few randomization results
+resultList <- lapply(1:8, function(i) {
     getNextRandomResult(
         randomDataBase               = randomDataBase,
         randomProject                = randomProject,
@@ -97,9 +97,10 @@ results <- lapply(1:5, function(i) {
 })
 
 # Convert results to a data frame
-as.data.frame(randomDataBase)
+randomDataBase |> 
+    as.data.frame() |>
+    knitr::kable()
 ```
-
 
 # 2. How to contribute to randomforge
 

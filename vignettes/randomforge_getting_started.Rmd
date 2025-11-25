@@ -32,9 +32,10 @@ this is a good place to start.
 
 At this stage, `randomforge` is available only on GitHub:
 
-```r
+```{r}
+#| eval: FALSE
 # install.packages("remotes")
-remotes::install_github("rpact-com/randomforge")
+remotes::install_github("RCONIS/randomforge")
 ```
 
 # Creating a Randomization Project
@@ -130,7 +131,7 @@ To generate assignments, create a random allocation value service, then call
 `getNextRandomResult()`.
 
 ```{r}
-# Draw a few randomization results
+# Create a few randomization results
 resultList <- lapply(1:12, function(i) {
     getNextRandomResult(
         randomDataBase               = randomDataBase,

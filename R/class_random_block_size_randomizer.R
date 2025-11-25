@@ -41,6 +41,9 @@
 #' 
 getRandomBlockSizeRandomizer <- function(blockSizes, ..., seed = NA_integer_) {
     .assertIsSingleInteger(seed, "seed", naAllowed = TRUE, validateType = FALSE)
+    if (!exists("blockSizes")) {
+        stop(C_EXCEPTION_TYPE_MISSING_ARGUMENT, "'blockSizes' must be specified")
+    }
     if (is.na(seed)) {
         seed <- createSeed()
     }
