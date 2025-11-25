@@ -30,6 +30,7 @@
 #' 
 #' @param blockSizes List of block size configurations, each mapping treatment arm IDs to sizes.
 #' @param seed Integer random seed used for reproducibility.
+#' @param ... Additional arguments (currently unused).
 #'
 #' @return A `RandomBlockSizeRandomizer` reference class object.
 #' 

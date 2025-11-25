@@ -27,6 +27,3 @@ The randomness comes from atmospheric noise, which for many purposes
 is better than the pseudo-random number algorithms typically used
 in computer programs. For more information see \url{https://www.random.org}.
 }
-\seealso{
-\link{getSimulatedTwoArmMeans}
-}

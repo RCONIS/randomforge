@@ -78,8 +78,6 @@
 #' is better than the pseudo-random number algorithms typically used
 #' in computer programs. For more information see \url{https://www.random.org}.
 #'
-#' @seealso \link{getSimulatedTwoArmMeans}
-#'
 #' @return an integer value or vector containing one or more seeds.
 #'
 #' @export

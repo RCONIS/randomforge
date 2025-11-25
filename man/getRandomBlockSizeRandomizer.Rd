@@ -9,6 +9,8 @@ getRandomBlockSizeRandomizer(blockSizes, ..., seed = NA_integer_)
 \arguments{
 \item{blockSizes}{List of block size configurations, each mapping treatment arm IDs to sizes.}
 
+\item{...}{Additional arguments (currently unused).}
+
 \item{seed}{Integer random seed used for reproducibility.}
 }
 \value{
