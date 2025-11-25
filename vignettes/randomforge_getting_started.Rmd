@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
+## Introduction
 
 `randomforge` is an open-source R package providing a transparent and modular 
 framework for clinical trial randomization.  
@@ -28,7 +28,7 @@ If you are new to randomization frameworks or want a minimal working example,
 this is a good place to start.
 
 
-# Installation
+## Installation
 
 At this stage, `randomforge` is available only on GitHub:
 
@@ -38,7 +38,7 @@ At this stage, `randomforge` is available only on GitHub:
 remotes::install_github("RCONIS/randomforge")
 ```
 
-# Creating a Randomization Project
+## Creating a Randomization Project
 
 Every workflow begins with a `RandomProject` stored inside an in-memory 
 `RandomDataBase`:
@@ -59,7 +59,7 @@ randomDataBase$persist(randomProject)
 A project groups all configurations, subjects, and resulting allocations.
 
 
-# Defining a Randomization Configuration
+## Defining a Randomization Configuration
 
 A configuration defines:
 
@@ -86,7 +86,7 @@ randomDataBase$persist(config)
 ```
 
 
-# Creating a Block Randomization Method
+## Creating a Block Randomization Method
 
 `randomforge` currently supports **permuted block randomization** (PBR) as a 
 fully working implementation.
@@ -108,7 +108,7 @@ randomMethodPBR <- getRandomMethodPBR(
 )
 ```
 
-# Create a Random Allocation Value Service
+## Create a Random Allocation Value Service
 
 ```{r}
 # Create a random allocation value service
@@ -125,7 +125,7 @@ ravService |>
 
 Other key performance indicators are planned for future releases.
 
-# Running Randomization
+## Running Randomization
 
 To generate assignments, create a random allocation value service, then call 
 `getNextRandomResult()`.
@@ -147,7 +147,7 @@ ravService |>
     plot()
 ```
 
-# Inspecting the Results
+## Inspecting the Results
 
 All subjects and allocations stored in the database can be displayed as a data
 frame:
@@ -168,7 +168,7 @@ resultData |>
     knitr::kable()
 ```
 
-# Exporting to Excel (Optional)
+## Exporting to Excel (Optional)
 
 `randomforge` supports exporting subject lists or randomization results via 
 `writeExcelFile()`:
@@ -179,7 +179,7 @@ writeExcelFile(resultData, "randomization_list.xlsx")
 ```
 
 
-# What’s Next?
+## What’s Next?
 
 The project is in an early phase, and many extensions are planned:
 
@@ -194,7 +194,7 @@ To learn how to contribute, see the vignette:
 **`vignette("randomforge_contribution")`**
 
 
-# Thank You
+## Thank You
 
 We hope this vignette helps you get started with `randomforge`.  
 Feedback and suggestions are very welcome via GitHub issues.

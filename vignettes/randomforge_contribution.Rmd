@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
+## Introduction
 
-**RandomForge — An Open Project for Clinical Trial Randomization in R**
+**randomforge — An Open Project for Clinical Trial Randomization in R**
 
 `randomforge` is a newly started, open-source project on GitHub that aims to
 provide a clean and transparent implementation of clinical trial randomization
@@ -38,7 +38,7 @@ This vignette explains how to:
 3. Use GitHub effectively even if you are new to it  
 
 
-# 1. Installing randomforge and running a simple randomization
+## Installing randomforge and running a simple randomization
 
 At this stage, the package is not yet on CRAN.  
 You can install the development version directly from GitHub:
@@ -78,8 +78,7 @@ blockSizes <- getBlockSizes(config$treatmentArmIds, 8)
 
 # Create a permuted block randomization method
 randomMethodPBR <- getRandomMethodPBR(
-    blockSizes              = blockSizes,
-    fixedBlockDesignEnabled = FALSE
+    blockSizes = blockSizes
 )
 
 # Create a random allocation value service
@@ -88,12 +87,12 @@ ravService$createNewRandomAllocationValues(config)
 
 # Create a few randomization results
 resultList <- lapply(1:8, function(i) {
-    getNextRandomResult(
+    suppressMessages(getNextRandomResult(
         randomDataBase               = randomDataBase,
         randomProject                = randomProject,
         randomMethod                 = randomMethodPBR,
         randomAllocationValueService = ravService
-    )
+    ))
 })
 
 # Convert results to a data frame
@@ -102,7 +101,7 @@ randomDataBase |>
     knitr::kable()
 ```
 
-# 2. How to contribute to randomforge
+## How to contribute to randomforge
 
 Contributions of all kinds are welcome:
 
@@ -118,7 +117,7 @@ get involved.
 We are happy to support new contributors.
 
 
-# 3. Option A: Get invited as a direct contributor
+### Option A: Get invited as a direct contributor
 
 If you prefer not to deal with forks or pull requests, you can simply request
 to be added as a contributor to the GitHub repository.
@@ -137,24 +136,24 @@ Once added, you will be able to push branches and open pull requests directly
 in the main repository.
 
 
-# 4. Option B: Contribute via Fork (recommended for most users)
+### Option B: Contribute via Fork (recommended for most users)
 
 If you are not familiar with GitHub contribution workflows, here is a simple
 step-by-step guide.
 
-## Step 1 — Create a GitHub account  
+#### Step 1 — Create a GitHub account  
 If you do not already have one, register at  
 https://github.com
 
-## Step 2 — Open the randomforge repository  
+#### Step 2 — Open the randomforge repository  
 Navigate to:  
 https://github.com/RCONIS/randomforge
 
-## Step 3 — Click “Fork”  
+#### Step 3 — Click “Fork”  
 The button is in the upper-right corner.  
 This creates *your own copy* of the repository under your GitHub account.
 
-## Step 4 — Clone your fork to your local machine
+#### Step 4 — Clone your fork to your local machine
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/randomforge.git
@@ -166,29 +165,29 @@ Then:
 cd randomforge
 ```
 
-## Step 5 — Create a new branch for your change
+#### Step 5 — Create a new branch for your change
 
 ```bash
 git checkout -b my-feature-branch
 ```
 
-## Step 6 — Make your changes locally  
+#### Step 6 — Make your changes locally  
 Edit R files, documentation, tests, examples, or vignettes.
 
-## Step 7 — Commit your changes
+#### Step 7 — Commit your changes
 
 ```bash
 git add .
 git commit -m "Add new feature / fix / improvement"
 ```
 
-## Step 8 — Push your branch to your fork
+#### Step 8 — Push your branch to your fork
 
 ```bash
 git push origin my-feature-branch
 ```
 
-## Step 9 — Open a Pull Request  
+#### Step 9 — Open a Pull Request  
 Go back to your fork on GitHub and click:
 
 **“Compare & pull request”**
@@ -202,7 +201,7 @@ In the Pull Request description, please provide:
 We will review all contributions as soon as possible.
 
 
-# 5. Getting help
+## Getting help
 
 If you get stuck at any point — GitHub workflow, code questions, architecture
 discussion — feel free to:
@@ -214,8 +213,8 @@ All questions are welcome, especially from newcomers.
 We want to make contributing as easy and friendly as possible.
 
 
-# 6. Thank you
+## Thank you
 
-We appreciate your interest in contributing to the RandomForge project.  
+We appreciate your interest in contributing to the *randomforge* project.  
 Your ideas and contributions help shape a more open, transparent, and
 community-driven future for clinical trial randomization in R.
