@@ -28,3 +28,5 @@ NEWS\.tex
 .*_snaps.*
 ^Meta$
 ^CNAME$
+^_pkgdown\.yml$
+^\.github$

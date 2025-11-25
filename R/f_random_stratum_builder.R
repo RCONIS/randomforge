@@ -55,7 +55,7 @@ createStratumId <- function(factorLevels) {
             )
         }
 
-        factorLevel <- factorLevels.get(factorName)
+        factorLevel <- factorLevels[[factorName]]
         if (is.null(factorLevel) || nchar(trimws(factorLevel)) == 0) {
             stop("The specified factor level (#", counter, ") is invalid")
         }

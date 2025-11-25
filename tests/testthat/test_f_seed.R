@@ -21,6 +21,9 @@
 # ------------------------------------------------------------------------------
 
 test_that("For invalid input arguments 'createSeed' throws meaningful exceptions", {
+    testthat::skip_if_not_installed("httr")
+    testthat::skip_if_not_installed("glue")
+    
     expect_error(createSeed(numberOfValues = 0), 
         "Argument out of bounds: 'numberOfValues' (0) is out of bounds [1; 1000]", fixed = TRUE)
     expect_error(createSeed(numberOfValues = 1, minValue = -1), 
@@ -32,6 +35,9 @@ test_that("For invalid input arguments 'createSeed' throws meaningful exceptions
 })
 
 test_that("The results of 'createSeed' depend on the input arguments as expected", {
+    testthat::skip_if_not_installed("httr")
+    testthat::skip_if_not_installed("glue")
+    
     expect_length(createSeed(), 1)
     expect_length(createSeed(numberOfValues = 9), 9)
     
@@ -41,6 +47,9 @@ test_that("The results of 'createSeed' depend on the input arguments as expected
 })
 
 test_that("'createSeed' returns valid seed although network connection is missing", {
+    testthat::skip_if_not_installed("httr")
+    testthat::skip_if_not_installed("glue")
+        
     expect_warning(seed <- createSeed(
         minValue = 100000000, maxValue = 999999999,
         test_exception = "network error"
