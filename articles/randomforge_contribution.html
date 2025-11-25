@@ -77,7 +77,7 @@ Pahlke</h4>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p><strong>RandomForge — An Open Project for Clinical Trial
+<p><strong>randomforge — An Open Project for Clinical Trial
 Randomization in R</strong></p>
 <p><code>randomforge</code> is a newly started, open-source project on
 GitHub that aims to provide a clean and transparent implementation of
@@ -99,7 +99,7 @@ practitioners are explicitly welcome as the project evolves.</p>
 </ol>
 </div>
 <div class="section level2">
-<h2 id="installing-randomforge-and-running-a-simple-randomization">1. Installing randomforge and running a simple randomization<a class="anchor" aria-label="anchor" href="#installing-randomforge-and-running-a-simple-randomization"></a>
+<h2 id="installing-randomforge-and-running-a-simple-randomization">Installing randomforge and running a simple randomization<a class="anchor" aria-label="anchor" href="#installing-randomforge-and-running-a-simple-randomization"></a>
 </h2>
 <p>At this stage, the package is not yet on CRAN.<br>
 You can install the development version directly from GitHub:</p>
@@ -135,80 +135,23 @@ randomization workflow.</p>
 <span></span>
 <span><span class="co"># Create a permuted block randomization method</span></span>
 <span><span class="va">randomMethodPBR</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getRandomMethodPBR.html">getRandomMethodPBR</a></span><span class="op">(</span></span>
-<span>    blockSizes              <span class="op">=</span> <span class="va">blockSizes</span>,</span>
-<span>    fixedBlockDesignEnabled <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    blockSizes <span class="op">=</span> <span class="va">blockSizes</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create a random allocation value service</span></span>
 <span><span class="va">ravService</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getRandomAllocationValueService.html">getRandomAllocationValueService</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ravService</span><span class="op">$</span><span class="fu">createNewRandomAllocationValues</span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Create 9000 new random allocation values (seed = 6692687)</span></span>
+<span><span class="co">#&gt; Create 9000 new random allocation values (seed = 7411532)</span></span>
 <span></span>
 <span><span class="co"># Create a few randomization results</span></span>
 <span><span class="va">resultList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="../reference/getNextRandomResult.html">getNextRandomResult</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="../reference/getNextRandomResult.html">getNextRandomResult</a></span><span class="op">(</span></span>
 <span>        randomDataBase               <span class="op">=</span> <span class="va">randomDataBase</span>,</span>
 <span>        randomProject                <span class="op">=</span> <span class="va">randomProject</span>,</span>
 <span>        randomMethod                 <span class="op">=</span> <span class="va">randomMethodPBR</span>,</span>
 <span>        randomAllocationValueService <span class="op">=</span> <span class="va">ravService</span></span>
-<span>    <span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.254686910891905)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Create new block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:1, B:0], block-wise-levels[A:1/4, B:0/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.254686910891905]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.732571959961206)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:1, B:1], block-wise-levels[A:1/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.732571959961206]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.491432298207656)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:2, B:1], block-wise-levels[A:2/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.491432298207656]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.0196517161093652)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:3, B:1], block-wise-levels[A:3/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.0196517161093652]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.342846009880304)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:4, B:1], block-wise-levels[A:4/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.342846009880304]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.782142449636012)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:2], block-wise-levels[A:4/4, B:2/4], range-set[A=[0,0], B=[0,1]; rav=0.782142449636012]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.709863466676325)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:3], block-wise-levels[A:4/4, B:3/4], range-set[A=[0,0], B=[0,1]; rav=0.709863466676325]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.124208028428257)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:4], block-wise-levels[A:4/4, B:4/4], range-set[A=[0,0], B=[0,1]; rav=0.124208028428257]]</span></span>
 <span></span>
 <span><span class="co"># Convert results to a data frame</span></span>
 <span><span class="va">randomDataBase</span> <span class="op">|&gt;</span> </span>
@@ -243,91 +186,93 @@ randomization workflow.</p>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">1</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">1</td>
 <td align="right">0</td>
-<td align="left">A:1/4</td>
-<td align="left">B:0/4</td>
+<td align="right">1</td>
+<td align="left">A:0/4</td>
+<td align="left">B:1/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.254686910891905]</td>
-<td align="left">cf9f3aaf-5722-44d8-a081-9b7104d87abe</td>
+rav=0.759495647391304]</td>
+<td align="left">f6ab6e03-a017-432c-908e-e9dc41f070c4</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">2</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="left">A:1/4</td>
 <td align="left">B:1/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.732571959961206]</td>
-<td align="left">b92bfedc-a492-45ea-bf67-92aec9e67fa8</td>
+rav=0.494076571660116]</td>
+<td align="left">90bf5a3d-bff7-4d94-b7c6-6142f1406bb7</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">3</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">2</td>
 <td align="right">1</td>
-<td align="left">A:2/4</td>
-<td align="left">B:1/4</td>
+<td align="right">2</td>
+<td align="left">A:1/4</td>
+<td align="left">B:2/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.491432298207656]</td>
-<td align="left">a7642527-d963-486d-92db-0c8743a24737</td>
+rav=0.947109093191102]</td>
+<td align="left">ab0262b2-3ab5-4bb1-a9e5-707926afea07</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">4</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">3</td>
 <td align="right">1</td>
-<td align="left">A:3/4</td>
-<td align="left">B:1/4</td>
+<td align="right">3</td>
+<td align="left">A:1/4</td>
+<td align="left">B:3/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.0196517161093652]</td>
-<td align="left">ffe6807b-843e-45b2-809d-94d9177f5318</td>
+rav=0.899938452756032]</td>
+<td align="left">3266b24c-7987-45e7-a7b5-8e5738d16861</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">5</td>
 <td align="left">A</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="left">A:4/4</td>
-<td align="left">B:1/4</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="left">A:2/4</td>
+<td align="left">B:3/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.342846009880304]</td>
-<td align="left">a955d411-4ddc-49ed-b156-feec91b12f60</td>
+rav=0.123416466871276]</td>
+<td align="left">5549c73c-03e0-4a73-af9c-d56fb23eeb87</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">6</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">4</td>
-<td align="right">2</td>
-<td align="left">A:4/4</td>
-<td align="left">B:2/4</td>
-<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.782142449636012]</td>
-<td align="left">6f37b9fe-b34e-4018-a561-751e81f4ee9a</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">A:3/4</td>
+<td align="left">B:3/4</td>
+<td align="left">range-set[A=[0,0.5], B=[0.5,1];
+rav=0.418621566146612]</td>
+<td align="left">0601ee75-1e32-4324-a5eb-788aeb9d3e8b</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">7</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">4</td>
 <td align="right">3</td>
 <td align="left">A:4/4</td>
 <td align="left">B:3/4</td>
-<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.709863466676325]</td>
-<td align="left">861b9fbe-091d-4320-99f9-7b689008b8e9</td>
+<td align="left">range-set[A=[0,0.5], B=[0.5,1];
+rav=0.14366362686269]</td>
+<td align="left">29bca874-3cfe-490a-95f4-61a316db906a</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
@@ -338,14 +283,14 @@ rav=0.342846009880304]</td>
 <td align="right">4</td>
 <td align="left">A:4/4</td>
 <td align="left">B:4/4</td>
-<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.124208028428257]</td>
-<td align="left">96618a3d-2ca7-4127-a920-2054a8abb3be</td>
+<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.268954261904582]</td>
+<td align="left">7b2d89d6-d258-466f-9f75-dc46af9b19a2</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section level2">
-<h2 id="how-to-contribute-to-randomforge">2. How to contribute to randomforge<a class="anchor" aria-label="anchor" href="#how-to-contribute-to-randomforge"></a>
+<h2 id="how-to-contribute-to-randomforge">How to contribute to randomforge<a class="anchor" aria-label="anchor" href="#how-to-contribute-to-randomforge"></a>
 </h2>
 <p>Contributions of all kinds are welcome:</p>
 <ul>
@@ -364,10 +309,9 @@ rav=0.342846009880304]</td>
 <p>You do <strong>not</strong> need to be an expert in R, Git, or
 clinical trial methodology to get involved.<br>
 We are happy to support new contributors.</p>
-</div>
-<div class="section level2">
-<h2 id="option-a-get-invited-as-a-direct-contributor">3. Option A: Get invited as a direct contributor<a class="anchor" aria-label="anchor" href="#option-a-get-invited-as-a-direct-contributor"></a>
-</h2>
+<div class="section level3">
+<h3 id="option-a-get-invited-as-a-direct-contributor">Option A: Get invited as a direct contributor<a class="anchor" aria-label="anchor" href="#option-a-get-invited-as-a-direct-contributor"></a>
+</h3>
 <p>If you prefer not to deal with forks or pull requests, you can simply
 request to be added as a contributor to the GitHub repository.</p>
 <p>Please send an email to:</p>
@@ -383,59 +327,59 @@ request to be added as a contributor to the GitHub repository.</p>
 <p>Once added, you will be able to push branches and open pull requests
 directly in the main repository.</p>
 </div>
-<div class="section level2">
-<h2 id="option-b-contribute-via-fork-recommended-for-most-users">4. Option B: Contribute via Fork (recommended for most users)<a class="anchor" aria-label="anchor" href="#option-b-contribute-via-fork-recommended-for-most-users"></a>
-</h2>
+<div class="section level3">
+<h3 id="option-b-contribute-via-fork-recommended-for-most-users">Option B: Contribute via Fork (recommended for most users)<a class="anchor" aria-label="anchor" href="#option-b-contribute-via-fork-recommended-for-most-users"></a>
+</h3>
 <p>If you are not familiar with GitHub contribution workflows, here is a
 simple step-by-step guide.</p>
-<div class="section level3">
-<h3 id="step-1-create-a-github-account">Step 1 — Create a GitHub account<a class="anchor" aria-label="anchor" href="#step-1-create-a-github-account"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-1-create-a-github-account">Step 1 — Create a GitHub account<a class="anchor" aria-label="anchor" href="#step-1-create-a-github-account"></a>
+</h4>
 <p>If you do not already have one, register at<br><a href="https://github.com" class="external-link uri">https://github.com</a></p>
 </div>
-<div class="section level3">
-<h3 id="step-2-open-the-randomforge-repository">Step 2 — Open the randomforge repository<a class="anchor" aria-label="anchor" href="#step-2-open-the-randomforge-repository"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-2-open-the-randomforge-repository">Step 2 — Open the randomforge repository<a class="anchor" aria-label="anchor" href="#step-2-open-the-randomforge-repository"></a>
+</h4>
 <p>Navigate to:<br><a href="https://github.com/RCONIS/randomforge" class="external-link uri">https://github.com/RCONIS/randomforge</a></p>
 </div>
-<div class="section level3">
-<h3 id="step-3-click-fork">Step 3 — Click “Fork”<a class="anchor" aria-label="anchor" href="#step-3-click-fork"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-3-click-fork">Step 3 — Click “Fork”<a class="anchor" aria-label="anchor" href="#step-3-click-fork"></a>
+</h4>
 <p>The button is in the upper-right corner.<br>
 This creates <em>your own copy</em> of the repository under your GitHub
 account.</p>
 </div>
-<div class="section level3">
-<h3 id="step-4-clone-your-fork-to-your-local-machine">Step 4 — Clone your fork to your local machine<a class="anchor" aria-label="anchor" href="#step-4-clone-your-fork-to-your-local-machine"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-4-clone-your-fork-to-your-local-machine">Step 4 — Clone your fork to your local machine<a class="anchor" aria-label="anchor" href="#step-4-clone-your-fork-to-your-local-machine"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/randomforge.git</span></code></pre></div>
 <p>Then:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="bu">cd</span> randomforge</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="step-5-create-a-new-branch-for-your-change">Step 5 — Create a new branch for your change<a class="anchor" aria-label="anchor" href="#step-5-create-a-new-branch-for-your-change"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-5-create-a-new-branch-for-your-change">Step 5 — Create a new branch for your change<a class="anchor" aria-label="anchor" href="#step-5-create-a-new-branch-for-your-change"></a>
+</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> my-feature-branch</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="step-6-make-your-changes-locally">Step 6 — Make your changes locally<a class="anchor" aria-label="anchor" href="#step-6-make-your-changes-locally"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-6-make-your-changes-locally">Step 6 — Make your changes locally<a class="anchor" aria-label="anchor" href="#step-6-make-your-changes-locally"></a>
+</h4>
 <p>Edit R files, documentation, tests, examples, or vignettes.</p>
 </div>
-<div class="section level3">
-<h3 id="step-7-commit-your-changes">Step 7 — Commit your changes<a class="anchor" aria-label="anchor" href="#step-7-commit-your-changes"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-7-commit-your-changes">Step 7 — Commit your changes<a class="anchor" aria-label="anchor" href="#step-7-commit-your-changes"></a>
+</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">git</span> add .</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add new feature / fix / improvement"</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="step-8-push-your-branch-to-your-fork">Step 8 — Push your branch to your fork<a class="anchor" aria-label="anchor" href="#step-8-push-your-branch-to-your-fork"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-8-push-your-branch-to-your-fork">Step 8 — Push your branch to your fork<a class="anchor" aria-label="anchor" href="#step-8-push-your-branch-to-your-fork"></a>
+</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">git</span> push origin my-feature-branch</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="step-9-open-a-pull-request">Step 9 — Open a Pull Request<a class="anchor" aria-label="anchor" href="#step-9-open-a-pull-request"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-9-open-a-pull-request">Step 9 — Open a Pull Request<a class="anchor" aria-label="anchor" href="#step-9-open-a-pull-request"></a>
+</h4>
 <p>Go back to your fork on GitHub and click:</p>
 <p><strong>“Compare &amp; pull request”</strong></p>
 <p>In the Pull Request description, please provide:</p>
@@ -449,8 +393,9 @@ account.</p>
 <p>We will review all contributions as soon as possible.</p>
 </div>
 </div>
+</div>
 <div class="section level2">
-<h2 id="getting-help">5. Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+<h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
 </h2>
 <p>If you get stuck at any point — GitHub workflow, code questions,
 architecture discussion — feel free to:</p>
@@ -464,10 +409,10 @@ architecture discussion — feel free to:</p>
 We want to make contributing as easy and friendly as possible.</p>
 </div>
 <div class="section level2">
-<h2 id="thank-you">6. Thank you<a class="anchor" aria-label="anchor" href="#thank-you"></a>
+<h2 id="thank-you">Thank you<a class="anchor" aria-label="anchor" href="#thank-you"></a>
 </h2>
-<p>We appreciate your interest in contributing to the RandomForge
-project.<br>
+<p>We appreciate your interest in contributing to the
+<em>randomforge</em> project.<br>
 Your ideas and contributions help shape a more open, transparent, and
 community-driven future for clinical trial randomization in R.</p>
 </div>
