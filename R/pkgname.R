@@ -33,7 +33,7 @@
 #' The package aims to support a broad range of classical, 
 #' covariate-adaptive, and response-adaptive techniques while 
 #' enabling reproducibility, auditability, and methodological clarity.
-#' Built as part of the open RandomForge initiative ("Innovating the 
+#' Built as part of the open *randomforge* initiative ("Innovating the 
 #' Future of Randomization"), the package encourages community 
 #' collaboration, modular extensions, and contributions from academia, 
 #' industry, and clinical researchers.

@@ -1,6 +1,6 @@
 # randomforge
 
-**RandomForge — Innovating the Future of Randomization**
+**randomforge — Innovating the Future of Randomization**
 
 `randomforge` is an open, extensible framework for clinical trial
 randomization methods in R.  
@@ -9,7 +9,7 @@ randomization procedures, starting with a flexible implementation of
 **permuted block randomization** and designed to grow into a broader ecosystem
 of randomization methods.
 
-This package is the core engine of the wider **RandomForge** initiative:
+This package is the core engine of the wider **randomforge** initiative:
 a community-driven effort to innovate the future of clinical trial
 randomization.
 
@@ -23,7 +23,7 @@ Yet many tools currently in use are:
 - opaque in how assignments are generated,
 - and not designed for collaborative innovation.
 
-**RandomForge** aims to change this by providing an open, shared infrastructure
+**randomforge** aims to change this by providing an open, shared infrastructure
 for randomization methods – where ideas can grow into trusted, well-documented
 and practically usable methods, developed together by the community.
 
@@ -62,7 +62,7 @@ response-adaptive procedures).
 ## 🚀 Planned Extensions
 
 While the current release focuses on permuted block randomization, the
-RandomForge initiative is designed to cover a much wider range of techniques
+**randomforge** initiative is designed to cover a much wider range of techniques
 over time, including (but not limited to):
 
 - baseline-adaptive and covariate-adaptive methods (e.g. minimization),

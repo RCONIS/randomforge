@@ -3,7 +3,7 @@
 ## Initial Public Release
 
 This is the first publicly available version of **randomforge**, released as an
-early-stage foundation for the emerging *RandomForge* ecosystem
+early-stage foundation for the emerging **randomforge** ecosystem
 ("Innovating the Future of Randomization").
 
 The 0.1.0 release focuses on establishing the architectural core and enabling
