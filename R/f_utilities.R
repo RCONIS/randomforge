@@ -24,7 +24,7 @@
 NULL
 
 .getPackageVersionString <- function() {
-    return(paste(unlist(utils::packageVersion("rpact")), collapse = "."))
+    return(paste(unlist(utils::packageVersion("randomforge")), collapse = "."))
 }
 
 #'
