@@ -1,0 +1,163 @@
+---
+title: "Randomization with Flexible Block Sizes with randomforge"
+author: "Friedrich Pahlke"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Randomization with Flexible Block Sizes with randomforge}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+This vignette provides a practical example for **randomforge**. 
+It demonstrates:
+
+- How to define treatment arms  
+- How to configure project-level randomization  
+- How do you implement permuted block randomization (PBR) with a fixed starting
+  block size and continuation with variable block sizes
+- How to perform quality control of random values  
+- How to extract and inspect the generated randomization list  
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+```
+
+## Loading the randomforge Package
+
+```{r}
+library(randomforge)
+```
+
+## Trial Setup
+
+### Treatment Arms
+
+```{r}
+treatmentArmIds = c("Treatment", "Control")
+```
+
+### Maximum Number of Subjects per Center
+
+```{r}
+maxNumberOfSubjects <- 40
+```
+
+### Seed
+
+The seeds in this example will be generated via  
+[random.org](https://www.random.org/)
+
+```{r}
+#| eval: FALSE
+seed <- createSeed()
+seed
+```
+
+```{r}
+#| echo: FALSE
+seed <- 1379678
+seed
+```
+
+## Creating Project and Configuration
+
+```{r}
+randomDataBase <- getRandomDataBase()
+
+randomProject <- getRandomProject(name = "Flexible PBR Example Trial")
+randomDataBase$persist(randomProject)
+
+randomConfiguration <- getRandomConfiguration(
+    randomProject = randomProject, 
+    treatmentArmIds = treatmentArmIds, 
+    seed = seed
+)
+randomDataBase$persist(randomConfiguration)
+
+ravService <- getRandomAllocationValueService()
+```
+
+## Initial Randomization Using Fixed Block Size
+
+### Define Initial Block Length
+
+```{r, message = FALSE}
+initialBlockLength <- 8
+randomMethod <- getRandomMethodPBR(
+    blockSizes = getBlockSizes(treatmentArmIds, initialBlockLength)
+)
+for (i in 1:initialBlockLength) {
+    suppressMessages(getNextRandomResult(
+        randomDataBase, randomProject, randomMethod, ravService
+    ))
+}
+```
+
+## Variable Block Sizes for Remaining Subjects
+
+### Define Candidate Block Sizes
+
+```{r}
+blockSizes <- getBlockSizes(treatmentArmIds, c(4, 6))
+blockSizeRandomizer <- getRandomBlockSizeRandomizer(
+    blockSizes = blockSizes,
+    seed = 2758500)
+blockSizeRandomizer$initRandomValues(numberOfBlockSizes = length(blockSizes))
+```
+
+### Randomize Remaining Subjects
+
+```{r, message = FALSE}
+randomMethod <- getRandomMethodPBR(
+    blockSizes = blockSizes, 
+    fixedBlockDesignEnabled = FALSE, 
+    blockSizeRandomizer = blockSizeRandomizer
+)
+
+for (i in 1:(maxNumberOfSubjects - initialBlockLength)) {
+    suppressMessages(getNextRandomResult(
+        randomDataBase, randomProject, randomMethod, ravService
+    ))
+}
+```
+
+## Quality Control
+
+### Distribution of Used Random Values
+
+```{r}
+plot(ravService)
+```
+
+No significant deviation from a uniform distribution is detected (p > 0.05).
+
+### Distribution of All Generated Random Values
+
+```{r}
+plot(ravService, usedValuesOnly = FALSE)
+```
+
+## Output: Randomization List
+
+```{r}
+randomList <- as.data.frame(randomDataBase)
+knitr::kable(randomList)
+```
+
+## System Information
+
+- System: `r R.version.string`  
+- randomforge version: `r packageVersion("randomforge")`  
+- Platform: `r R.version$platform`  
+- Working directory: `r getwd()`
