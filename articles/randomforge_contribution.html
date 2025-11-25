@@ -142,7 +142,7 @@ randomization workflow.</p>
 <span><span class="co"># Create a random allocation value service</span></span>
 <span><span class="va">ravService</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getRandomAllocationValueService.html">getRandomAllocationValueService</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ravService</span><span class="op">$</span><span class="fu">createNewRandomAllocationValues</span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Create 9000 new random allocation values (seed = 3751529)</span></span>
+<span><span class="co">#&gt; Create 9000 new random allocation values (seed = 6692687)</span></span>
 <span></span>
 <span><span class="co"># Create a few randomization results</span></span>
 <span><span class="va">resultList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
@@ -153,62 +153,62 @@ randomization workflow.</p>
 <span>        randomAllocationValueService <span class="op">=</span> <span class="va">ravService</span></span>
 <span>    <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.0788929697591811)...</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.254686910891905)...</span></span>
 <span><span class="co">#&gt; Randomize using PBR...</span></span>
 <span><span class="co">#&gt; Get block...</span></span>
 <span><span class="co">#&gt; Create new block...</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:1, B:0], block-wise-levels[A:1/4, B:0/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.0788929697591811]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.0214472699444741)...</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:1, B:0], block-wise-levels[A:1/4, B:0/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.254686910891905]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.732571959961206)...</span></span>
 <span><span class="co">#&gt; Randomize using PBR...</span></span>
 <span><span class="co">#&gt; Get block...</span></span>
 <span><span class="co">#&gt; Use existing block...</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:2, B:0], block-wise-levels[A:2/4, B:0/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.0214472699444741]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.734403318259865)...</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:1, B:1], block-wise-levels[A:1/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.732571959961206]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.491432298207656)...</span></span>
 <span><span class="co">#&gt; Randomize using PBR...</span></span>
 <span><span class="co">#&gt; Get block...</span></span>
 <span><span class="co">#&gt; Use existing block...</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:2, B:1], block-wise-levels[A:2/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.734403318259865]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.397318777628243)...</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:2, B:1], block-wise-levels[A:2/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.491432298207656]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.0196517161093652)...</span></span>
 <span><span class="co">#&gt; Randomize using PBR...</span></span>
 <span><span class="co">#&gt; Get block...</span></span>
 <span><span class="co">#&gt; Use existing block...</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:3, B:1], block-wise-levels[A:3/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.397318777628243]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.671995327342302)...</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:3, B:1], block-wise-levels[A:3/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.0196517161093652]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.342846009880304)...</span></span>
 <span><span class="co">#&gt; Randomize using PBR...</span></span>
 <span><span class="co">#&gt; Get block...</span></span>
 <span><span class="co">#&gt; Use existing block...</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:3, B:2], block-wise-levels[A:3/4, B:2/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.671995327342302]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.645773652940989)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:3, B:3], block-wise-levels[A:3/4, B:3/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.645773652940989]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.0209502822253853)...</span></span>
-<span><span class="co">#&gt; Randomize using PBR...</span></span>
-<span><span class="co">#&gt; Get block...</span></span>
-<span><span class="co">#&gt; Use existing block...</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Init ranges via probabilities A = 0.5, B = 0.5</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:4, B:3], block-wise-levels[A:4/4, B:3/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.0209502822253853]]</span></span>
-<span><span class="co">#&gt; Get next random result (rav:0.122103085974231)...</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:A, overall-levels[A:4, B:1], block-wise-levels[A:4/4, B:1/4], range-set[A=[0,0.5], B=[0.5,1]; rav=0.342846009880304]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.782142449636012)...</span></span>
 <span><span class="co">#&gt; Randomize using PBR...</span></span>
 <span><span class="co">#&gt; Get block...</span></span>
 <span><span class="co">#&gt; Use existing block...</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
 <span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
-<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:4], block-wise-levels[A:4/4, B:4/4], range-set[A=[0,0], B=[0,1]; rav=0.122103085974231]]</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:2], block-wise-levels[A:4/4, B:2/4], range-set[A=[0,0], B=[0,1]; rav=0.782142449636012]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.709863466676325)...</span></span>
+<span><span class="co">#&gt; Randomize using PBR...</span></span>
+<span><span class="co">#&gt; Get block...</span></span>
+<span><span class="co">#&gt; Use existing block...</span></span>
+<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
+<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:3], block-wise-levels[A:4/4, B:3/4], range-set[A=[0,0], B=[0,1]; rav=0.709863466676325]]</span></span>
+<span><span class="co">#&gt; Get next random result (rav:0.124208028428257)...</span></span>
+<span><span class="co">#&gt; Randomize using PBR...</span></span>
+<span><span class="co">#&gt; Get block...</span></span>
+<span><span class="co">#&gt; Use existing block...</span></span>
+<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
+<span><span class="co">#&gt; Init ranges via probabilities A = 0, B = 1</span></span>
+<span><span class="co">#&gt; Random result: random-result[treatment:B, overall-levels[A:4, B:4], block-wise-levels[A:4/4, B:4/4], range-set[A=[0,0], B=[0,1]; rav=0.124208028428257]]</span></span>
 <span></span>
 <span><span class="co"># Convert results to a data frame</span></span>
 <span><span class="va">randomDataBase</span> <span class="op">|&gt;</span> </span>
@@ -250,34 +250,34 @@ randomization workflow.</p>
 <td align="left">A:1/4</td>
 <td align="left">B:0/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.0788929697591811]</td>
-<td align="left">bb7d741a-fbd8-41cb-98bc-67cdee7b2e33</td>
+rav=0.254686910891905]</td>
+<td align="left">cf9f3aaf-5722-44d8-a081-9b7104d87abe</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">2</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="left">A:2/4</td>
-<td align="left">B:0/4</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">A:1/4</td>
+<td align="left">B:1/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.0214472699444741]</td>
-<td align="left">7e0a42fe-54c9-4fa0-8238-77294fb7aded</td>
+rav=0.732571959961206]</td>
+<td align="left">b92bfedc-a492-45ea-bf67-92aec9e67fa8</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">3</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">2</td>
 <td align="right">1</td>
 <td align="left">A:2/4</td>
 <td align="left">B:1/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.734403318259865]</td>
-<td align="left">ef3bc4b5-82e7-4b00-aae6-476da295a0e3</td>
+rav=0.491432298207656]</td>
+<td align="left">a7642527-d963-486d-92db-0c8743a24737</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
@@ -289,47 +289,45 @@ rav=0.734403318259865]</td>
 <td align="left">A:3/4</td>
 <td align="left">B:1/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.397318777628243]</td>
-<td align="left">1bbe4874-d0ba-402c-9295-c44cc7939f1b</td>
+rav=0.0196517161093652]</td>
+<td align="left">ffe6807b-843e-45b2-809d-94d9177f5318</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">5</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">3</td>
-<td align="right">2</td>
-<td align="left">A:3/4</td>
-<td align="left">B:2/4</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">A:4/4</td>
+<td align="left">B:1/4</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.671995327342302]</td>
-<td align="left">9c29027e-f514-419d-8ab0-fd6dfdea12ba</td>
+rav=0.342846009880304]</td>
+<td align="left">a955d411-4ddc-49ed-b156-feec91b12f60</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">6</td>
 <td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">3</td>
-<td align="right">3</td>
-<td align="left">A:3/4</td>
-<td align="left">B:3/4</td>
-<td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.645773652940989]</td>
-<td align="left">622a931b-1a75-452d-be08-009474a069e4</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">A:4/4</td>
+<td align="left">B:2/4</td>
+<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.782142449636012]</td>
+<td align="left">6f37b9fe-b34e-4018-a561-751e81f4ee9a</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">7</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">4</td>
 <td align="right">3</td>
 <td align="left">A:4/4</td>
 <td align="left">B:3/4</td>
-<td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.0209502822253853]</td>
-<td align="left">08bb4263-7a3b-401a-8c94-4bccc978e7da</td>
+<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.709863466676325]</td>
+<td align="left">861b9fbe-091d-4320-99f9-7b689008b8e9</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
@@ -340,8 +338,8 @@ rav=0.0209502822253853]</td>
 <td align="right">4</td>
 <td align="left">A:4/4</td>
 <td align="left">B:4/4</td>
-<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.122103085974231]</td>
-<td align="left">00aa6a4d-fcbe-41df-adb7-329c8d1fcffb</td>
+<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.124208028428257]</td>
+<td align="left">96618a3d-2ca7-4127-a920-2054a8abb3be</td>
 </tr>
 </tbody>
 </table>

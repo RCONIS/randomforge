@@ -17,6 +17,10 @@ getRandomBlockSizeRandomizer(blockSizes, ..., seed = NA_integer_)
   List of block size configurations, each mapping treatment arm IDs to
   sizes.
 
+- ...:
+
+  Additional arguments (currently unused).
+
 - seed:
 
   Integer random seed used for reproducibility.
