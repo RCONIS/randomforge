@@ -23,8 +23,8 @@ Description:
     industry, and clinical researchers. 
     The architecture is designed for integration into larger ecosystems, 
     including Shiny applications, APIs, and cloud-based workflows.
-License: MIT + file LICENSE
-Copyright: Copyright (C) 2025 by Friedrich Pahlke. All rights reserved.
+License: LGPL-3 + file LICENSE
+Copyright: Copyright (C) 2025 by Friedrich Pahlke
 URL: 
     https://randomforge.org,
     https://github.com/rpact-com/randomforge

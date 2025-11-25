@@ -1,3 +1,24 @@
+# ------------------------------------------------------------------------------
+#  randomforge — Innovating the Future of Randomization
+#  Framework for transparent and extensible clinical trial randomization in R
+#
+#  Author: Friedrich Pahlke, RPACT GmbH
+#  Copyright (c) 2025
+#
+#  This file is part of the randomforge R package.
+#  The package is licensed under the GNU Lesser General Public License (LGPL-3.0).
+#  Full license text: https://www.gnu.org/licenses/lgpl-3.0.txt
+#
+#  Source code and issue tracker:
+#  https://github.com/RCONIS/randomforge
+#
+#  Documentation:
+#  https://randomforge.org
+#
+#  For collaboration or contributions:
+#  friedrich.pahlke@rpact.com
+#  info@randomforge.org
+# ------------------------------------------------------------------------------
 
 #'
 #' Create a New RandomAllocationValueService Instance

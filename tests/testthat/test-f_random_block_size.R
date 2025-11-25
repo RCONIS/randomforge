@@ -1,15 +1,15 @@
 
 test_that("Test block size assertions", {
 
-    expect_error(assertIsValidBlockSize(list("A" = 3, "B" = 3)), NA)
-    expect_error(assertIsValidBlockSize(list("A" = 3, "B" = 0)))
-    expect_error(assertIsValidBlockSize(list("A" = 3, 3)))
-    expect_error(assertIsValidBlockSize(list("A" = 3)))
+    expect_error(.assertIsValidBlockSize(list("A" = 3, "B" = 3)), NA)
+    expect_error(.assertIsValidBlockSize(list("A" = 3, "B" = 0)))
+    expect_error(.assertIsValidBlockSize(list("A" = 3, 3)))
+    expect_error(.assertIsValidBlockSize(list("A" = 3)))
     
     blockSizes <- list()
     blockSizes[[1]] <- list("A" = 2, "B" = 2)
     blockSizes[[2]] <- list("A" = 3, "B" = 0)
-    expect_error(assertAreValidBlockSizes(blockSizes))
+    expect_error(.assertAreValidBlockSizes(blockSizes))
 })
         
 

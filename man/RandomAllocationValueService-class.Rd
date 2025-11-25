@@ -28,8 +28,8 @@ value creation, retrieval, and display.
 \item{initialize(...)}{Initializes the service, setting the seed, index, and values.}
 \item{show()}{Displays a summary of the service.}
 \item{toString()}{Returns a string representation of the service.}
-\item{createNewRandomAllocationValues(randomConfiguration,
-numberOfValuesToCreate)}{Generates new random allocation values
+\item{createNewRandomAllocationValues(randomConfiguration)}{
+Generates new random allocation values
 based on the configuration.}
 \item{getNextRandomAllocationValue(randomConfiguration)}{Retrieves
 the next random allocation value if available.}
