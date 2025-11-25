@@ -26,27 +26,27 @@ identification and resolution of any issues.
 
 | file                                                                                                                          |   n |   time | error | failed | skipped | warning |
 |:------------------------------------------------------------------------------------------------------------------------------|----:|-------:|------:|-------:|--------:|--------:|
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R)                                 |  10 |  1.398 |     0 |      0 |       0 |       0 |
-| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R) | 766 | 13.843 |     0 |      0 |       0 |       0 |
-| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R)       |  11 |  0.115 |     0 |      0 |       0 |       0 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R)                                 |  10 |  1.547 |     0 |      0 |       0 |       0 |
+| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R) | 766 | 13.308 |     0 |      0 |       0 |       0 |
+| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R)       |  11 |  0.110 |     0 |      0 |       0 |       0 |
 
 Show Detailed Test Results
 
 | file                                                                                                                              | context                | test                                                                   | status |   n |   time |
 |:----------------------------------------------------------------------------------------------------------------------------------|:-----------------------|:-----------------------------------------------------------------------|:-------|----:|-------:|
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L24_L25)                             | f_seed                 | For invalid input arguments ‘createSeed’ throws meaningful exceptions  | PASS   |   4 |  0.193 |
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L35)                                 | f_seed                 | The results of ‘createSeed’ depend on the input arguments as expected  | PASS   |   4 |  1.188 |
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L44_L47)                             | f_seed                 | ‘createSeed’ returns valid seed although network connection is missing | PASS   |   2 |  0.017 |
-| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R#L55) | class_random_data_base | Test that seed is working as expected                                  | PASS   | 766 | 13.843 |
-| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L25)       | f_random_block_size    | Test block size assertions                                             | PASS   |   5 |  0.052 |
-| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L39)       | f_random_block_size    | Test block size generation and validation                              | PASS   |   6 |  0.063 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L24_L25)                             | f_seed                 | For invalid input arguments ‘createSeed’ throws meaningful exceptions  | PASS   |   4 |  0.192 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L35)                                 | f_seed                 | The results of ‘createSeed’ depend on the input arguments as expected  | PASS   |   4 |  1.340 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L44_L47)                             | f_seed                 | ‘createSeed’ returns valid seed although network connection is missing | PASS   |   2 |  0.015 |
+| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R#L55) | class_random_data_base | Test that seed is working as expected                                  | PASS   | 766 | 13.308 |
+| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L25)       | f_random_block_size    | Test block size assertions                                             | PASS   |   5 |  0.051 |
+| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L39)       | f_random_block_size    | Test block size generation and validation                              | PASS   |   6 |  0.059 |
 
 Session Info
 
 | Field    | Value                        |                                                                                                                                                                                             |
 |:---------|:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Version  | R version 4.5.2 (2025-10-31) |                                                                                                                                                                                             |
-| Platform | x86_64-pc-linux-gnu          | [![](https://github.com/metrumresearchgroup/covrpage/blob/actions/inst/logo/gh.png?raw=true)](https://github.com/RCONIS/randomforge/commit/f844c832750611decce5d7e6ff9e92fae4ada88d/checks) |
+| Platform | x86_64-pc-linux-gnu          | [![](https://github.com/metrumresearchgroup/covrpage/blob/actions/inst/logo/gh.png?raw=true)](https://github.com/RCONIS/randomforge/commit/38c9fc6a9af456e180fbc8349a28ea010914cfbf/checks) |
 | Running  | Ubuntu 24.04.3 LTS           |                                                                                                                                                                                             |
 | Language | C                            |                                                                                                                                                                                             |
 | Timezone | UTC                          |                                                                                                                                                                                             |
