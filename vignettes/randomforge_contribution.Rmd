@@ -215,6 +215,6 @@ We want to make contributing as easy and friendly as possible.
 
 ## Thank you
 
-We appreciate your interest in contributing to the *randomforge* project.  
+We appreciate your interest in contributing to the **randomforge** project.  
 Your ideas and contributions help shape a more open, transparent, and
 community-driven future for clinical trial randomization in R.
