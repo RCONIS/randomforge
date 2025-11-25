@@ -27,3 +27,4 @@ NEWS\.tex
 .*temp.*
 .*_snaps.*
 ^Meta$
+^CNAME$

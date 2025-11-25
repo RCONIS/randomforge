@@ -210,12 +210,8 @@ x$info |>
 
 pkgs <- x$pkgs
 try(pkgs <- rbind(pkgs, data.frame(
-    Package = "rpact",
-    Version = as.character(packageVersion("rpact"))
-)), silent = TRUE)
-try(pkgs <- rbind(pkgs, data.frame(
-    Package = "rpact.cloud",
-    Version = as.character(packageVersion("rpact.cloud"))
+    Package = "randomforge",
+    Version = as.character(packageVersion("randomforge"))
 )), silent = TRUE)
 pkgs |>
     knitr::kable()
