@@ -26,27 +26,27 @@ identification and resolution of any issues.
 
 | file                                                                                                                          |   n |   time | error | failed | skipped | warning |
 |:------------------------------------------------------------------------------------------------------------------------------|----:|-------:|------:|-------:|--------:|--------:|
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R)                                 |  10 |  1.113 |     0 |      0 |       0 |       0 |
-| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R) | 766 | 13.414 |     0 |      0 |       0 |       0 |
-| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R)       |  11 |  0.108 |     0 |      0 |       0 |       0 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R)                                 |  10 |  1.431 |     0 |      0 |       0 |       0 |
+| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R) | 766 | 13.843 |     0 |      0 |       0 |       0 |
+| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R)       |  11 |  0.109 |     0 |      0 |       0 |       0 |
 
 Show Detailed Test Results
 
 | file                                                                                                                              | context                | test                                                                   | status |   n |   time |
 |:----------------------------------------------------------------------------------------------------------------------------------|:-----------------------|:-----------------------------------------------------------------------|:-------|----:|-------:|
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L27_L28)                             | f_seed                 | For invalid input arguments ‘createSeed’ throws meaningful exceptions  | PASS   |   4 |  0.193 |
-| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L41)                                 | f_seed                 | The results of ‘createSeed’ depend on the input arguments as expected  | PASS   |   4 |  0.904 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L27_L28)                             | f_seed                 | For invalid input arguments ‘createSeed’ throws meaningful exceptions  | PASS   |   4 |  0.191 |
+| [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L41)                                 | f_seed                 | The results of ‘createSeed’ depend on the input arguments as expected  | PASS   |   4 |  1.224 |
 | [test_f_seed.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test_f_seed.R#L53_L56)                             | f_seed                 | ‘createSeed’ returns valid seed although network connection is missing | PASS   |   2 |  0.016 |
-| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R#L55) | class_random_data_base | Test that seed is working as expected                                  | PASS   | 766 | 13.414 |
+| [test-class_random_data_base.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-class_random_data_base.R#L55) | class_random_data_base | Test that seed is working as expected                                  | PASS   | 766 | 13.843 |
 | [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L25)       | f_random_block_size    | Test block size assertions                                             | PASS   |   5 |  0.050 |
-| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L39)       | f_random_block_size    | Test block size generation and validation                              | PASS   |   6 |  0.058 |
+| [test-f_random_block_size.R](https://github.com/RCONIS/randomforge/blob/main/tests/testthat/test-f_random_block_size.R#L39)       | f_random_block_size    | Test block size generation and validation                              | PASS   |   6 |  0.059 |
 
 Session Info
 
 | Field    | Value                        |                                                                                                                                                                                             |
 |:---------|:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Version  | R version 4.5.2 (2025-10-31) |                                                                                                                                                                                             |
-| Platform | x86_64-pc-linux-gnu          | [![](https://github.com/metrumresearchgroup/covrpage/blob/actions/inst/logo/gh.png?raw=true)](https://github.com/RCONIS/randomforge/commit/3a18e8498a2f17aa64ae63fed6276f35acb06270/checks) |
+| Platform | x86_64-pc-linux-gnu          | [![](https://github.com/metrumresearchgroup/covrpage/blob/actions/inst/logo/gh.png?raw=true)](https://github.com/RCONIS/randomforge/commit/63a74b883c5fb5457a9b7433a945c5d5c131e80e/checks) |
 | Running  | Ubuntu 24.04.3 LTS           |                                                                                                                                                                                             |
 | Language | C                            |                                                                                                                                                                                             |
 | Timezone | UTC                          |                                                                                                                                                                                             |
