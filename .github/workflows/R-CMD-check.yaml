@@ -26,5 +26,10 @@ jobs:
         with:
           extra-packages: any::rcmdcheck, any::uuid, any::glue, any::httr
           needs: check
+          
+      - name: Install extra packages explicitly
+        run: |
+          install.packages(c("httr", "glue))
+        shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
