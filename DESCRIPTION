@@ -46,9 +46,12 @@ Suggests:
     uuid (>= 1.0-3),
     writexl (>= 1.5.0),
     glue (>= 1.6.0),
-    httr (>= 1.4.0)
+    httr (>= 1.4.0),
+    covrpage
+Remotes:
+    yonicd/covrpage
 Config/testthat/edition: 3
-Config/testthat/parallel: true
+Config/testthat/parallel: false
 VignetteBuilder: knitr, rmarkdown
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3

@@ -1,0 +1,242 @@
+---
+title: "randomforge Test Report"
+date: "`r format(Sys.time(), '%d %B, %Y %H:%M:%S')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{randomforge Test Report}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction 
+
+Welcome to the "randomforge Test Report" vignette. This document
+provides a comprehensive overview of the testing results for the randomforge
+project. The tests are executed using the
+[testthat](https://cran.r-project.org/package=testthat) package, and the results
+are summarized with the [covrpage](https://github.com/yonicd/covrpage) package.
+
+In this vignette, you can expect to find:
+
+- **Summarized Test Results**: Short and long summaries of the test results,
+  highlighting any failures or issues encountered. 
+- **Detailed Test Results**: An expandable section with detailed information on
+  each test, including any errors or failures. 
+- **Session Information**: Information about the R session and the packages used
+  during testing. 
+
+This report aims to provide a clear and detailed account of the testing process
+and results, ensuring transparency and aiding in the identification and
+resolution of any issues.
+
+## Summarized Test Results
+
+```{r setup, include=FALSE}
+logging_enabled <- FALSE
+
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+
+get_absolute_url <- function(url) {
+    base_url <- Sys.getenv("GITHUB_REPOSITORY")
+    if (!is.null(base_url) && base_url != "") {
+        base_url <- paste0("https://github.com/", base_url, "/blob/main/tests/")
+    } else {
+        base_url <- "https://github.com/RCONIS/randomforgeblob/main/tests/"
+    }
+    if (any(grepl('<a href="', url))) {
+        url1 <- '<a href="'
+        url2 <- "testthat/"
+        url <- gsub(paste0(url1, url2), paste0(url1, base_url, url2), url, fixed = TRUE)
+    }
+
+    # url <- "[test-assertions.R](testthat/test-assertions.R)"
+    if (any(grepl("^\\[.*\\]\\(.*\\)$", url))) {
+        url <- sub("^(\\[.*\\])\\((.*)\\)$", paste0("\\1(", base_url, "\\2)"), url)
+    }
+
+    return(url)
+}
+
+add_absolute_urls <- function(df) {
+    if (is.null(df) || !is.data.frame(df) || !"file" %in% colnames(df)) {
+        return(df)
+    }
+
+    df$file <- get_absolute_url(df$file)
+    return(df)
+}
+```
+
+```{r load_dependencies, include=FALSE}
+library(knitr, warn.conflicts = FALSE, quietly = TRUE)
+library(testthat, warn.conflicts = FALSE, quietly = TRUE)
+library(randomforge, warn.conflicts = FALSE, quietly = TRUE)
+```
+
+```{r run_unit_tests, include=FALSE}
+testthat::set_max_fails(Inf)
+
+test_file_path <- "../tests/testthat"
+if (!dir.exists(test_file_path)) {
+    test_file_path <- "tests/testthat"
+}
+if (!dir.exists(test_file_path)) {
+    stop("Could not find testthat directory")
+}
+
+if (isTRUE(logging_enabled)) {
+    log_lines <- utils::capture.output({
+        test_x <- testthat::test_dir(
+            path = test_file_path,
+            filter = ".*result-comparison.*",
+            reporter = testthat::default_reporter(),
+            stop_on_failure = FALSE,
+            stop_on_warning = FALSE,
+            load_package = "source"
+        )
+    })
+} else {
+    log_lines <- character(0)
+    test_x <- testthat::test_dir(
+        path = test_file_path,
+        reporter = testthat::default_reporter(),
+        stop_on_failure = FALSE,
+        stop_on_warning = FALSE,
+        load_package = "source"
+    )
+}
+
+skip <- length(test_x) > 0
+failed <- FALSE
+```
+
+```{r map_tests, include=FALSE}
+test_m <- covrpage::map_testthat()
+```
+
+```{r create_summaries, include=FALSE}
+if (length(test_x) > 0) {
+    i <- 1
+    while (i <= length(test_x)) {
+        if (is.na(test_x[[i]]$test)) {
+            test_x <- test_x[-i]
+        } else {
+            i <- i + 1
+        }
+    }
+}
+
+test_x_short <- test_x |>
+    covrpage::testthat_summary(type = "short") |>
+    add_absolute_urls()
+
+if (length(test_x) > 1) {
+    for (i in 2:length(test_x)) {
+        resBefore <- test_x[[i - 1]]$results
+        if (length(test_x[[i]]$results) == 0) {
+            test_x[[i]]$results <- resBefore
+        }
+    }
+}
+test_x_long <- test_x |>
+    covrpage::testthat_summary(type = "long") |>
+    add_absolute_urls()
+```
+ 
+```{r check_for_failed_tests, include=FALSE, eval=skip}
+test_skip <- test_x_long[test_x_long$status != "PASS", c("file", "test")]
+
+test_skip$file <- gsub("#(.*?)$", "", basename(test_skip$file))
+
+test_skip <- merge(test_skip, test_m)
+
+failed <- any(test_x_long$status %in% c("ERROR", "FAILED"))
+```
+
+```{r prep_for_skipped_tests, include=FALSE, eval=!skip}
+test_skip <- test_m
+```
+
+```{r print_skipped_warning_for_short_summary, echo=FALSE, warning=FALSE, message=FALSE, eval=!skip}
+cat("All tests were skipped")
+```
+
+```{r print_short_summary_table, echo=FALSE, warning=FALSE, message=FALSE, eval=skip}
+test_x_short |>
+    knitr::kable()
+```
+
+<details `r sprintf("%s", if (skip) covrpage:::test_details(test_x_short))`>
+  <summary> Show Detailed Test Results </summary>
+
+```{r print_skipped_warning_for_long_summary, echo=FALSE, warning=FALSE, message=FALSE, eval=!skip}
+cat("All tests were skipped")
+```
+
+```{r print_long_summary_table, echo=FALSE, warning=FALSE, message=FALSE, eval=skip}
+test_x_long |>
+    knitr::kable()
+```
+
+```{r prep_session_info_summary_table, echo=FALSE}
+if (length(names(test_x_long)) > 0) {
+    if ("icon" %in% names(test_x_long)) {
+        emos <- covrpage:::emos[[covrpage:::platform()]]
+        knitr::kable(
+            t(c(
+                Failed = emos[["FAILED"]],
+                Warning = emos[["WARNING"]],
+                Skipped = emos[["SKIPPED"]]
+            ))
+        )
+    }
+}
+```
+
+</details>
+
+
+<details>
+  <summary> Session Info </summary>
+  
+```{r print_session_info_summary_table, echo=FALSE, warning=FALSE, message=FALSE}
+x <- covrpage:::sinfo()
+
+x$info |>
+    knitr::kable()
+
+pkgs <- x$pkgs
+try(pkgs <- rbind(pkgs, data.frame(
+    Package = "rpact",
+    Version = as.character(packageVersion("rpact"))
+)), silent = TRUE)
+try(pkgs <- rbind(pkgs, data.frame(
+    Package = "rpact.cloud",
+    Version = as.character(packageVersion("rpact.cloud"))
+)), silent = TRUE)
+pkgs |>
+    knitr::kable()
+```
+
+</details>
+
+
+```{r print_log_messages, echo=FALSE, warning=FALSE, message=FALSE, results='asis', eval=logging_enabled}
+cat('<details>\n')
+cat('  <summary> Log Messages </summary>\n')
+cat('\n')
+log_lines <- paste(trimws(log_lines), collapse = "\\\n")
+log_lines <- gsub('" + "', '"\n"', log_lines, fixed = TRUE)
+cat(log_lines)
+cat('\n')
+cat('</details>\n')
+```
+
+`r sprintf('<!--- Final Status : %s --->', covrpage:::test_to_badge(test_x_short))`
+
+Tests are run using the [`testthat`](https://github.com/r-lib/testthat) package.
+This summary is created by the [`covrpage`](https://github.com/yonicd/covrpage)
+package.

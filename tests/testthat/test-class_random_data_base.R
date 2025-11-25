@@ -1,4 +1,24 @@
-
+# ------------------------------------------------------------------------------
+#  randomforge — Innovating the Future of Randomization
+#  Framework for transparent and extensible clinical trial randomization in R
+#
+#  Author: Friedrich Pahlke, RPACT GmbH
+#  Copyright (c) 2025
+#
+#  This file is part of the randomforge R package.
+#  The package is licensed under the GNU Lesser General Public License (LGPL-3.0).
+#  Full license text: https://www.gnu.org/licenses/lgpl-3.0.txt
+#
+#  Source code and issue tracker:
+#  https://github.com/RCONIS/randomforge
+#
+#  Documentation:
+#  https://randomforge.org
+#
+#  For collaboration or contributions:
+#  friedrich.pahlke@rpact.com
+#  info@randomforge.org
+# ------------------------------------------------------------------------------
 
 test_that("Test that seed is working as expected", {
         
@@ -16,25 +36,20 @@ test_that("Test that seed is working as expected", {
     blockSizes[[1]] <- list("A" = 2, "B" = 2)
     blockSizes[[2]] <- list("A" = 3, "B" = 3)
     
-    blockSizeRandomizer <- getRandomBlockSizeRandomizer(seed = 371022898L)
-    blockSizeRandomizer$initRandomValues(numberOfBlockSizes = length(blockSizes))
-    
+    blockSizeRandomizer <- getRandomBlockSizeRandomizer(blockSizes, seed = 371022898L)
     randomMethod <- getRandomMethodPBR(
         blockSizes = blockSizes, 
         fixedBlockDesignEnabled = FALSE, 
         blockSizeRandomizer = blockSizeRandomizer)
     
     for (i in 1:30) {
-        suppressMessages(temp <- getNextRandomResult(randomDataBase, randomProject, randomMethod, randomAllocationValueService))
+        suppressMessages(temp <- getNextRandomResult(
+            randomDataBase, 
+            randomProject, 
+            randomMethod, 
+            randomAllocationValueService))
     }
-    
-#    parameterBlackList <- c("uniqueId", "creationDate", "randomizationDate")
-#    getUnitTestObject(randomProject, "randomProject", parameterBlackList = parameterBlackList)
-#    getUnitTestObject(randomConfiguration, "randomConfiguration", parameterBlackList = parameterBlackList)
-#    getUnitTestObject(randomMethod, "randomMethod", parameterBlackList = parameterBlackList) # TODO impl
-#    for (i in 1:length(randomDataBase$randomSubjects)) {
-#        getUnitTestObject(randomDataBase$randomSubjects[[i]], paste0("randomDataBase$randomSubjects[[", i, "]]"), parameterBlackList = parameterBlackList)
-#    }
+
     
     ## Comparison of the results of RandomProject object 'randomProject' with expected results
     expect_equal(randomProject$name, "Test")

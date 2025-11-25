@@ -9,7 +9,7 @@ getRandomMethodPBR(
   blockSizes = list(),
   fixedBlockDesignEnabled = TRUE,
   fixedBlockIndex = 1L,
-  blockSizeRandomizer = getRandomBlockSizeRandomizer()
+  blockSizeRandomizer = NULL
 )
 }
 \arguments{
