@@ -63,10 +63,10 @@ config <- getRandomConfiguration(
     ravBufferMaximumSize = 10000L
 )
 config
-#> random-project: Example Trial [2025-11-25] 55201d8b-f495-4dda-ad42-602a722392a1
-#> uniqueId: d7829d53-9941-4042-970d-61ffc5dd9965
-#> creationDate: 2025-11-25
-#> seed: 3220245
+#> random-project: Example Trial [2025-11-26] 33c8fb09-53bf-4828-ad50-67e639fb0e9f
+#> uniqueId: 850ca5eb-50a0-4c46-aa64-cb827b199e63
+#> creationDate: 2025-11-26
+#> seed: 7384896
 #> ravBufferMinimumSize: 1000
 #> ravBufferMaximumSize: 10000
 #> treatmentArmIds: 'A', 'B'
@@ -89,7 +89,7 @@ blockSizes <- getBlockSizes(config$treatmentArmIds, c(4, 6))
 # Define a block randomization method
 blockSizeRandomizer <- getRandomBlockSizeRandomizer(blockSizes)
 blockSizeRandomizer
-#> RandomBlockSizeRandomizer(seed = 4360457, numberOfValues = 1000, currentIndex = 1)
+#> RandomBlockSizeRandomizer(seed = 4629104, numberOfValues = 1000, currentIndex = 1)
 
 randomMethodPBR <- getRandomMethodPBR(
     blockSizes              = blockSizes,
@@ -104,7 +104,7 @@ randomMethodPBR <- getRandomMethodPBR(
 # Create a random allocation value service
 ravService <- getRandomAllocationValueService()
 ravService$createNewRandomAllocationValues(config)
-#> Create 9000 new random allocation values (seed = 3220245)
+#> Create 9000 new random allocation values (seed = 7384896)
 ```
 
 Quality control of the random numbers used for randomization can be
@@ -158,18 +158,18 @@ resultData
 
 | project       | random-number | treatment-arm | status     | overall-levels-A | overall-levels-B | block-wise-levels-A | block-wise-levels-B | randomization-decision                                        | unique-subject-id                    |
 |:--------------|--------------:|:--------------|:-----------|-----------------:|-----------------:|:--------------------|:--------------------|:--------------------------------------------------------------|:-------------------------------------|
-| Example Trial |             1 | A             | RANDOMIZED |                1 |                0 | A:1/3               | B:0/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.468744855141267\]  | 050dee46-e66e-4944-8b92-e95f25b930e4 |
-| Example Trial |             2 | B             | RANDOMIZED |                1 |                1 | A:1/3               | B:1/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.756985571468249\]  | ff45a7d1-6beb-476d-839c-7a4d2492c7dd |
-| Example Trial |             3 | A             | RANDOMIZED |                2 |                1 | A:2/3               | B:1/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.271119616460055\]  | 1c3894ab-bf75-4f15-b524-17c18f39d459 |
-| Example Trial |             4 | A             | RANDOMIZED |                3 |                1 | A:3/3               | B:1/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.0876933715771884\] | c18cf159-ccba-4b75-b54b-312b171e15d3 |
-| Example Trial |             5 | B             | RANDOMIZED |                3 |                2 | A:3/3               | B:2/3               | range-set\[A=\[0,0\], B=\[0,1\]; rav=0.568074944894761\]      | 7fa81294-37eb-46d0-a1f6-062fb4df26b2 |
-| Example Trial |             6 | B             | RANDOMIZED |                3 |                3 | A:3/3               | B:3/3               | range-set\[A=\[0,0\], B=\[0,1\]; rav=0.840228229295462\]      | b0b321e6-3b31-43bb-8dfd-2607d2957476 |
-| Example Trial |             7 | B             | RANDOMIZED |                3 |                4 | A:0/2               | B:1/2               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.522972852690145\]  | 72135485-1a9e-465c-9b82-3d5476a57c41 |
-| Example Trial |             8 | B             | RANDOMIZED |                3 |                5 | A:0/2               | B:2/2               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.999524904415011\]  | e8557a05-73c9-4fcc-8182-a839775eb7a6 |
-| Example Trial |             9 | A             | RANDOMIZED |                4 |                5 | A:1/2               | B:2/2               | range-set\[A=\[0,1\], B=\[1,1\]; rav=0.440441417042166\]      | 68a00687-c4cc-44d8-9acb-c3dfa1b97f1f |
-| Example Trial |            10 | A             | RANDOMIZED |                5 |                5 | A:2/2               | B:2/2               | range-set\[A=\[0,1\], B=\[1,1\]; rav=0.928691892651841\]      | 6bda81a8-266e-4ff9-8f07-11c542ce6f1d |
-| Example Trial |            11 | B             | RANDOMIZED |                5 |                6 | A:0/2               | B:1/2               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.747130039148033\]  | ce94a93b-1fc7-4feb-b8a6-c217c5f7dc56 |
-| Example Trial |            12 | B             | RANDOMIZED |                5 |                7 | A:0/2               | B:2/2               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.89640818326734\]   | e5291a41-5d6f-4155-9a3a-3b582820dcba |
+| Example Trial |             1 | A             | RANDOMIZED |                1 |                0 | A:1/3               | B:0/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.0953753066714853\] | 8626d10a-83f8-4723-bfc5-bb9d962778a6 |
+| Example Trial |             2 | A             | RANDOMIZED |                2 |                0 | A:2/3               | B:0/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.482989687006921\]  | 59d93e7c-eff3-4b4e-b105-f0b9358d9d8c |
+| Example Trial |             3 | B             | RANDOMIZED |                2 |                1 | A:2/3               | B:1/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.741397644625977\]  | 2296b7f9-edeb-44ef-867b-c2040a71c14b |
+| Example Trial |             4 | B             | RANDOMIZED |                2 |                2 | A:2/3               | B:2/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.939893207512796\]  | 8940e01d-dff8-4f1e-8eae-389c1399f7f9 |
+| Example Trial |             5 | B             | RANDOMIZED |                2 |                3 | A:2/3               | B:3/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.526956472313032\]  | 52c34a1b-aba8-4c43-8a4e-89ea39383301 |
+| Example Trial |             6 | A             | RANDOMIZED |                3 |                3 | A:3/3               | B:3/3               | range-set\[A=\[0,1\], B=\[1,1\]; rav=0.312386621255428\]      | 5dfb3e4f-5739-4037-a0c6-284073f3fab7 |
+| Example Trial |             7 | B             | RANDOMIZED |                3 |                4 | A:0/3               | B:1/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.535009081242606\]  | e20c7127-0305-43ff-9480-5ac431b791af |
+| Example Trial |             8 | B             | RANDOMIZED |                3 |                5 | A:0/3               | B:2/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.600243803812191\]  | 8308ff81-9d46-4a88-bd32-b292211f39ff |
+| Example Trial |             9 | B             | RANDOMIZED |                3 |                6 | A:0/3               | B:3/3               | range-set\[A=\[0,0.5\], B=\[0.5,1\]; rav=0.564123915275559\]  | dfabc7a6-0160-4c72-9b3b-edb2a076db89 |
+| Example Trial |            10 | A             | RANDOMIZED |                4 |                6 | A:1/3               | B:3/3               | range-set\[A=\[0,1\], B=\[1,1\]; rav=0.443886212306097\]      | 8b7860ea-e446-43d0-a636-6c712d1eec5c |
+| Example Trial |            11 | A             | RANDOMIZED |                5 |                6 | A:2/3               | B:3/3               | range-set\[A=\[0,1\], B=\[1,1\]; rav=0.10632219677791\]       | 53d9732e-be4e-4a73-976e-972f8bce2472 |
+| Example Trial |            12 | A             | RANDOMIZED |                6 |                6 | A:3/3               | B:3/3               | range-set\[A=\[0,1\], B=\[1,1\]; rav=0.559311755700037\]      | b462981b-f3ce-4062-a89e-105d69963a78 |
 
 ## Exporting to Excel (Optional)
 

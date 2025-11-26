@@ -67,7 +67,7 @@
                         <h4 data-toc-skip class="author">Friedrich
 Pahlke</h4>
             
-            <h4 data-toc-skip class="date">2025-11-25</h4>
+            <h4 data-toc-skip class="date">2025-11-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rpact-com/randomforge/blob/main/vignettes/randomforge_getting_started.Rmd" class="external-link"><code>vignettes/randomforge_getting_started.Rmd</code></a></small>
       <div class="d-none name"><code>randomforge_getting_started.Rmd</code></div>
@@ -141,10 +141,10 @@ allocations.</p>
 <span>    ravBufferMaximumSize <span class="op">=</span> <span class="fl">10000L</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">config</span></span>
-<span><span class="co">#&gt; random-project: Example Trial [2025-11-25] 55201d8b-f495-4dda-ad42-602a722392a1</span></span>
-<span><span class="co">#&gt; uniqueId: d7829d53-9941-4042-970d-61ffc5dd9965</span></span>
-<span><span class="co">#&gt; creationDate: 2025-11-25</span></span>
-<span><span class="co">#&gt; seed: 3220245</span></span>
+<span><span class="co">#&gt; random-project: Example Trial [2025-11-26] 33c8fb09-53bf-4828-ad50-67e639fb0e9f</span></span>
+<span><span class="co">#&gt; uniqueId: 850ca5eb-50a0-4c46-aa64-cb827b199e63</span></span>
+<span><span class="co">#&gt; creationDate: 2025-11-26</span></span>
+<span><span class="co">#&gt; seed: 7384896</span></span>
 <span><span class="co">#&gt; ravBufferMinimumSize: 1000</span></span>
 <span><span class="co">#&gt; ravBufferMaximumSize: 10000</span></span>
 <span><span class="co">#&gt; treatmentArmIds: 'A', 'B'</span></span>
@@ -165,7 +165,7 @@ randomization</strong> (PBR) as a fully working implementation.</p>
 <span><span class="co"># Define a block randomization method</span></span>
 <span><span class="va">blockSizeRandomizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getRandomBlockSizeRandomizer.html">getRandomBlockSizeRandomizer</a></span><span class="op">(</span><span class="va">blockSizes</span><span class="op">)</span></span>
 <span><span class="va">blockSizeRandomizer</span></span>
-<span><span class="co">#&gt; RandomBlockSizeRandomizer(seed = 4360457, numberOfValues = 1000, currentIndex = 1)</span></span>
+<span><span class="co">#&gt; RandomBlockSizeRandomizer(seed = 4629104, numberOfValues = 1000, currentIndex = 1)</span></span>
 <span></span>
 <span><span class="va">randomMethodPBR</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getRandomMethodPBR.html">getRandomMethodPBR</a></span><span class="op">(</span></span>
 <span>    blockSizes              <span class="op">=</span> <span class="va">blockSizes</span>,</span>
@@ -180,7 +180,7 @@ randomization</strong> (PBR) as a fully working implementation.</p>
 <code class="sourceCode R"><span><span class="co"># Create a random allocation value service</span></span>
 <span><span class="va">ravService</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getRandomAllocationValueService.html">getRandomAllocationValueService</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ravService</span><span class="op">$</span><span class="fu">createNewRandomAllocationValues</span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Create 9000 new random allocation values (seed = 3220245)</span></span></code></pre></div>
+<span><span class="co">#&gt; Create 9000 new random allocation values (seed = 7384896)</span></span></code></pre></div>
 <p>Quality control of the random numbers used for randomization can be
 visualized by</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -255,71 +255,72 @@ as a data frame:</p>
 <td align="left">A:1/3</td>
 <td align="left">B:0/3</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.468744855141267]</td>
-<td align="left">050dee46-e66e-4944-8b92-e95f25b930e4</td>
+rav=0.0953753066714853]</td>
+<td align="left">8626d10a-83f8-4723-bfc5-bb9d962778a6</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">2</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="left">A:1/3</td>
-<td align="left">B:1/3</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="left">A:2/3</td>
+<td align="left">B:0/3</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.756985571468249]</td>
-<td align="left">ff45a7d1-6beb-476d-839c-7a4d2492c7dd</td>
+rav=0.482989687006921]</td>
+<td align="left">59d93e7c-eff3-4b4e-b105-f0b9358d9d8c</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">3</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">2</td>
 <td align="right">1</td>
 <td align="left">A:2/3</td>
 <td align="left">B:1/3</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.271119616460055]</td>
-<td align="left">1c3894ab-bf75-4f15-b524-17c18f39d459</td>
+rav=0.741397644625977]</td>
+<td align="left">2296b7f9-edeb-44ef-867b-c2040a71c14b</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">4</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="left">A:3/3</td>
-<td align="left">B:1/3</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">A:2/3</td>
+<td align="left">B:2/3</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.0876933715771884]</td>
-<td align="left">c18cf159-ccba-4b75-b54b-312b171e15d3</td>
+rav=0.939893207512796]</td>
+<td align="left">8940e01d-dff8-4f1e-8eae-389c1399f7f9</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">5</td>
 <td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">3</td>
 <td align="right">2</td>
-<td align="left">A:3/3</td>
-<td align="left">B:2/3</td>
-<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.568074944894761]</td>
-<td align="left">7fa81294-37eb-46d0-a1f6-062fb4df26b2</td>
+<td align="right">3</td>
+<td align="left">A:2/3</td>
+<td align="left">B:3/3</td>
+<td align="left">range-set[A=[0,0.5], B=[0.5,1];
+rav=0.526956472313032]</td>
+<td align="left">52c34a1b-aba8-4c43-8a4e-89ea39383301</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">6</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="left">A:3/3</td>
 <td align="left">B:3/3</td>
-<td align="left">range-set[A=[0,0], B=[0,1]; rav=0.840228229295462]</td>
-<td align="left">b0b321e6-3b31-43bb-8dfd-2607d2957476</td>
+<td align="left">range-set[A=[0,1], B=[1,1]; rav=0.312386621255428]</td>
+<td align="left">5dfb3e4f-5739-4037-a0c6-284073f3fab7</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
@@ -328,11 +329,11 @@ rav=0.0876933715771884]</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">3</td>
 <td align="right">4</td>
-<td align="left">A:0/2</td>
-<td align="left">B:1/2</td>
+<td align="left">A:0/3</td>
+<td align="left">B:1/3</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.522972852690145]</td>
-<td align="left">72135485-1a9e-465c-9b82-3d5476a57c41</td>
+rav=0.535009081242606]</td>
+<td align="left">e20c7127-0305-43ff-9480-5ac431b791af</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
@@ -341,61 +342,60 @@ rav=0.522972852690145]</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">3</td>
 <td align="right">5</td>
-<td align="left">A:0/2</td>
-<td align="left">B:2/2</td>
+<td align="left">A:0/3</td>
+<td align="left">B:2/3</td>
 <td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.999524904415011]</td>
-<td align="left">e8557a05-73c9-4fcc-8182-a839775eb7a6</td>
+rav=0.600243803812191]</td>
+<td align="left">8308ff81-9d46-4a88-bd32-b292211f39ff</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">9</td>
-<td align="left">A</td>
+<td align="left">B</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="left">A:1/2</td>
-<td align="left">B:2/2</td>
-<td align="left">range-set[A=[0,1], B=[1,1]; rav=0.440441417042166]</td>
-<td align="left">68a00687-c4cc-44d8-9acb-c3dfa1b97f1f</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="left">A:0/3</td>
+<td align="left">B:3/3</td>
+<td align="left">range-set[A=[0,0.5], B=[0.5,1];
+rav=0.564123915275559]</td>
+<td align="left">dfabc7a6-0160-4c72-9b3b-edb2a076db89</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">10</td>
 <td align="left">A</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="left">A:2/2</td>
-<td align="left">B:2/2</td>
-<td align="left">range-set[A=[0,1], B=[1,1]; rav=0.928691892651841]</td>
-<td align="left">6bda81a8-266e-4ff9-8f07-11c542ce6f1d</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="left">A:1/3</td>
+<td align="left">B:3/3</td>
+<td align="left">range-set[A=[0,1], B=[1,1]; rav=0.443886212306097]</td>
+<td align="left">8b7860ea-e446-43d0-a636-6c712d1eec5c</td>
 </tr>
 <tr class="odd">
 <td align="left">Example Trial</td>
 <td align="right">11</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
 <td align="right">5</td>
 <td align="right">6</td>
-<td align="left">A:0/2</td>
-<td align="left">B:1/2</td>
-<td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.747130039148033]</td>
-<td align="left">ce94a93b-1fc7-4feb-b8a6-c217c5f7dc56</td>
+<td align="left">A:2/3</td>
+<td align="left">B:3/3</td>
+<td align="left">range-set[A=[0,1], B=[1,1]; rav=0.10632219677791]</td>
+<td align="left">53d9732e-be4e-4a73-976e-972f8bce2472</td>
 </tr>
 <tr class="even">
 <td align="left">Example Trial</td>
 <td align="right">12</td>
-<td align="left">B</td>
+<td align="left">A</td>
 <td align="left">RANDOMIZED</td>
-<td align="right">5</td>
-<td align="right">7</td>
-<td align="left">A:0/2</td>
-<td align="left">B:2/2</td>
-<td align="left">range-set[A=[0,0.5], B=[0.5,1];
-rav=0.89640818326734]</td>
-<td align="left">e5291a41-5d6f-4155-9a3a-3b582820dcba</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="left">A:3/3</td>
+<td align="left">B:3/3</td>
+<td align="left">range-set[A=[0,1], B=[1,1]; rav=0.559311755700037]</td>
+<td align="left">b462981b-f3ce-4062-a89e-105d69963a78</td>
 </tr>
 </tbody>
 </table>
