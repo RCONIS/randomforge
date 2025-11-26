@@ -74,14 +74,14 @@ getNextRandomResult <- function(
         randomSystemState <- RandomSystemState()
         randomSystemState$init(randomConfiguration$treatmentArmIds, 
             factorIds = randomConfiguration$factorIds, 
-            strataIds = NULL # TODO implement strataIds
+            strataIds = NULL # TODO implement strataIds (https://github.com/RCONIS/randomforge/issues/4)
         )
     }
     if (is.null(randomSystemState)) {
         stop("Failed to get random system state")
     }
 
-    factorLevels <- list() # TODO implement factorLevels
+    factorLevels <- list() # TODO implement factorLevels (https://github.com/RCONIS/randomforge/issues/4)
     
     randomResult <- randomMethod$randomize(factorLevels, randomSystemState, randomAllocationValue)
     randomDataBase$persist(randomResult)

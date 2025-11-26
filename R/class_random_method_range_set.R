@@ -178,7 +178,7 @@ RandomMethodRangeSet <- setRefClass("RandomMethodRangeSet",
             d <- 0
             sum <- 0
             randomMethodRanges <- list()
-            # TODO sort randomMethodRanges
+            # TODO sort randomMethodRanges (https://github.com/RCONIS/randomforge/issues/9)
     
             for (range in randomMethodRanges) {
                 sum <- sum + range$getUpperBound() - range$getLowerBound()

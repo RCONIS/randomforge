@@ -189,10 +189,7 @@ RandomMethodPBR <- setRefClass("RandomMethodPBR",
 
             blockSize <- blockSizes[[randomIndex]]
 
-            # TODO logging
-            # Map<String, Object> rndLoggerValues = new HashMap<String, Object>()
-            # rndLoggerValues.put("blockSize", "new random block size: " + blockSize + " (random index: " + randomIndex + ")")
-            # logger.info("Random configuration set: " + rndLoggerValues)
+            # TODO log this (https://github.com/RCONIS/randomforge/issues/6)
 
             return(blockSize)
         }
