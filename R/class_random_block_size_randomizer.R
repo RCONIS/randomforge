@@ -107,13 +107,15 @@ RandomBlockSizeRandomizer <- setRefClass("RandomBlockSizeRandomizer",
         initRandomValues = function(numberOfBlockSizes, ..., numberOfValuesToCreate = 1000L) {
             .self$values <- sample.int(n = numberOfBlockSizes, size = numberOfValuesToCreate, replace = TRUE)
         },
-        nextInt = function(numberOfBlockSizes) { # TODO implement numberOfBlockSizes
+        nextInt = function(numberOfBlockSizes) {
             if (length(values) == 0) {
                 stop("Block size randomizer not initialized. Call initRandomValues() first")
             }
             if (index > length(values)) {
                 stop("No more random block sizes available")
             }
+            
+            # TODO implement numberOfBlockSizes check (https://github.com/RCONIS/randomforge/issues/7)
             
             value <- values[index]
             .self$index <- index + 1L

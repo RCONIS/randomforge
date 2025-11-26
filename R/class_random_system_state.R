@@ -300,7 +300,7 @@ RandomSystemState <- setRefClass("RandomSystemState",
             fillingLevel <- fillingLevel + 1L
             .self$fillingLevelsOverall[[treatmentArmId]] <- fillingLevel
             
-            # TODO increment also factor and strata levels
+            # TODO increment also factor and strata levels (https://github.com/RCONIS/randomforge/issues/8)
         },
         setFillingLevelsBlock = function(randomBlock) {
             factorLevels <- randomBlock$factorLevels
